@@ -5,8 +5,6 @@
  * 例子：创建三个窗口卖票，总票数为100张.使用继承Thread类的方式
  *
  * 说明：在继承Thread类创建多线程的方式中，慎用this充当同步监视器，考虑使用当前类充当同步监视器。
- *
-
  */
 class Window2 extends Thread{
 
@@ -21,7 +19,7 @@ class Window2 extends Thread{
         while(true){
             //正确的
 //            synchronized (obj){
-            synchronized (Window2.class){//Class clazz = Window2.class,Window2.class只会加载一次
+            synchronized (Window2.class){//Class class = Window2.class,Window2.class只会加载一次
                 //错误的方式：this代表着t1,t2,t3三个对象
 //              synchronized (this){
 
@@ -33,7 +31,8 @@ class Window2 extends Thread{
                         e.printStackTrace();
                     }
 
-                    System.out.println(getName() + "：卖票，票号为：" + ticket);
+                    System.out.println(getName() +
+                            "：卖票，票号为：" + ticket);
                     ticket--;
                 }else{
                     break;

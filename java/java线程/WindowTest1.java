@@ -1,8 +1,6 @@
 /**
  * 例子：创建三个窗口卖票，总票数为100张.使用实现Runnable接口的方式
  * 存在线程的安全问题，待解决。
- *
- *
  */
 class Window1 implements Runnable{
 
@@ -16,7 +14,7 @@ class Window1 implements Runnable{
         while(true) {
             if (ticket > 0) {
 
-                //加上下面的会出现票为0，-1（原来也会出现这种情况，只是概率变高了），出错票
+                //加上 下面的会出现票为0，-1（原来也会出现这种情况，只是概率变高了），出错票
 //                try {
 //                    Thread.sleep(100);//阻塞一下，切换线程的概率变大
 //                } catch (InterruptedException e) {
@@ -29,7 +27,7 @@ class Window1 implements Runnable{
             } else {
                 break;
             }
-         }
+          }
         }
     }
 }

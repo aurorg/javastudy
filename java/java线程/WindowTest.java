@@ -1,10 +1,8 @@
 //eg:创建三个窗口卖票，总票数为100张
 //解决多线程安全问题
-
-
 class Window extends Thread{
 
-    private  static int ticket =100;//注意static，必须设置为静态的，共同用
+    private  static int ticket =100;//注意static，必须设置为静态的，共同用de
     private  static Object obj = new Object();//同上
 
     @Override
@@ -23,7 +21,8 @@ class Window extends Thread{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    System.out.println(getName() + ": 卖票，票号为： " + ticket);//输出有三个100，线程安全问题
+                    System.out.println(getName() +
+                            ": 卖票，票号为： " + ticket);//输出有三个100，线程安全问题
                     ticket--;
                 } else {
                     break;
