@@ -1,6 +1,6 @@
 package temp;
 
-public class Temp2 {
+public class Temp2{
     public static void main(String[] args) {
         MThread mThread = new MThread();
 
@@ -10,7 +10,7 @@ public class Temp2 {
 
         Thread t2 = new Thread(mThread);
         t2.setName("线程二");
-        t1.start();
+        t2.start();
     }
 }
 
@@ -18,9 +18,8 @@ class MThread implements Runnable{
     @Override
     public void run() {
         for(int i=0;i<100;i++){
-            if(i%2==0){
-                System.out.println(Thread.currentThread().getName()+":" +i);
-
+            if(i%2==0) {
+                System.out.println(Thread.currentThread().getName() + ":" + i);
             }
         }
     }
