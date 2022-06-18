@@ -1,14 +1,14 @@
 package java0;
 
-class LiftOff implements Runnable{
+class LiftOff1 implements Runnable{
     protected int countDown =10;
     private static int taskCount =0;
     private final int id = taskCount++;
-    public LiftOff(){
+    public LiftOff1(){
 
     }
 
-    public LiftOff(int countDown){
+    public LiftOff1(int countDown){
         this.countDown = countDown;
     }
 
@@ -26,7 +26,6 @@ class LiftOff implements Runnable{
     }
 }
 
-
 public class MainThread {
     public static void main(String[] args) {
         //方式一
@@ -34,10 +33,9 @@ public class MainThread {
 //        launch.run();
 
         //方式二
-        Thread t = new Thread(new LiftOff());//使用Thread来驱动LiftOff对象
+        Thread t = new Thread(new LiftOff1());//使用Thread来驱动LiftOff对象
         t.start();
         System.out.println("waiting for java0.LiftOff");
     }
-
 }
 
