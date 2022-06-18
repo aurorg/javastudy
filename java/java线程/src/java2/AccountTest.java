@@ -11,22 +11,16 @@ class Account{
     //存钱的方法
     public synchronized void deposit(double amt){
         if(amt>0){
-
             balance +=amt;
-
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             System.out.println(Thread.currentThread().getName()
                     +":存钱成功。余额是：" + balance);
-
         }
-
     }
-
 }
 
 class Customer extends Thread{
