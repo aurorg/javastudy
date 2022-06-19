@@ -1,5 +1,9 @@
 package src.java2;
 
+/**
+ * 银行账户存钱问题
+ *
+ */
 class Account{
     private double balance;//余额
 
@@ -27,7 +31,7 @@ class Customer extends Thread{
     private Account acct;
 
     public Customer(Account acct){
-        this.acct=acct;
+        this.acct=acct;  //让两个用户共用同一个账户
     }
 
     @Override
@@ -36,6 +40,7 @@ class Customer extends Thread{
             acct.deposit(1000);
         }
     }
+
 }
 
 public class AccountTest {

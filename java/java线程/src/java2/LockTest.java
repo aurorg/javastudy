@@ -13,7 +13,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * 2.优先使用顺序：
  * Lock -> 同步代码块（已经进入了方法体，分配了相应资源） -> 同步方法（在方法体之外）
  *
- *
  *  面试题：如何解决线程安全问题？有几种方式
 
  */

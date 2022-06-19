@@ -1,5 +1,5 @@
 package temp1111;
-
+//死锁问题
 public class Tempjava2_1 {
     public static void main(String[] args) {
 

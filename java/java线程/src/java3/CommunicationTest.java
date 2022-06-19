@@ -29,7 +29,8 @@ class Number implements Runnable{
                         e.printStackTrace();
                     }
 
-                    System.out.println(Thread.currentThread().getName() + ":" + number);
+                    System.out.println(Thread.currentThread().getName()
+                            + ":" + number);
                     number++;
 
                     try {
@@ -38,8 +39,6 @@ class Number implements Runnable{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-
                 } else {
                     break;
                 }
