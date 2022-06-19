@@ -2,52 +2,57 @@ package temp1111;
 
 public class Tempjava2_1 {
     public static void main(String[] args) {
-        Account acct = new Account(0);
 
-        Customer c1 = new Customer(acct);
-        Customer c2 = new Customer(acct);
+        StringBuffer s1 = new StringBuffer();
+        StringBuffer s2 = new StringBuffer();
 
-        c1.setName("甲");
-        c2.setName("乙");
+        new Thread(){
+            @Override
+            public void run() {
+                 synchronized(s1){
+                     s1.append("a");
+                     s2.append("1");
 
-        c1.start();
-        c2.start();
-    }
-}
+                     try {
+                         Thread.sleep(100);
+                     } catch (InterruptedException e) {
+                         e.printStackTrace();
+                     }
 
-class Account{
-    private double balance;//余额
+                     synchronized(s2){
+                         s1.append("b");
+                         s2.append("2");
 
-    public Account(double balance){
-        this.balance = balance;
-    }
-
-    public synchronized void deposit(double amt){
-        if(amt>0){
-            balance +=amt;
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                         System.out.println(s1);
+                         System.out.println(s2);
+                     }
+                 }
             }
-            System.out.println(Thread.currentThread().getName()
-            +":存钱成功。余额是：" + balance);
-        }
+        }.start();
+
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                 synchronized(s2){
+                     s1.append("c");
+                     s2.append("3");
+
+                     try {
+                         Thread.sleep(100);
+                     } catch (InterruptedException e) {
+                         e.printStackTrace();
+                     }
+
+                     synchronized(s1){
+                         s1.append("d");
+                         s2.append("4");
+
+                         System.out.println(s1);
+                         System.out.println(s2);
+                     }
+                 }
+            }
+        }).start();
     }
 }
 
-class Customer extends Thread{
-    private Account acct;
-
-    public Customer(Account acct){
-        this.acct = acct;
-    }
-
-    @Override
-    public void run() {
-         for(int i=0;i<3;i++){
-             acct.deposit(1000);
-         }
-    }
-}

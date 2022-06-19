@@ -2,7 +2,11 @@ package src.java2;
 
 /**
  * 1.死锁的理解：不同的线程分别占用对方需要的同步资源不放弃，
- * 都在等待对方放弃自己需要的同步资源，就形成了线程的死锁
+ *   都在等待对方放弃自己需要的同步资源，就形成了线程的死锁
+ *
+ * 2.说明：
+ * 1》出现死锁后，不会出现异常，也不会出现提示，只是所有的线程都处于阻塞状态，无法继续
+ * 2》使用同步的时候，要避免出现死锁
  *
  */
 public class ThreadTest {
@@ -38,7 +42,7 @@ public class ThreadTest {
         }.start();
 
 
-        new Thread(new Runnable() {
+        new Thread(new Runnable() {  //匿名方式实现Runnable接口
             @Override
             public void run() {
 

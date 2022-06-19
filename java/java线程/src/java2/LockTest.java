@@ -17,12 +17,12 @@ import java.util.concurrent.locks.ReentrantLock;
  *  面试题：如何解决线程安全问题？有几种方式
 
  */
-class Window implements Runnable { //实现，也可以用继承
+class Windows implements Runnable { //实现Runable接口，也可以用继承
 
     private int ticket = 100;
 
-    //1.实例化ReentrantLock
-    private ReentrantLock lock = new ReentrantLock();
+    //1.实例化ReentrantLock【造一个对象】
+    private ReentrantLock lock = new ReentrantLock(); //括号里面的参数是boolean型
 
     @Override
     public void run() {
@@ -39,7 +39,8 @@ class Window implements Runnable { //实现，也可以用继承
                         e.printStackTrace();
                     }
 
-                    System.out.println(Thread.currentThread().getName() + "：售票，票号为：" + ticket);
+                    System.out.println(Thread.currentThread().getName()
+                            + "：售票，票号为：" + ticket);
                     ticket--;
                 } else {
                     break;
@@ -56,7 +57,7 @@ class Window implements Runnable { //实现，也可以用继承
 
 public class LockTest {
     public static void main(String[] args) {
-        Window w = new Window();
+        Windows w = new Windows();
 
         Thread t1 = new Thread(w);
         Thread t2 = new Thread(w);
