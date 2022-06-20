@@ -16,6 +16,7 @@ class Bank{
 
     public static Bank getInstance(){
         //方式一：效率稍差
+
 //        synchronized (src.java1.Bank.class) {
 //            if(instance == null){
 //
@@ -23,6 +24,7 @@ class Bank{
 //            }
 //            return instance;
 //        }
+
         //方式二：效率更高
         if(instance == null){
 

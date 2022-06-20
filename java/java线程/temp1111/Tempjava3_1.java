@@ -10,7 +10,7 @@ public class Tempjava3_1 {
         t1.setName("线程一");
         t2.setName("线程二");
 
-        
+
         t1.start();
         t2.start();
     }
@@ -41,6 +41,7 @@ class Number implements Runnable{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }else{
                 break;
                  }
