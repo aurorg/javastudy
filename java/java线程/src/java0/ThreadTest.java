@@ -13,15 +13,26 @@ package src.java0;
 //eg：遍历100以内的所有的偶数
 
 //1.创建一个继承于Thread类的子类
-class MyThread extends Thread {
-    //2.重写Thread类的run()
+//class MyThread extends Thread {
+//    //2.重写Thread类的run()
+//    @Override
+//    public void run() {
+//        for (int i = 0; i < 100; i++) {
+//            if(i %2==0) {
+//                System.out.println(i);
+//            }
+//        }
+//    }
+//}
+    
+    class MyThread extends Thread{
     @Override
     public void run() {
-        for (int i = 0; i < 100; i++) {
-            if(i %2==0) {
-                System.out.println(i);
-            }
-        }
+         for(int i=0;i<100;i++){
+             if(i%2==0){
+                 System.out.println(i);
+             }
+         }
     }
 }
 
