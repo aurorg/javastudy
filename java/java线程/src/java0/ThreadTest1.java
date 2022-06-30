@@ -31,7 +31,6 @@ class MThread implements Runnable{
                 System.out.println(Thread.currentThread().getName()
                         + ":" + i);
             }
-
         }
     }
 }
@@ -52,6 +51,8 @@ public class ThreadTest1 {
         Thread t2 = new Thread(mThread);
         t2.setName("线程2");
         t2.start();
+
+
     }
 }
 

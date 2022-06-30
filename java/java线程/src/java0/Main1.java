@@ -1,6 +1,7 @@
 package src.java0;
 
 class Thread1 extends Thread{
+
     private String name;
 
     public Thread1(String name) {
@@ -20,6 +21,7 @@ class Thread1 extends Thread{
 
     }
 }
+
 public class Main1 {
 
     public static void main(String[] args) {

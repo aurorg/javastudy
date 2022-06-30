@@ -3,6 +3,7 @@ package src.java0;//创建两个分线程，一个遍历偶数，一个遍历奇
   class Testexer2 {
     public static void main(String[] args) {
 
+
         //简便方法：
         //创建Thread类的匿名子类的方式
         new Thread(){
@@ -16,6 +17,7 @@ package src.java0;//创建两个分线程，一个遍历偶数，一个遍历奇
             }
         }.start();
 
+
         //创建Thread类的匿名子类的方式的另一种表达
 
 //        new Thread(() -> {
@@ -25,6 +27,7 @@ package src.java0;//创建两个分线程，一个遍历偶数，一个遍历奇
 //                }
 //            }
 //        }).start();
+
 
         new Thread() {
             @Override
@@ -36,8 +39,6 @@ package src.java0;//创建两个分线程，一个遍历偶数，一个遍历奇
                 }
             }
         }.start();
-
-
     }
 }
 
