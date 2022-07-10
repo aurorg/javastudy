@@ -75,7 +75,7 @@ class MyThreadPool {
     //线程池中的所有运行中的线程（线程池）
     private List<Worker> pool = new ArrayList<>();
 
-     //参数解析
+     //参数
 
     //①poolSize最大的线程数
     private int poolSize = 3;//线程池大小
@@ -108,7 +108,7 @@ class MyThreadPool {
     public void execute(Runnable command) throws InterruptedException {
         //懒汉式创建
         //当线程池中的线程数量小于可运行的线程数标准,则创建新线程执行该任务，
-        // 线程数量大于可运行的线程数标准，添加进队列阻塞，等待其他线程结束之前的任务再执行该任务
+        //线程数量大于可运行的线程数标准，添加进队列阻塞，等待其他线程结束之前的任务再执行该任务
 
         //小于的情况
         if (pool.size() < MAXPOOL) {
