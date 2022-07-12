@@ -1,4 +1,4 @@
-package Temp1;
+package TEMP.Temp1;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

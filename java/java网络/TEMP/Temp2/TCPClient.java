@@ -1,4 +1,4 @@
-package Temp2;
+package TEMP.Temp2;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -7,7 +7,11 @@ import java.net.Socket;
 
 public class TCPClient {
     public static void main(String[] args){
+
+        //socket对象初始化
         Socket socket = null;
+
+        //输出流 os对象初始化
         OutputStream os = null;
         try {
             //1、创建Socket对象，它的第一个参数需要的是服务端的IP，第二个参数是服务端的端口
@@ -19,6 +23,7 @@ public class TCPClient {
 
             //3、写出数据
             os.write("你好，我是客户端hahahaha！".getBytes());
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

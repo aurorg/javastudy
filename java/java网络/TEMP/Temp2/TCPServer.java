@@ -1,4 +1,4 @@
-package Temp2;
+package TEMP.Temp2;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,7 +38,8 @@ public class TCPServer {
             while ((len=is.read(buffer))!=-1){
                 baos.write(buffer,0,len);
             }
-            System.out.println("收到了来自于客户端"+socket.getInetAddress().getHostName()
+            System.out.println("收到了来自于客户端"+
+                    socket.getInetAddress().getHostName()
                     +"的消息："+baos.toString());
         } catch (IOException e) {
             e.printStackTrace();
