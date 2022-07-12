@@ -25,6 +25,7 @@
       <sourceFolder url="file://$MODULE_DIR$/java/ten" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java/third" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java/twelve" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java/java网络" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
