@@ -8,10 +8,12 @@ import java.net.Socket;
 
 public class TestTCPServer {
     public static void main(String[] args) {
+        //初始化
         ServerSocket serverSocket = null;
         Socket socket = null;
         InputStream is =null;
-        ByteArrayOutputStream baos = null;
+        ByteArrayOutputStream baos = null;//ByteArrayOutputStream 将数据写入可以扩展的字节数组
+
         try{
             serverSocket = new ServerSocket(2022);
             socket =serverSocket.accept();
