@@ -8,57 +8,58 @@ import java.net.Socket;
 
 public class TestTCPServer {
     public static void main(String[] args) {
-        //初始化
         ServerSocket serverSocket = null;
-        Socket socket = null;
+        Socket socket =null;
         InputStream is =null;
-        ByteArrayOutputStream baos = null;//ByteArrayOutputStream 将数据写入可以扩展的字节数组
+        ByteArrayOutputStream baos = null;
+            try {
+                serverSocket = new ServerSocket(2022);
+                socket = serverSocket.accept();
+                is = socket.getInputStream();
 
-        try{
-            serverSocket = new ServerSocket(2022);
-            socket =serverSocket.accept();
-            is =socket.getInputStream();
+                baos = new ByteArrayOutputStream();
+                int len=0;
+                byte[] buffer = new byte[1024];
+                while((len=is.read(buffer))!=-1){
+                    baos.write(buffer,0,len);
+                }
+                System.out.println("收到了来自客户端"+
+                        socket.getInetAddress().getHostName()
+                        +"的消息：" + baos.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally{
+                if(serverSocket!=null){
+                    try{
+                        serverSocket.close();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                if(socket!=null){
+                    try{
+                        socket.close();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                if(is!=null){
+                    try{
+                        is.close();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                if(baos!=null){
+                    try{
+                        baos.close();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
 
-            baos = new ByteArrayOutputStream();
-            int len=0;
-            byte[] buffer = new byte[1024];
-            while((len=is.read(buffer))!=-1){
-                baos.write(buffer,0,len);
-            }
-            System.out.println("收到了来自于客户端" +
-                    socket.getInetAddress().getHostName()
-                    + "的消息：" + baos.toString());
-        }catch(IOException e){
-            e.printStackTrace();
-        }finally{
-            if(serverSocket!=null){
-                try{
-                    serverSocket.close();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-            if(socket!=null){
-                try{
-                    socket.close();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-            if(is!=null){
-                try{
-                    is.close();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-            if(baos!=null){
-                try{
-                    baos.close();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-        }
+
+
     }
 }

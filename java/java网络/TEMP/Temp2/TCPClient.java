@@ -14,6 +14,7 @@ public class TCPClient {
         //输出流 os对象初始化
         OutputStream os = null;
         try {
+
             //1、创建Socket对象，它的第一个参数需要的是服务端的IP，第二个参数是服务端的端口
             InetAddress inet = InetAddress.getByName("127.0.0.1");
             socket = new Socket(inet,2022);//inet是服务端ip
