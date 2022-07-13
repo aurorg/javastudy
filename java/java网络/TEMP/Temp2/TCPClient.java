@@ -23,7 +23,7 @@ public class TCPClient {
             os = socket.getOutputStream();
 
             //3、写出数据
-            os.write("你好，我是客户端hahahaha！".getBytes());
+            os.write("你好，我是客户端小杨同学！".getBytes());
 
         } catch (IOException e) {
             e.printStackTrace();
