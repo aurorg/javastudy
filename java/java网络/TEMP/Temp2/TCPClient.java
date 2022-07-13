@@ -31,14 +31,14 @@ public class TCPClient {
             //4、释放资源,别忘了哦！！！！
             if(socket!=null){
                 try {
-                    socket.close();
+                    socket.close();//关闭
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             if(os!=null){
                 try {
-                    os.close();
+                    os.close();//关闭
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

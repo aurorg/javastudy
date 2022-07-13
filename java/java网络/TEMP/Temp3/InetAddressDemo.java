@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 public class InetAddressDemo {
     public static void main(String[] args) {
         try{
-            
+
             //获取自己本机地址信息
             InetAddress localIp=InetAddress.getLocalHost();
 

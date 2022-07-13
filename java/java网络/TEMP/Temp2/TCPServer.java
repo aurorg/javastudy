@@ -35,6 +35,8 @@ public class TCPServer {
             baos = new ByteArrayOutputStream();
             int len=0;
             byte[] buffer = new byte[1024];
+
+            //判断是否将客户端发的消息读完了
             while ((len=is.read(buffer))!=-1){
                 baos.write(buffer,0,len);
             }

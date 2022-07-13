@@ -9,14 +9,14 @@ public class TestTCPclient {
     public static void main(String[] args) {
         Socket socket =null;
         OutputStream os =null;
-        try {
+        try{
             InetAddress inet = InetAddress.getByName("127.0.0.1");
-            socket = new Socket(inet,2022);
+            socket =new Socket(inet,2022);
 
             os =socket.getOutputStream();
 
-            os.write("你好，我是客户端！！！！".getBytes());
-        } catch (IOException e) {
+            os.write("你好，我是客户端哦".getBytes());
+        }catch(IOException e){
             e.printStackTrace();
         }finally{
             if(socket!=null){
@@ -36,3 +36,4 @@ public class TestTCPclient {
         }
     }
 }
+

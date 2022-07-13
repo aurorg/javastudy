@@ -1,4 +1,4 @@
-package BOOK;
+package BOOK.DEMO;
 //显示www.oreilly.com地址的程序
 import java.net.InetAddress;
 import java.net.UnknownHostException;
