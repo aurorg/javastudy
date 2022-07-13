@@ -16,7 +16,7 @@ public class ClientDemo {
 
                 //2.从连接中取出输出流并且发消息
                 OutputStream os = s.getOutputStream();
-                System.out.println("小杨同学说：");
+                System.out.println("zouge说：");
                 Scanner sc = new Scanner(System.in);
                 String msg = sc.nextLine();
                 os.write(msg.getBytes());

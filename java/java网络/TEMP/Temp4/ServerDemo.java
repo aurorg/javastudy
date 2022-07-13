@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public class ServerDemo {
     public static void main(String[] args) throws Exception {
 
-        //1.创建一个线程池，如果有客户端连接就创建一个线程，与之通信、
+        //1.创建一个线程池，如果有客户端连接就创建一个线程，与之通信
         ExecutorService executorService = Executors.newCachedThreadPool();
 
         //2.创建ServerSocket对象
