@@ -2,6 +2,8 @@
 //
 //public class NIOClient {
 //
+
+
 //    /*标识数字*/
 //    private static int flag = 0;
 //    /*缓冲区大小*/

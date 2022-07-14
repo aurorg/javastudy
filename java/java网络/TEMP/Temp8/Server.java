@@ -20,6 +20,7 @@ public class Server {
         while (true) {
             SocketChannel socketChannel = server.accept();
 
+
             if (socketChannel != null) {
                 socketChannel.configureBlocking(false);
                 clients.add(socketChannel);
@@ -27,6 +28,7 @@ public class Server {
             }
 
             ByteBuffer buffer = ByteBuffer.allocateDirect(4096);
+
 
             for (SocketChannel channel : clients) {
                 int num = channel.read(buffer);
