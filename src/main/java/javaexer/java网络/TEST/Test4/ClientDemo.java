@@ -1,4 +1,4 @@
-package TEMP.Temp4;
+package TEST.Test4;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,28 +9,28 @@ import java.util.Scanner;
 public class ClientDemo {
     public static void main(String[] args) {
         while(true){
-            Socket s=null;
-            try {
+            Socket s =null;
+            try{
                 //1.创建socket对象
-                s = new Socket("127.0.0.1", 9999);
+                s = new Socket("127.0.0.1",9999);
 
                 //2.从连接中取出输出流并且发消息
-                OutputStream os = s.getOutputStream();
-                System.out.println("zouge说：");
+                OutputStream os =s.getOutputStream();
+                System.out.println("zouge说：" );
                 Scanner sc = new Scanner(System.in);
-                String msg = sc.nextLine();
+                String msg =sc.nextLine();
                 os.write(msg.getBytes());
 
-                //3.从连接中取出输入流并且接受回话
-                InputStream is = s.getInputStream();
-                byte[] b = new byte[1024];
-                int read = is.read(b);
+                //3.从连接中取出输出流并且回话
+                InputStream is =s.getInputStream();
+                byte[] b =new byte[1024];
+                int read =is.read(b);
                 System.out.println("aurora说："
-                        + new String(b, 0, read).trim());
-                //4.关闭
+                                  +new String(b,0,read).trim());
+
             }catch(IOException e){
                 e.printStackTrace();
-            }finally {
+            }finally{
                 try {
                     s.close();
                 } catch (IOException e) {
