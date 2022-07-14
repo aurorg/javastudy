@@ -1,4 +1,4 @@
-package TEMP.Temp8;
+package TEMP.Temp8NIO;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,7 +14,7 @@ public class Server {
         List<SocketChannel> clients = new ArrayList<>();
 
         ServerSocketChannel server = ServerSocketChannel.open();
-        server.bind(new InetSocketAddress("127.0.0.1", 9090));
+        server.bind(new InetSocketAddress("127.0.0.1", 9999));
         server.configureBlocking(false);
 
         while (true) {
@@ -27,7 +27,7 @@ public class Server {
                 System.out.println("Client connected: " + socketChannel.socket().getPort());
             }
 
-            ByteBuffer buffer = ByteBuffer.allocateDirect(4096);
+            ByteBuffer buffer = ByteBuffer.allocateDirect(2826);
 
 
             for (SocketChannel channel : clients) {

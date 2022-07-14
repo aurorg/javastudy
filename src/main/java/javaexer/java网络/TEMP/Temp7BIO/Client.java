@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class Client {
  public static void main(String[] args) throws Exception {
-  Socket client = new Socket("localhost", 9090);
+  Socket client = new Socket("localhost", 2826);
 
   PrintWriter printWriter = new PrintWriter(client.getOutputStream());
   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
