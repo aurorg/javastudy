@@ -32,7 +32,7 @@ public class GetBufferDemo {
         System.out.println("读取多个字节--------");
 
         //重复读取
-        allocate.rewind();
+        allocate.rewind();//rewind将position设置为0，可以重复读
         byte[] bytes = new byte[4];
         allocate.get(bytes);
         System.out.println(new String(bytes));

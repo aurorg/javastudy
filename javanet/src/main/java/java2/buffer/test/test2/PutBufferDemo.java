@@ -22,7 +22,7 @@ public class PutBufferDemo {
 
         System.out.println(byteBuffer.position());
         System.out.println(byteBuffer.limit());
-        
+
 
     }
 }
