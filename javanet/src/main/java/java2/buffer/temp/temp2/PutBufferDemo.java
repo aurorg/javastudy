@@ -35,7 +35,7 @@ public class PutBufferDemo {
 
         //添加一个字节
         byteBuffer.put((byte) 97);
-        byteBuffer.put((byte) 97);
+
         System.out.println(byteBuffer.position());//1 获取当前索引所在位置
         System.out.println(byteBuffer.limit());//10 最多能操作到哪个索引
         System.out.println(byteBuffer.capacity());//10 返回缓冲区总长度
