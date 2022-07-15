@@ -25,6 +25,10 @@ public class GetBufferDemo {
         System.out.println(allocate.get(1));
 
         System.out.println("读取多个字节-------");
+//        allocate.rewind();
+//        byte[] bytes = new byte[4];
+//        allocate.get(bytes);
+//        System.out.println(new String(bytes));
         allocate.rewind();
         byte[] bytes = new byte[4];
         allocate.get(bytes);
@@ -39,6 +43,6 @@ public class GetBufferDemo {
         allocate.clear();
         allocate.put("abc".getBytes());
         System.out.println(new String(allocate.array()));
-        
+
     }
 }
