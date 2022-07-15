@@ -16,7 +16,7 @@ public class FileCopy {
         FileChannel dst = out.getChannel();//复制后的文件
 
         src.transferTo(0,src.size(),dst);
-        // 或dst.transferFrom(src,0,src.size());
+        // 或dst.transferFrom    (src,0,src.size());
 
 
         in.close();
