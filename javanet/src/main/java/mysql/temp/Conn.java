@@ -1,4 +1,4 @@
-package mysqltest;
+package mysql.temp;
 
 //导入包
 import java.sql.Connection;
@@ -16,7 +16,7 @@ public class Conn {
         //数据库
         String url="jdbc:mysql://localhost:3306/happy?&useSSL=false&serverTimezone=UTC";
         String user="root";
-        String password="0905";
+        String password="szl0905";
         try {
             //注册JDBC驱动程序
             Class.forName(driver);

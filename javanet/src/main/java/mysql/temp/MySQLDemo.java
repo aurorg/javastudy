@@ -1,5 +1,4 @@
-package mysqltest;
-
+package mysql.temp;
 
 import java.sql.*;
 
@@ -16,7 +15,7 @@ public class MySQLDemo {
 
     // 数据库的用户名与密码，需要根据自己的设置
     static final String USER = "root";
-    static final String PASS = "0905";
+    static final String PASS = "szl0905";
 
     public static void main(String[] args) {
         Connection conn = null;
@@ -33,20 +32,20 @@ public class MySQLDemo {
             System.out.println(" 实例化Statement对象...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT id, name, url FROM websites";
+            sql = "SELECT owner ,name, birth FROM pet";
             ResultSet rs = stmt.executeQuery(sql);
 
             // 展开结果集数据库
             while(rs.next()){
                 // 通过字段检索
-                String  id  = rs.getString("aoliao");
-                String name = rs.getString("xuewa");
-                String url = rs.getString("dog");
+                String  owner  = rs.getString("owner");
+                String name = rs.getString("name");
+                String birth = rs.getString("birth");
 
                 // 输出数据
-                System.out.print("ID: " + id);
-                System.out.print(", 站点名称: " + name);
-                System.out.print(", 站点 URL: " + url);
+                System.out.print("主人owner: " + owner);
+                System.out.print(", 宠物名称name: " + name);
+                System.out.print(", 宠物生日birth: " + birth);
                 System.out.print("\n");
             }
             // 完成后关闭
