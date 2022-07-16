@@ -58,6 +58,7 @@ public class NIOSelectorServer {
 
                 //10.判断是否是客户端读就绪事件SelectionKey.isReadable()
                 if (key.isReadable()) {
+
                 //11.得到客户端通道,读取数据到缓冲区
                     SocketChannel socketChannel = (SocketChannel) key.channel();
                     ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
@@ -65,13 +66,15 @@ public class NIOSelectorServer {
                     if (read > 0) {System.out.println("客户端消息:" +
                             new String(byteBuffer.array(), 0, read,
                                     StandardCharsets.UTF_8));
+
                     //12.给客户端回写数据
                         socketChannel.write(ByteBuffer.wrap("没钱".getBytes(StandardCharsets.UTF_8)));
                                 socketChannel.close();
                     }
                 }
+
                     //13.从集合中删除对应的事件, 因为防止二次处理.
-                iterator.remove();
+                   iterator.remove();
             }
             }
         }
