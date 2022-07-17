@@ -60,7 +60,7 @@ public class NIOSelectorServer {
                 if (key.isReadable()) {
 
                 //11.得到客户端通道,读取数据到缓冲区
-                    SocketChannel socketChannel = (SocketChannel) key.channel();
+                    SocketChannel socketChannel = (SocketChannel)key.channel();
                     ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                     int read = socketChannel.read(byteBuffer);
                     if (read > 0) {System.out.println("客户端消息:" +
