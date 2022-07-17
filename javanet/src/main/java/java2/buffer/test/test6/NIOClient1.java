@@ -24,6 +24,6 @@ public class NIOClient1 {
 
         //5.释放资源
         socketChannel.close();
-        
+
     }
 }
