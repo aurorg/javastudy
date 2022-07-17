@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public class NIOClient {
     public static void main(String[] args) throws IOException {
+
         //1.打开通道
         SocketChannel socketChannel=SocketChannel.open();
 
