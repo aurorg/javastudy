@@ -1,9 +1,7 @@
-package java3netty.temp.temp1;
+package java3netty.temp.temp2;
 
 public class NettyServer {
     public static void main(String[] args) {
-
-        //创建BossGroup和WorkGroup
-
+        
     }
 }
