@@ -1,5 +1,7 @@
 package java2.buffer.temp.temp7;
 
+//服务器——选择器
+//Client还是可以和之前一样
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;

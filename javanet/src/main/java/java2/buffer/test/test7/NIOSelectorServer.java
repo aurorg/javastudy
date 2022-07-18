@@ -66,7 +66,7 @@ public class NIOSelectorServer {
                 }
                 //13.从集合中删除对应的事件，防止二次处理
                 iterator.remove();
-                
+
             }
         }
 
