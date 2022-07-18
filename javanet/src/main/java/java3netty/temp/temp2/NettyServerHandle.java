@@ -19,6 +19,7 @@ public class NettyServerHandle implements ChannelInboundHandler {
         System.out.println("客户端发来消息:" +
                 byteBuf.toString(CharsetUtil.UTF_8));
     }
+
     /**
      * 读取完毕事件
      *
@@ -30,6 +31,7 @@ public class NettyServerHandle implements ChannelInboundHandler {
     {ctx.writeAndFlush(Unpooled.copiedBuffer("你好,我是Netty服务端aurora.",
             CharsetUtil.UTF_8));
     }
+
     /**
      * 异常发生事件
      *
@@ -43,13 +45,17 @@ public class NettyServerHandle implements ChannelInboundHandler {
         cause.printStackTrace();
         ctx.close();
     }
+
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
     }
+
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception
     {
     }
+
+
     /**
      * 通道就绪事件
      *
@@ -59,19 +65,25 @@ public class NettyServerHandle implements ChannelInboundHandler {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
     }
+
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
     }
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws
             Exception {
     }
+
     @Override
     public void channelWritabilityChanged(ChannelHandlerContext ctx) throws
             Exception {
-    }@Override
+    }
+
+    @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
     }
+
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
     }
