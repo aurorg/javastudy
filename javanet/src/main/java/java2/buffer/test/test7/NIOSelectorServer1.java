@@ -4,10 +4,12 @@ import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -52,7 +54,31 @@ public class NIOSelectorServer1 {
 
                     //必须设置通道为非阻塞，因为selector需要轮询监听每个通道的事件
                     socketChannel.configureBlocking(false);
+
+                    //指定监听事件为OP_READ
+                    socketChannel.register(selector,SelectionKey.OP_READ);
+
                 }
+
+                //10.判断是否是客户端读就绪事件SelectionKey.isReadable()
+                if(key.isReadable()){
+                    //11.得到客户端通道，读取数据到缓存区
+                    SocketChannel socketChannel =(SocketChannel)key.channel();
+                    ByteBuffer byteBuffer =ByteBuffer.allocate(1024);
+                    int read =socketChannel.read(byteBuffer);
+                    if(read >0){
+                        System.out.println("客户端消息：" +
+                                new String(byteBuffer.array(),0,read, StandardCharsets.UTF_8));
+
+                        //12.给客户端回写数据
+                        socketChannel.write(ByteBuffer.wrap("没钱".getBytes(StandardCharsets.UTF_8)));
+                        socketChannel.close();
+
+                    }
+                }
+
+                //13.从集合中删除对应的事件，防止二次处理
+                iterator.remove();
             }
         }
 
