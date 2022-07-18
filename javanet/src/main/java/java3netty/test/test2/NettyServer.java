@@ -7,10 +7,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.SocketChannel;
 import java3netty.temp.temp2.NettyServerHandle;
-import jdk.jfr.Event;
 
-import java.nio.channels.SocketChannel;
 
 //Netty服务端
 public class NettyServer {
