@@ -53,7 +53,7 @@ public class NettyClientHandle implements ChannelInboundHandler {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws
-            Exception {
+             Exception {
     }
 
 
