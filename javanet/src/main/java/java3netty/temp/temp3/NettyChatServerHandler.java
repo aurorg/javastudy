@@ -56,6 +56,10 @@ public class NettyChatServerHandler extends
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg)
             throws Exception {
+
+        //输出消息
+        System.out.println(msg);
+
         //当前发送消息的通道, 当前发送的客户端连接
         Channel channel = ctx.channel();
         for (Channel channel1 : channelList) {

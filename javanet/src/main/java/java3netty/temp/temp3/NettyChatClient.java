@@ -43,14 +43,18 @@ public class NettyChatClient {
                         @Override
                         protected void initChannel(SocketChannel ch) throws
                                 Exception {
+
                     //6. 向pipeline中添加自定义业务处理handler
-                    //添加编解码器
+
+                            //添加编解码器
                             ch.pipeline().addLast(new StringDecoder());
                             ch.pipeline().addLast(new StringEncoder());
+
                             //添加客户端的处理类
                             ch.pipeline().addLast(new NettyChatClientHandler());
                         }
                     });
+
             //7. 启动客户端,等待连接服务端,同时将异步改为同步
             ChannelFuture channelFuture = bootstrap.connect(ip, port).sync();
             Channel channel = channelFuture.channel();

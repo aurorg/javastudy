@@ -7,6 +7,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
  */
 public class NettyChatClientHandler extends
         SimpleChannelInboundHandler<String> {
+
     /**
      * 通道读取就绪事件
      *
