@@ -13,6 +13,7 @@ import java.io.IOException;
 public class NettyServer {
     public static void main(String[] args) throws IOException,InterruptedException {
 
+
         //创建BossGroup和WorkerGroup
         //说明
         //1.创建两个线程组bossGroup和workerGroup\

@@ -56,6 +56,7 @@ public class NettyClientHandle implements ChannelInboundHandler {
             Exception {
     }
 
+
     @Override
     public void channelWritabilityChanged(ChannelHandlerContext ctx) throws
             Exception {
