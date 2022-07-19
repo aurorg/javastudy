@@ -2,8 +2,10 @@ package java3netty.temp.temp1;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelPipeline;
 import io.netty.util.CharsetUtil;
 
 import java.nio.charset.StandardCharsets;
@@ -23,7 +25,14 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         //super.channelRead(ctx, msg);
 
+        System.out.println("服务器读取线程 " + Thread.currentThread().getName());
+
         System.out.println("server ctx =" + ctx);
+
+        System.out.println("看看channel和pipeline的关系：");
+        Channel channel =ctx.channel();
+        ChannelPipeline pipeline =ctx.pipeline(); //pipeline本质是一个双向链表，出站入站
+
 
         //将msg转成一个ByteBuf
         //ByteBuf 是Netty提供的，不是Nio的ByteBuffer

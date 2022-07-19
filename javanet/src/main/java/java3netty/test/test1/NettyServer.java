@@ -19,7 +19,7 @@ public class NettyServer {
         //1.创建两个线程组bossGroup和workerGroup\
         //2.bossGroup只是处理请求，真正的和客户端业务处理，会交给workerGroup完成
         //3.两个都是无限循环
-
+        //
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
