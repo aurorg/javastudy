@@ -55,6 +55,7 @@ public class Test2MysqlDemo {
             //处理class.forName错误
             e.printStackTrace();
         }finally{
+
             //关闭资源
             try{
                 if(stmt!=null)
@@ -65,6 +66,7 @@ public class Test2MysqlDemo {
 
             }//什么都不用做哦
 
+
             try{
                 if(conn!=null){
                     conn.close();
@@ -73,6 +75,7 @@ public class Test2MysqlDemo {
                 se.printStackTrace();
             }
         }
+
         System.out.println("Goodbye");
     }
 }

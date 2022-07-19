@@ -20,15 +20,20 @@ public class Test1Conn {
         String user ="root";
         String password="szl0905";
         try{
+
             //注册jdbc驱动
             Class.forName(driver);
+
+
 
             //建立连接
             con = DriverManager.getConnection(url,user,password);
             if(!con.isClosed()){
                 System.out.println("数据库连接成功");
             }
+
             con.close();
+
         }catch (ClassNotFoundException e){
             System.out.println("数据库驱动没有安装");
         }catch (SQLException e){
