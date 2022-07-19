@@ -21,7 +21,7 @@ public class NettyServer {
         //4.bossGroup和workerGroup含有的子线程【NioEventLoop】的个数
         //  默认为：实际cpu核数 *2  【可以自己设置线程的数量】
 
-        
+
             NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
 
             NioEventLoopGroup workerGroup = new NioEventLoopGroup();
