@@ -27,7 +27,7 @@ public class Demo1 {
 
         //1、测试read函数，读取数据库中的内容
        // read();
-          del();
+//          del();
 
         //2、测试del函数，删除数据库中的数据
 //        try {
@@ -37,11 +37,11 @@ public class Demo1 {
 //        }
 
         //3、测试添加函数
-//        try {
-//            add();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            add();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //4、测试修改函数
 //        try {
@@ -76,12 +76,14 @@ public class Demo1 {
             System.out.println("实例化Statement对象...");
 
             //创建传输器
-            stat = conn.createStatement();
+            stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
+
+
             String sql;
             sql = "SELECT owner,name,birth FROM pet";
 
             //传输sql并且返回结果
-            ResultSet rs = stat.executeQuery(sql);
+            ResultSet rs = stat.executeQuery(sql); //executeQuery(String sql) ：用于向数据发送查询语句
 
             //展开结果集数据库
             //next()会将光标向下移动一行，
@@ -137,13 +139,15 @@ public class Demo1 {
 
             //删除的mysql语句，然后进行删除
             //count用来返回相应的行数
-            int count = stat.executeUpdate("delete from pet where name= '222222'");
+            int count = stat.executeUpdate("delete from pet where name= 'lalala'");
+            //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
 
             if(count>0){
-                System.out.println("操作成功，受到影响的行数为："+count);
+                System.out.println("删除成功，受到影响的行数为："+count);
             }else{
-                System.out.println("操作失败");
+                System.out.println("删除失败");
             }
+
             //关闭资源
             rs.close();
             stat.close();
@@ -169,7 +173,6 @@ public class Demo1 {
                 se.printStackTrace();
             }
         }
-        System.out.println("删除成功！");
     }
 
 
@@ -180,14 +183,18 @@ public class Demo1 {
         try{
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stat = conn.createStatement();
-            //4.利用传输器传输数据，并返响应行数。
-            int count = stat.executeUpdate("insert into pet values('mimi','xiaozhang','cat','f','1111-11-11',null)");
 
+            //利用传输器传输数据
+            int count = stat.executeUpdate("insert into pet values('mimi','xiaozhang','cat','f','1111-11-11',null)");
+            //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
+
+            //返回相应的行数
             if(count > 0){
-                System.out.println("操作成功，受到影响的行数为："+count);
+                System.out.println("添加成功，受到影响的行数为："+count);
             }else{
-                System.out.println("操作失败");
+                System.out.println("添加失败");
             }
+
         }catch(Exception e){
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -198,7 +205,6 @@ public class Demo1 {
             stat.close();
             conn.close();
         }
-        System.out.println("添加成功！");
 
     }
 
@@ -212,11 +218,12 @@ public class Demo1 {
 
             //4.利用传输器传输数据，并返响应行数。
             int count = stat.executeUpdate("update pet set owner = 'nana' where name = 'aoliao'");
+            //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
 
             if(count > 0){
-                System.out.println("操作成功，受到影响的行数为："+count);
+                System.out.println("修改成功，受到影响的行数为："+count);
             }else{
-                System.out.println("操作失败");
+                System.out.println("修改失败");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -230,11 +237,5 @@ public class Demo1 {
         }
 
     }
-
-
-
-
-
-
 
 }
