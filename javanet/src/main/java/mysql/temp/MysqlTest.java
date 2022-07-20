@@ -14,10 +14,10 @@ public class MysqlTest {
 
         try {
             //1.register
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             //2.getConnection
-            String url="jdbc:mysql://localhost:3306/happy";
+            String url="jdbc:mysql://localhost:3306/happy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
             Properties info=new Properties();
             info.put("user", "root");
             info.put("password", "szl0905");
