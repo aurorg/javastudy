@@ -20,18 +20,24 @@ public class Test3MySQLRead {
              //注册JDBC驱动
              Class.forName(JDBC_DRIVER);
 
-             //打开链接
+             //获得数据库链接
              System.out.println("连接数据库.....");
              conn =DriverManager.getConnection(DB_URL,USER,PASS);
 
              //执行查询
              System.out.println("实例化Statement对象...");
+
+             //创建传输器
              stmt =conn.createStatement();
              String sql;
              sql = "SELECT owner,name,birth FROM pet";
+
+             //传输sql并且返回结果
              ResultSet rs = stmt.executeQuery(sql);
 
              //展开结果集数据库
+             //next()会将光标向下移动一行，
+             //并返回当前行是否有效，如果遍历完成整个表，则会返回false
              while(rs.next()){
 
                  // 通过字段检索

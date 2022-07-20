@@ -25,7 +25,7 @@ public class Test4MySQLWrite {
 
             String sql ="insert into pet(owner,name,birth) values(?,?,?)";
             ps =connection.prepareStatement(sql);
-            
+
             ps.setString(1,"444444");
             ps.setString(2,"lalala");
             ps.setString(3,"2004-02-02");
