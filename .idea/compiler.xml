@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="javanet" />
+        <module name="chatroom" />
         <module name="javabasics" />
         <module name="javathread" />
+        <module name="javanet" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="chatroom" target="11" />
       <module name="javabasics" target="11" />
       <module name="javanet" target="11" />
       <module name="javastudy" target="11" />

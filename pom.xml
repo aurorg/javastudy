@@ -13,6 +13,7 @@
         <module>javathread</module>
         <module>javathread</module>
         <module>javanet</module>
+        <module>chatroom</module>
     </modules>
 
     <properties>
