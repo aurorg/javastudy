@@ -24,6 +24,9 @@ public class UserView {
     //sql语句的执行结果
     static ResultSet rs = null;
 
+    //记录语句的输入
+    static PreparedStatement ps =null;
+
     //用户输入
     static Scanner input = new Scanner(System.in);
 
@@ -175,11 +178,27 @@ public class UserView {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stat = conn.createStatement();
 
-            //利用传输器传输数据
-            int count = stat.executeUpdate("insert into usermsg(username,userpassword,phonenumber) values('aoliao','aoliao123','654321')");
-            //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
+//            //利用传输器传输数据
+//            int count = stat.executeUpdate("insert into usermsg(username,userpassword,phonenumber) values('aoliao','aoliao123','654321')");
+//            //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
+            String sql ="insert into usermsg(username,userpassword,phonenumber) values(?,?,?) ";
+            ps=conn.prepareStatement(sql);
 
-            //返回相应的行数
+            System.out.println("请再次输入您的昵称【username】,密码【userpassword】,电话号码【phonenumber】,对您的数据进行储存");
+
+            System.out.println("请输入username：");
+            String s1=input.next();
+            ps.setString(1,s1);
+
+            System.out.println("请输入userpassword：");
+            String s2=input.next();
+            ps.setString(2,s2);
+
+            System.out.println("请输入phonenumber：");
+            int s3=input.nextInt();
+            ps.setInt(3,s3);
+
+            int count =ps.executeUpdate();//返回相应的行数
             if(count > 0){
                 System.out.println("添加成功，受到影响的行数为："+count);
                 rtid();
@@ -193,11 +212,11 @@ public class UserView {
         }finally{
             //6.关闭资源
             //后创建的先关闭
-//            try {
-//                rs.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             try {
                 stat.close();
             } catch (SQLException e) {
@@ -224,19 +243,33 @@ public class UserView {
             //获得数据库链接
             //System.out.println("连接数据库.....");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement ps1 =null;
 
             //执行查询
             //System.out.println("实例化Statement对象...");
 
             //创建传输器
-            stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
+            //stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
+
+//            System.out.println("请再次输入phonenumber：");
+//            int s3=input.nextInt();
+//            ps.setInt(1,s3);
+
+            String sql ="SELECT userid FROM usermsg where phonenumber = ? ";
+            ps1=conn.prepareStatement(sql);
+
+            System.out.println("请再次输入phonenumber：");
+
+            int s3=input.nextInt();
+            //System.out.println(s3+ "###################");
+            ps1.setInt(1,s3);
 
 
-            String sql;
-            sql = "SELECT userid FROM usermsg where phonenumber = '654321'";
+//            String sql;
+//            sql = "SELECT userid FROM usermsg where phonenumber = '654321'";
 
             //传输sql并且返回结果
-            ResultSet rs = stat.executeQuery(sql); //executeQuery(String sql) ：用于向数据发送查询语句
+            ResultSet rs = ps1.executeQuery(); //executeQuery(String sql) ：用于向数据发送查询语句
 
             //展开结果集数据库
             //next()会将光标向下移动一行，
@@ -250,8 +283,9 @@ public class UserView {
 
             }
             // 完成后关闭
+            ps1.close();
             rs.close();
-            stat.close();
+            //stat.close();
             conn.close();
 
         } catch (SQLException se) {
@@ -262,10 +296,10 @@ public class UserView {
             e.printStackTrace();
         } finally {
             // 关闭资源
-            try {
-                if (stat != null) stat.close();
-            } catch (SQLException se2) {
-            }// 什么都不做
+//            try {
+//                if (stat != null) stat.close();
+//            } catch (SQLException se2) {
+//            }// 什么都不做
             try {
                 if (conn != null) conn.close();
             } catch (SQLException se) {
@@ -344,11 +378,20 @@ public class UserView {
             //创建向数据库发送sql的statement对象
             stat = conn.createStatement();
 
+            String sql ="delete from usermsg where userid=?";
+            ps =conn.prepareStatement(sql);
+
+            System.out.println("请再次输入要删除的账号：");
+            int s1 =input.nextInt();
+            ps.setInt(1,s1);
+
             //删除的mysql语句，然后进行删除
             //count用来返回相应的行数
-            int count = stat.executeUpdate("delete from usemsg where userid= '10'");
+            //int count = stat.executeUpdate("delete from usemsg where userid= '10'");
             //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
 
+
+            int count = ps.executeUpdate();
             if(count>0){
                 System.out.println("删除账户成功，受到影响的行数为："+count);
             }else{
@@ -357,6 +400,7 @@ public class UserView {
 
             //关闭资源
             //rs.close();
+            ps.close();
             stat.close();
             conn.close();
 
