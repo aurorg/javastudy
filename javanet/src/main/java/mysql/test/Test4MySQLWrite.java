@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class Test4MySQLWrite {
+    static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         Connection connection =null;
         PreparedStatement ps =null;
@@ -25,6 +27,8 @@ public class Test4MySQLWrite {
 
             String sql ="insert into pet(owner,name,birth) values(?,?,?)";
             ps =connection.prepareStatement(sql);
+
+
 
             ps.setString(1,"444444");
             ps.setString(2,"lalala");

@@ -63,6 +63,9 @@ public class UserView {
             case 3:
                 logout();
                 break;
+            default:
+                System.out.println("请按照要求输入哦！");
+                System.exit(0);
         }
     }
 //----------------------------------------------------------------------------------------------------------------------
@@ -284,15 +287,102 @@ public class UserView {
         System.out.println("请再次确认密码：");
         String psw2 =input.next();
 
-        
+        //如果两次密码相同就成功登录
+        //不相同的话重新输入密码
+        if(psw1.equals(psw2)){
+            //登录成功
+            System.out.println("登陆成功啦！");
+            System.out.println("接下来，您可以根据需求选择功能哦！");
+
+        }else{
+            System.out.println("密码或者账号错误，请重新登录!!!");
+            login();
+        }
 
 
     }
 
     //用户注销
     public static void logout(){
+        System.out.println("用户注销操作如下：");
+        System.out.println("请输入您的账号【id】:");
+        int userid1 =input.nextInt();
+
+        System.out.println("请输入您的密码：");
+        String psw1 =input.next();
+
+        System.out.println("请再次确认密码：");
+        String psw2 =input.next();
+
+        System.out.println("请问您确定注销该账户了吗？");
+        System.out.println("*********************");
+        System.out.println("******[1]确定删除******");
+        System.out.println("******[2]不删除了******");
+
+        int n = input.nextInt();
+        switch (n) {
+            case 1:
+                deluser();
+                break;
+            case 2:
+                //后续操作函数
+                break;
+
+            default:
+                System.out.println("请按照要求输入哦！");
+                System.exit(0);
+        }
 
     }
+
+    //注销账户时，从数据库中删除数据
+    public static void deluser(){
+        try{
+            //初始化数据库的连接
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //创建向数据库发送sql的statement对象
+            stat = conn.createStatement();
+
+            //删除的mysql语句，然后进行删除
+            //count用来返回相应的行数
+            int count = stat.executeUpdate("delete from usemsg where userid= '10'");
+            //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
+
+            if(count>0){
+                System.out.println("删除账户成功，受到影响的行数为："+count);
+            }else{
+                System.out.println("删除账户失败");
+            }
+
+            //关闭资源
+            //rs.close();
+            stat.close();
+            conn.close();
+
+        } catch (SQLException se) {
+            // 处理 JDBC 错误
+            se.printStackTrace();
+        } catch (Exception e) {
+            // 处理 Class.forName 错误
+            e.printStackTrace();
+        } finally {
+            // 关闭资源
+
+            try {
+                if (stat != null) stat.close();
+            } catch (SQLException se2) {
+            }// 什么都不做
+
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+    }
+
 
 
 }
