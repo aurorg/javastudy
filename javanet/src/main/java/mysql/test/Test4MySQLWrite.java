@@ -28,11 +28,18 @@ public class Test4MySQLWrite {
             String sql ="insert into pet(owner,name,birth) values(?,?,?)";
             ps =connection.prepareStatement(sql);
 
+            System.out.println("请输入1：");
+            String s1=input.next();
 
+            ps.setString(1,s1);
 
-            ps.setString(1,"444444");
-            ps.setString(2,"lalala");
-            ps.setString(3,"2004-02-02");
+            System.out.println("请输入2：");
+            String s2=input.next();
+            ps.setString(2,s2);
+
+            System.out.println("请输入3：");
+            String s3=input.next();
+            ps.setString(3,s3);
 
             int resultSet =ps.executeUpdate();
             if(resultSet >0){
