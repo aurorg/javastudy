@@ -28,7 +28,6 @@ public class NettyChatServerHandler extends
                 channel.remoteAddress().toString().substring(1) + "在线.");
     }
 
-
     /**
      * 通道未就绪--channel下线
      *

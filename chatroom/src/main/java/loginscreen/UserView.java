@@ -328,6 +328,9 @@ public class UserView {
             System.out.println("登陆成功啦！");
             System.out.println("接下来，您可以根据需求选择功能哦！");
 
+            //下一步
+            //聊天功能+注销
+
         }else{
             System.out.println("密码或者账号错误，请重新登录!!!");
             login();
@@ -412,7 +415,6 @@ public class UserView {
             e.printStackTrace();
         } finally {
             // 关闭资源
-
             try {
                 if (stat != null) stat.close();
             } catch (SQLException se2) {

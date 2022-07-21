@@ -22,9 +22,9 @@ public class NettyServer {
         //  默认为：实际cpu核数 *2  【可以自己设置线程的数量】
 
 
-            NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
 
-            NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
 
@@ -32,7 +32,7 @@ public class NettyServer {
             ServerBootstrap bootstrap = new ServerBootstrap();
 
             //使用链式编程来进行设置
-            bootstrap.group(bossGroup, workerGroup) //设置两个线程组
+            bootstrap.group(bossGroup, workerGroup)  //设置两个线程组
                     .channel(NioServerSocketChannel.class)  //使用NioSocketChannel作为服务器的通道实现
                     .option(ChannelOption.SO_BACKLOG, 128) //设置线程队列得到的连接数
                     .childOption(ChannelOption.SO_KEEPALIVE, true) //设置保持活动的连接状态
@@ -42,6 +42,7 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new NettyServerHandler());
+                                         //.addLast()
                         }
 
                     }); //给workerGroup的EventLoop对应的管道设置处理器
