@@ -26,7 +26,7 @@ public class Demo1 {
     public static void main(String[] args)  {
 
         //1、测试read函数，读取数据库中的内容
-       // read();
+        read();
 //          del();
 
         //2、测试del函数，删除数据库中的数据
@@ -37,11 +37,11 @@ public class Demo1 {
 //        }
 
         //3、测试添加函数
-        try {
-            add();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            add();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         //4、测试修改函数
 //        try {
@@ -149,7 +149,7 @@ public class Demo1 {
             }
 
             //关闭资源
-            rs.close();
+            //rs.close();
             stat.close();
             conn.close();
 
@@ -185,7 +185,7 @@ public class Demo1 {
             stat = conn.createStatement();
 
             //利用传输器传输数据
-            int count = stat.executeUpdate("insert into pet values('mimi','xiaozhang','cat','f','1111-11-11',null)");
+            int count = stat.executeUpdate("insert into pet values('mimi1','xiaozhang','cat','f','1111-11-11',null)");
             //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
 
             //返回相应的行数
@@ -201,7 +201,7 @@ public class Demo1 {
         }finally{
             //6.关闭资源
             //后创建的先关闭
-            rs.close();
+            //rs.close();
             stat.close();
             conn.close();
         }
@@ -231,7 +231,7 @@ public class Demo1 {
         }finally{
             //6.关闭资源
             //后创建的先关闭
-            rs.close();
+            //rs.close();
             stat.close();
             conn.close();
         }
