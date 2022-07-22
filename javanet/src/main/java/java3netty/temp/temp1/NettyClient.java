@@ -2,6 +2,8 @@ package java3netty.temp.temp1;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -20,10 +22,16 @@ public class NettyClient {
 
             bootstrap.group(group) //设置线程组
                     .channel(NioSocketChannel.class) //设置客户端通道的实现类
-                    .handler( new ChannelInitializer<SocketChannel>() {
+                    .handler(new ChannelInitializer<NioSocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new NettyClientHandler()); //加入自己的处理器
+                        protected void initChannel(NioSocketChannel ch) throws Exception {
+                            ch.pipeline().addLast("LoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
+                                @Override
+                                public void channelActive(ChannelHandlerContext ctx) throws Exception {
+
+                                    //创建一个线程专门用来跑这些界面（登录界面，主界面）的界面层
+                                }
+                            });
                         }
                     });
 

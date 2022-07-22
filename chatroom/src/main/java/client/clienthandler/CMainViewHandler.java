@@ -4,5 +4,5 @@ package client.clienthandler;
  *
  *
  */
-public class MainView {
+public class CMainViewHandler {
 }

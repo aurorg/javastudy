@@ -7,6 +7,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.io.IOException;
 
@@ -36,11 +37,11 @@ public class NettyServer {
                     .channel(NioServerSocketChannel.class)  //使用NioSocketChannel作为服务器的通道实现
                     .option(ChannelOption.SO_BACKLOG, 128) //设置线程队列得到的连接数
                     .childOption(ChannelOption.SO_KEEPALIVE, true) //设置保持活动的连接状态
-                    .childHandler(new ChannelInitializer<SocketChannel>() { //创建一个通道测试对象（匿名对象）
+                    .childHandler(new ChannelInitializer<NioSocketChannel>() { //创建一个通道测试对象（匿名对象）
 
                         //给pipeline设置处理器
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new NettyServerHandler());
                                          //.addLast()
                         }
