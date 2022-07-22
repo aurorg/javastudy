@@ -43,6 +43,7 @@ public class ChatNettyServer {
                         //给pipeline设置处理器
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
+                            System.out.println("1111111111111111");
                             ch.pipeline().addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
                             //.addLast()
                         }
