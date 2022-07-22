@@ -1,7 +1,14 @@
 package message;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Message {
-    private int msgtype;
+    //private int msgtype;
+
+    private int messageType;
+    private int sequenceId;
+    //public  int getMessageType();
 
 
     //第一部分：注册，登录，注销，退出界面
@@ -17,6 +24,15 @@ public class Message {
 
     private static final int quit = 7;        //【退出系统】    客户端发给服务端的消息
     private static final int quit1 =8;        //【退出系统】    服务端向客户端发的消息
+
+    private static final Map<Integer,Class<?>> messageClasses = new HashMap<>();
+
+    public static Class<?> getMessageClass(int messageType){
+        return messageClasses.get(messageType);
+    }
+    public int getSequenceId(){
+        return sequenceId;
+    }
 
 
 }

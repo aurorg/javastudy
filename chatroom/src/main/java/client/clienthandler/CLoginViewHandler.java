@@ -3,6 +3,7 @@ package client.clienthandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import message.cctoss.Enrollmsg;
 
 import java.util.Scanner;
 
@@ -14,7 +15,10 @@ import java.util.Scanner;
  * 完成上面这三个操作之后进行后续操作，就会调用MainView里面的界面
  */
 public class CLoginViewHandler{
+    //用户输入
     static Scanner input = new Scanner(System.in);
+
+
     //实现界面层和客户交流的代码
     public CLoginViewHandler(ChannelHandlerContext ctx){
         System.out.println("*******************************");
@@ -28,7 +32,7 @@ public class CLoginViewHandler{
         int n = input.nextInt();
         switch (n) {
             case 1:
-               enroll();
+               enroll(ctx);
                 break;
             case 2:
                // login();
@@ -42,8 +46,15 @@ public class CLoginViewHandler{
         }
 
     }
-    public void enroll(){}
+    public void enroll(ChannelHandlerContext ctx){
+        System.out.println("请输入您的手机号码进行注册（6位）：");
+        int pn1 =input.nextInt();
 
+        Enrollmsg message = new Enrollmsg();
+        message.setPhonenumber(pn1);
+        ctx.writeAndFlush(message);
+
+    }
 
 
 

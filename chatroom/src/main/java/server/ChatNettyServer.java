@@ -1,5 +1,6 @@
 package server;
 
+import common.MessageCodec;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -11,8 +12,38 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import server.serverhandler.SLoginViewHandle;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class ChatNettyServer {
+
+    public static void jdbcmysql(){
+        // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
+        final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        final String DB_URL = "jdbc:mysql://localhost:3306/chatroom?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+
+        //数据库用户和密码
+        final String USER = "root";
+        final String PASS = "szl0905";
+
+        //数据的连接对象
+        Connection conn = null;
+
+        //传输器
+        Statement stat = null;
+
+        //sql语句的执行结果
+        ResultSet rs = null;
+
+        //记录语句的输入
+        PreparedStatement ps =null;
+
+
+    }
+
+
     public static void main(String[] args) throws IOException ,InterruptedException{
 
         //创建BossGroup和WorkGroup
@@ -22,7 +53,7 @@ public class ChatNettyServer {
         //3.两个都是无限循环
         //4.bossGroup和workerGroup含有的子线程【NioEventLoop】的个数
         //  默认为：实际cpu核数 *2  【可以自己设置线程的数量】
-
+        jdbcmysql();
 
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
 
@@ -44,7 +75,8 @@ public class ChatNettyServer {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             System.out.println("1111111111111111");
-                            ch.pipeline().addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
+                            ch.pipeline().addLast(new MessageCodec())
+                                    .addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
                             //.addLast()
                         }
 
