@@ -28,7 +28,7 @@ public class CLoginViewHandler{
         int n = input.nextInt();
         switch (n) {
             case 1:
-               // enroll(ctx);
+               enroll();
                 break;
             case 2:
                // login();
@@ -42,6 +42,8 @@ public class CLoginViewHandler{
         }
 
     }
+    public void enroll(){}
+
 
 
 

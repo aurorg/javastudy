@@ -2,6 +2,8 @@ package message.cctoss;
 
 import message.Message;
 
+//注册时客户端向服务端发的消息包装在一个类里面
+
 public class Enrollmsg extends Message {
     private int userid; //用户的id
     private String name; //用户姓名
