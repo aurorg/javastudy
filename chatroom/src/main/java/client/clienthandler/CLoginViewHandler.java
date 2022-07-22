@@ -50,9 +50,12 @@ public class CLoginViewHandler{
         System.out.println("请输入您的手机号码进行注册（6位）：");
         int pn1 =input.nextInt();
 
-        Enrollmsg message = new Enrollmsg();
-        message.setPhonenumber(pn1);
-        ctx.writeAndFlush(message);
+//        Enrollmsg message = new Enrollmsg();
+//        message.setPhonenumber(pn1);
+//        ctx.writeAndFlush(message);
+
+          ctx.writeAndFlush("1233213244");
+
 
     }
 

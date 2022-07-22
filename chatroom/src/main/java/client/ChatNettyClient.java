@@ -20,8 +20,8 @@ public class ChatNettyClient {
         NioEventLoopGroup group = new NioEventLoopGroup();
 
 
-//        LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
-//        MessageCodec clientCodec=new MessageCodec();
+        LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
+        MessageCodec clientCodec=new MessageCodec();
 
 
 
@@ -35,8 +35,8 @@ public class ChatNettyClient {
                     .handler( new ChannelInitializer<NioSocketChannel>() {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new StringEncoder());
-                            ch.pipeline().addLast(new StringEncoder());
+                            ch.pipeline().addLast(new MessageCodec());
+
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 
                                 @Override
