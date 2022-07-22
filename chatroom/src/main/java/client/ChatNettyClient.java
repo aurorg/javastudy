@@ -9,12 +9,21 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
 public class ChatNettyClient {
     public static void main(String[] args) throws Exception{
 
         //客户端需要一个事件循环组
         NioEventLoopGroup group = new NioEventLoopGroup();
+
+
+//        LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
+//        MessageCodec clientCodec=new MessageCodec();
+
+
 
         try {
             //创建客户端启动对象
@@ -26,14 +35,17 @@ public class ChatNettyClient {
                     .handler( new ChannelInitializer<NioSocketChannel>() {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new MessageCodec())
-                                    .addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
+                            ch.pipeline().addLast(new StringEncoder());
+                            ch.pipeline().addLast(new StringEncoder());
+                            ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
+
                                 @Override
                                 public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
                                     //创建一个线程专门用来跑这些界面（登录界面，主界面）的界面层
                                     new Thread(()->{new CLoginViewHandler(ctx);}).start();
                                 }
+
                             });
                         }
                     });

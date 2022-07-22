@@ -9,6 +9,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 import server.serverhandler.SLoginViewHandle;
 
 import java.io.IOException;
@@ -59,6 +61,8 @@ public class ChatNettyServer {
 
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
+
+
         try {
 
             //创建服务器端启动的对象，配置参数
@@ -74,9 +78,10 @@ public class ChatNettyServer {
                         //给pipeline设置处理器
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
-                            System.out.println("1111111111111111");
-                            ch.pipeline().addLast(new MessageCodec())
-                                    .addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
+                            ch.pipeline().addLast(new StringEncoder());
+                            ch.pipeline().addLast(new StringDecoder());
+                            ch.pipeline().addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
+
                             //.addLast()
                         }
 

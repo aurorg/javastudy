@@ -42,7 +42,8 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
     protected void channelRead0(ChannelHandlerContext ctx,Enrollmsg message) throws Exception {
         try {
 
-            System.out.println("2222222222");
+            System.out.println(message);
+            //System.out.println("2222222222");
             int pn1 =message.getPhonenumber();
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
