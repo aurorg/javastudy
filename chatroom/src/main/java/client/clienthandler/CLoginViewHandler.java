@@ -28,13 +28,13 @@ public class CLoginViewHandler{
         int n = input.nextInt();
         switch (n) {
             case 1:
-                enroll(ctx);
+               // enroll(ctx);
                 break;
             case 2:
-                login();
+               // login();
                 break;
             case 3:
-                logout();
+               // logout();
                 break;
             default:
                 System.out.println("请按照要求输入哦！");
@@ -43,30 +43,7 @@ public class CLoginViewHandler{
 
     }
 
-    public void enroll(ChannelHandlerContext ctx){
-        System.out.println("请输入您的手机号码进行注册（6位）：");
-        int pn1 =input.nextInt();
 
-        ByteBuf byteBuf =ctx.alloc().buffer();
-        byteBuf.writeInt(pn1);
-        //byteBuf = (ByteBuf) msg;
-        ctx.writeAndFlush(byteBuf);
-
-        //去数据库中查找该手机号码注册过账号没有【规定，一个账号只能注册一个电话号码】
-        //注册过了：选择新的手机号进行注册
-        //没有注册过：继续进行登录
-        //检索数据库看这个用户的数据是否在数据库中
-
-        //调用服务层的函数完成
-
-
-    }
-    public void login(){
-
-    }
-    public void logout(){
-
-    }
 
 
 }
