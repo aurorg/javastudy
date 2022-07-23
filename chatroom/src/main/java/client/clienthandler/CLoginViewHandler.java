@@ -55,10 +55,12 @@ public class CLoginViewHandler{
         String psw1 =input.next();
 
         Enrollmsg message = new Enrollmsg(pn1,name1,psw1);
-       // message.setPhonenumber(pn1);
+        // message.setPhonenumber(pn1);
         ctx.writeAndFlush(message);
 
-      //    ctx.writeAndFlush("1233213244");
+        //    ctx.writeAndFlush("1233213244");
+
+
 
 
     }

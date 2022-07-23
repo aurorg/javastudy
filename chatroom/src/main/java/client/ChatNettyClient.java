@@ -11,13 +11,13 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import message.ServerToClientmsg;
 
 public class ChatNettyClient {
     public static void main(String[] args) throws Exception{
 
         //客户端需要一个事件循环组
         NioEventLoopGroup group = new NioEventLoopGroup();
-
 
         LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
       //  MessageCodec clientCodec=new MessageCodec();

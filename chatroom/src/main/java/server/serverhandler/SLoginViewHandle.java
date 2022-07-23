@@ -3,6 +3,7 @@ package server.serverhandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.Enrollmsg;
+import message.ServerToClientmsg;
 
 import java.sql.*;
 
@@ -35,9 +36,16 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
     protected void channelRead0(ChannelHandlerContext ctx,Enrollmsg message) throws Exception {
         try {
 
+            //每次先打印一下下，看消息发过来没有！！！！！！
             System.out.println(message);
-            //System.out.println("2222222222");
+
+
             int pn1 =message.getPhonenumber();
+            System.out.println(pn1);
+
+            ServerToClientmsg message1;
+
+
 
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
@@ -76,6 +84,10 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
             }
             //判断之后进行后续选择
             if(isexit){
+                 message1 = new ServerToClientmsg(false,"您的手机号已经注册过账号");
+                System.out.println(message1);
+                ctx.writeAndFlush(message1);
+                
                  //message = new ServerToClientmsg(false,"您的电话号码已被使用，请选择新的电话号码进行注册：");
                 //System.out.println("您的电话号码已被使用，请选择新的电话号码进行注册：");
 
