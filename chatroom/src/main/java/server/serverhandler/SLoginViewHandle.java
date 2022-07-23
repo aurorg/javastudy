@@ -1,17 +1,10 @@
 package server.serverhandler;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.CharsetUtil;
-import message.cctoss.Enrollmsg;
-import message.sstocc.Enroollmsg1;
+import message.Enrollmsg;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import java.util.Scanner;
 
 public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
     // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
@@ -45,6 +38,7 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
             System.out.println(message);
             //System.out.println("2222222222");
             int pn1 =message.getPhonenumber();
+
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
 
@@ -82,8 +76,7 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
             }
             //判断之后进行后续选择
             if(isexit){
-                ctx.writeAndFlush(Unpooled.copiedBuffer("您的电话号码已被使用，请选择新的电话号码进行注册："
-                        .getBytes(StandardCharsets.UTF_8)));
+                 //message = new ServerToClientmsg(false,"您的电话号码已被使用，请选择新的电话号码进行注册：");
                 //System.out.println("您的电话号码已被使用，请选择新的电话号码进行注册：");
 
             }

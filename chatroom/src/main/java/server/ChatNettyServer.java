@@ -11,6 +11,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import server.serverhandler.SLoginViewHandle;
 
 import java.io.IOException;
@@ -61,6 +63,7 @@ public class ChatNettyServer {
 
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
+        LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
 
 
         try {
@@ -71,15 +74,15 @@ public class ChatNettyServer {
             //使用链式编程来进行设置
             bootstrap.group(bossGroup, workerGroup)  //设置两个线程组
                     .channel(NioServerSocketChannel.class)  //使用NioSocketChannel作为服务器的通道实现
-                    .option(ChannelOption.SO_BACKLOG, 128) //设置线程队列得到的连接数
-                    .childOption(ChannelOption.SO_KEEPALIVE, true) //设置保持活动的连接状态
+                    //.option(ChannelOption.SO_BACKLOG, 128) //设置线程队列得到的连接数
+                    //.childOption(ChannelOption.SO_KEEPALIVE, true) //设置保持活动的连接状态
                     .childHandler(new ChannelInitializer<NioSocketChannel>() { //创建一个通道测试对象（匿名对象）
 
                         //给pipeline设置处理器
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new StringEncoder());
-                            ch.pipeline().addLast(new StringDecoder());
+                            ch.pipeline().addLast(new MessageCodec());
+
                             ch.pipeline().addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
 
                             //.addLast()

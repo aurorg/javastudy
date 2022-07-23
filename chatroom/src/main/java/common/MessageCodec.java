@@ -28,9 +28,9 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
         //2.1 字节,序列化算法方式 0-->jdk ，1-->json
         byteBuf.writeByte(0);
         //3.1 字节,指令类型
-       // byteBuf.writeByte(message.getMessageType());
+        byteBuf.writeByte(message.getMessageType());
         //4.4 字节,请求序号（为了双工通信，提高异步能力）
-       byteBuf.writeInt(message.getSequenceId());
+        byteBuf.writeInt(message.getSequenceId());
 
         ByteArrayOutputStream bos=new ByteArrayOutputStream();
         ObjectOutputStream oos=new ObjectOutputStream(bos);
@@ -38,6 +38,7 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
         byte[] bytes=bos.toByteArray();
         //5.4 字节，消息长度
         byteBuf.writeInt(bytes.length);
+        //System.out.println(bytes.length);
         //6.2字节，备用位
         byteBuf.writeShort(0xffff);
         //6.获取内容的字节数组
@@ -51,10 +52,12 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
         byte messageType=byteBuf.readByte();
         int sequenceId=byteBuf.readInt();
         int length=byteBuf.readInt();
+       // System.out.println(length);
         byteBuf.readByte();
         byteBuf.readByte();
         byte[] bytes=new byte[length];
         byteBuf.readBytes(bytes,0,length);
+
         if(serializerType==0){
             //使用jdk序列化
             ObjectInputStream ois=new ObjectInputStream(new ByteArrayInputStream(bytes));

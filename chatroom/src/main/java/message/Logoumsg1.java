@@ -1,4 +1,4 @@
-package message.sstocc;
+package message;
 
 public class Logoumsg1 {
 }

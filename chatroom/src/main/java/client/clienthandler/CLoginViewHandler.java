@@ -1,9 +1,7 @@
 package client.clienthandler;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import message.cctoss.Enrollmsg;
+import message.Enrollmsg;
 
 import java.util.Scanner;
 
@@ -50,11 +48,17 @@ public class CLoginViewHandler{
         System.out.println("请输入您的手机号码进行注册（6位）：");
         int pn1 =input.nextInt();
 
-//        Enrollmsg message = new Enrollmsg();
-//        message.setPhonenumber(pn1);
-//        ctx.writeAndFlush(message);
+        System.out.println("请输入您的账号昵称：");
+        String name1 =input.next();
 
-          ctx.writeAndFlush("1233213244");
+        System.out.println("请输入您的账号密码：");
+        String psw1 =input.next();
+
+        Enrollmsg message = new Enrollmsg(pn1,name1,psw1);
+       // message.setPhonenumber(pn1);
+        ctx.writeAndFlush(message);
+
+      //    ctx.writeAndFlush("1233213244");
 
 
     }

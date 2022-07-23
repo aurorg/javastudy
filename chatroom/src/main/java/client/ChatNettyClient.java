@@ -9,7 +9,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -21,7 +20,7 @@ public class ChatNettyClient {
 
 
         LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
-        MessageCodec clientCodec=new MessageCodec();
+      //  MessageCodec clientCodec=new MessageCodec();
 
 
 
@@ -36,14 +35,14 @@ public class ChatNettyClient {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new MessageCodec());
-
+                            //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 
                                 @Override
                                 public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
                                     //创建一个线程专门用来跑这些界面（登录界面，主界面）的界面层
-                                    new Thread(()->{new CLoginViewHandler(ctx);}).start();
+                                    new Thread(()->{new CLoginViewHandler(ctx);},"system.in").start();
                                 }
 
                             });
