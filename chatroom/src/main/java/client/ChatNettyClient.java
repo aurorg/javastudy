@@ -1,6 +1,7 @@
 package client;
 
 import client.clienthandler.CLoginViewHandler;
+import client.clienthandler.ResponseHandler;
 import common.MessageCodec;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -35,6 +36,7 @@ public class ChatNettyClient {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new MessageCodec());
+                            ch.pipeline().addLast(new ResponseHandler());
                             //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 

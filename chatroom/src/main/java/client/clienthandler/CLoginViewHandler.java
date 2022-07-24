@@ -54,6 +54,7 @@ public class CLoginViewHandler{
         System.out.println("请输入您的账号密码：");
         String psw1 =input.next();
 
+        //向客户端将这些消息发过去
         Enrollmsg message = new Enrollmsg(pn1,name1,psw1);
         // message.setPhonenumber(pn1);
         ctx.writeAndFlush(message);
