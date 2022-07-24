@@ -1,6 +1,6 @@
 package client;
 
-import client.clienthandler.CLoginViewHandler;
+import client.clienthandler.CDengLuViewHandler;
 import common.MessageCodec;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -46,7 +46,7 @@ public class ChatNettyClient {
                                 public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
                                     //创建一个线程专门用来跑这些界面（登录界面，主界面）的界面层
-                                    new Thread(()->{new CLoginViewHandler(ctx);},"system.in").start();
+                                    new Thread(()->{new CDengLuViewHandler(ctx);},"system.in").start();
                                 }
 
                             });

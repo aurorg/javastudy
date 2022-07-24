@@ -20,7 +20,7 @@ public abstract  class Message  implements Serializable {
     private static final int Loginmsg =2;    //【登录】    客户端发给服务端的消息
     private static final int Loginmsg1 =3;   //【登录】    服务端向客户端发的消息
 
-    private static final int Logoutmsg =4;   //【注销】    客户端发给服务端的消息
+    public static final int Logoutmsg =4;   //【注销】    客户端发给服务端的消息
     private static final int Logoutmsg1 =5;   //【注销】    服务端向客户端发的消息
 
     private static final int Quit = 6;        //【退出系统】    客户端发给服务端的消息

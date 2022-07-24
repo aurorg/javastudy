@@ -2,9 +2,7 @@ package client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import message.Message;
 import message.ServerToClientmsg;
-import client.clienthandler.CLoginViewHandler;
 
 import static client.ChatNettyClient.waitMessage;
 import static client.ChatNettyClient.waitSuccess;

@@ -8,7 +8,7 @@ import message.ServerToClientmsg;
 
 import java.sql.*;
 
-public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
+public class SEnrollViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
     // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/chatroom?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
@@ -38,7 +38,7 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
         try {
 
             //每次先打印一下下，看消息发过来没有！！！！！！
-            System.out.println(message);
+            System.out.println("打印消息"+message);
 
 
             //接受消息的部分

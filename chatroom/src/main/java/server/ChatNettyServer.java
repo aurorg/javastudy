@@ -4,16 +4,13 @@ import common.MessageCodec;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import server.serverhandler.SLoginViewHandle;
+import server.serverhandler.SEnrollViewHandle;
+import server.serverhandler.SLogoutmsgViewHandler;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -83,7 +80,9 @@ public class ChatNettyServer {
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new MessageCodec());
 
-                            ch.pipeline().addLast(new SLoginViewHandle()); //需要用什么处理器直接加就行了
+                            ch.pipeline().addLast(new SEnrollViewHandle());
+                            //需要用什么处理器直接加就行了
+                            ch.pipeline().addLast(new SLogoutmsgViewHandler());
 
                             //.addLast()
                         }
