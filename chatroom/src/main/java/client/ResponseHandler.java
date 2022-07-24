@@ -23,11 +23,11 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             waitSuccess=0;
         }
         else{
-               //return;
-//           }
             System.out.print("操作成功 "+reason);
             waitSuccess=1;
         }
+
+        //不管操作成功还是失败都需要唤醒界面的主线程
         synchronized (waitMessage){
             waitMessage.notifyAll();
         }

@@ -86,10 +86,6 @@ public class CLoginViewHandler{
             System.out.println("注册成功，请选择接下来的操作\n");
             new CLoginViewHandler(ctx);
         }
-        //System.out.println("1111111111");
-
-
-
     }
     public void login(ChannelHandlerContext ctx){
 
