@@ -40,10 +40,7 @@ public class ChatNettyServer {
 
         //记录语句的输入
         PreparedStatement ps =null;
-
-
     }
-
 
     public static void main(String[] args) throws IOException ,InterruptedException{
 

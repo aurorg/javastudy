@@ -55,6 +55,7 @@ public class ChatNettyClient {
 
             System.out.println("客户端 ok.....");
 
+            
             //启动客户端取连接服务端
             //关于ChannelFuture需要分析：涉及netty的异步模型
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 6686).sync();
