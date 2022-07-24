@@ -23,11 +23,6 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             waitSuccess=0;
         }
         else{
- //          if(message.getMessageType()== Message.noticeMapMessage) {
-//                noticeMap=msg.getNoticeMap();
-               synchronized (waitMessage) {
-                   waitMessage.notifyAll();
-               }
                //return;
 //           }
             System.out.print("操作成功 "+reason);

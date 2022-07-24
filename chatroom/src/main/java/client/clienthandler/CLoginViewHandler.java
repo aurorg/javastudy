@@ -1,6 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import lombok.extern.slf4j.Slf4j;
 import message.Enrollmsg;
 
 import java.util.Scanner;
@@ -15,6 +16,7 @@ import static client.ChatNettyClient.waitSuccess;
  * 【3】用户注销账号界面
  * 完成上面这三个操作之后进行后续操作，就会调用MainView里面的界面
  */
+//@Slf4j
 public class CLoginViewHandler{
     //用户输入
     static Scanner input = new Scanner(System.in);
@@ -55,6 +57,7 @@ public class CLoginViewHandler{
         System.out.println("请输入您的手机号码进行注册（6位）：");
         int pn1 =input.nextInt();
 
+        //log.info("23432424");
         System.out.println("请输入您的账号昵称：");
         String name1 =input.next();
 
@@ -70,13 +73,17 @@ public class CLoginViewHandler{
         try {
             synchronized (waitMessage){
                 waitMessage.wait();
+
             }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //System.out.println("111111");
+
         if(waitSuccess==1){
-            System.out.println("注册成功，请选择接下来的操作");
+            System.out.println("\n");
+            System.out.println("注册成功，请选择接下来的操作\n");
             new CLoginViewHandler(ctx);
         }
         //System.out.println("1111111111");
@@ -85,6 +92,7 @@ public class CLoginViewHandler{
 
     }
     public void login(ChannelHandlerContext ctx){
+
 
     }
 
