@@ -40,8 +40,13 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
             System.out.println(message);
 
 
+            //接受消息的部分
             int pn1 =message.getPhonenumber();
             System.out.println(pn1);
+            String name1 =message.getName();
+            String password1 =message.getPassword();
+
+
 
             ServerToClientmsg message1;
 
@@ -88,8 +93,31 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
                 System.out.println(message1);
                 ctx.writeAndFlush(message1);
 
-                 //message = new ServerToClientmsg(false,"您的电话号码已被使用，请选择新的电话号码进行注册：");
-                //System.out.println("您的电话号码已被使用，请选择新的电话号码进行注册：");
+            }
+            else{
+                message1 = new ServerToClientmsg(true,"注册成功");
+                String sql1 ="insert into usermsg(username,userpassword,phonenumber) values(?,?,?) ";
+                ps=conn.prepareStatement(sql1);
+                ps.setString(1,name1);
+                ps.setString(2,password1);
+                ps.setInt(3,pn1);
+                ps.executeUpdate();
+               // ResultSet rs2 = stat.executeQuery(sql1);
+
+                String sql2 ="SELECT userid FROM usermsg where phonenumber = ? ";
+                ps=conn.prepareStatement(sql2);
+                ps.setInt(1,pn1);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+
+                    // 通过字段检索
+                    int userid =rs.getInt("userid");
+                    System.out.println("您的账号是：" + userid);
+                    message1 = new ServerToClientmsg(true,"您的Id号是（以后登录的账号）" + userid);
+                    System.out.println(message1);
+                    ctx.writeAndFlush(message1);
+
+                }
 
             }
             // 完成后关闭
