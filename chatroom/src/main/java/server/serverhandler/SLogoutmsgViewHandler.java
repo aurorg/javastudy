@@ -53,6 +53,8 @@ public class SLogoutmsgViewHandler extends SimpleChannelInboundHandler<Logoutmsg
 
             String sql ="delete from usermsg where userid=?";
             ps =conn.prepareStatement(sql);
+            ps.setInt(1,id1);
+            ps.executeUpdate();
 
            // System.out.println("请再次输入要删除的账号：");
            // int s1 =input.nextInt();
@@ -64,7 +66,7 @@ public class SLogoutmsgViewHandler extends SimpleChannelInboundHandler<Logoutmsg
             //executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
 
 
-            rs = ps.executeQuery();
+            //rs = ps.executeQuery();
             message1 = new ServerToClientmsg(true,"您的账号已经删除");
             message1.setMessageType(Message.Logoutmsg);
             ctx.writeAndFlush(message1);

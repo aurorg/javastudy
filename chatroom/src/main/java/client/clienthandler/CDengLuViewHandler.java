@@ -2,7 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.Enrollmsg;
-import message.Loginmsg;
+
 import message.Logoutmsg;
 
 import java.util.Scanner;
@@ -51,7 +51,7 @@ public class CDengLuViewHandler {
                 System.exit(0);
         }
     }
-
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //注册操作
     public void enroll(ChannelHandlerContext ctx){
         System.out.println("请输入您的手机号码进行注册（6位）：");
@@ -87,7 +87,7 @@ public class CDengLuViewHandler {
             new CDengLuViewHandler(ctx);
         }
     }
-
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //登录操作
     public void login(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】:");
@@ -106,6 +106,8 @@ public class CDengLuViewHandler {
             System.out.println("登陆成功啦！");
             System.out.println("接下来，您可以根据需求选择功能哦！");
 
+            //调用主要的功能函数
+            new CMainViewHandler(ctx);
             //下一步
             //聊天功能+注销
 
@@ -115,6 +117,9 @@ public class CDengLuViewHandler {
         }
 
     }
+
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //注销账号
     public void logout(ChannelHandlerContext ctx){
@@ -160,7 +165,6 @@ public class CDengLuViewHandler {
                     //new CLoginViewHandler(ctx);
                 }
                 break;
-
 
             case 2:
                 //不删除了就进行后面的操作
