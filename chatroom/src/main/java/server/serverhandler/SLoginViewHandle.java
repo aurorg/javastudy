@@ -87,7 +87,7 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
                  message1 = new ServerToClientmsg(false,"您的手机号已经注册过账号");
                 System.out.println(message1);
                 ctx.writeAndFlush(message1);
-                
+
                  //message = new ServerToClientmsg(false,"您的电话号码已被使用，请选择新的电话号码进行注册：");
                 //System.out.println("您的电话号码已被使用，请选择新的电话号码进行注册：");
 

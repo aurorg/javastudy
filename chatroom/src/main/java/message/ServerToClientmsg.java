@@ -28,6 +28,6 @@ public class ServerToClientmsg extends Message {
         return this.MessageType;
     }
     public String toString(){
-        return "success = "+success+", reason = "+reason;
+        return "是否成功 = "+success+", 原因 = "+reason;
     }
 }

@@ -48,6 +48,7 @@ public class Enrollmsg extends Message {
         return 0;
     }
 
+
     public String toString(){
         //return "用户userid=" + userid  +  " ,用户name=" + name + " ,用户password=" + password + " ，用户phonenumber=" +phonenumber;
 
