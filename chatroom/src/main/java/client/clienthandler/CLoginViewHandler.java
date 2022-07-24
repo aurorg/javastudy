@@ -5,6 +5,9 @@ import message.Enrollmsg;
 
 import java.util.Scanner;
 
+import static client.ChatNettyClient.waitMessage;
+import static client.ChatNettyClient.waitSuccess;
+
 /**
  * 主要包含了
  * 【1】用户注册账号界面
@@ -25,6 +28,7 @@ public class CLoginViewHandler{
         System.out.println("*         [1]:用户注册          *");
         System.out.println("*         [2]:用户登录          *");
         System.out.println("*         [3]:用户注销          *");
+        System.out.println("*         [0]:退出系统          *");
         System.out.println("*******************************");
 
         int n = input.nextInt();
@@ -38,6 +42,9 @@ public class CLoginViewHandler{
             case 3:
                // logout();
                 break;
+            case 0:
+                System.out.println("退出啦！");
+                ctx.channel().close();
             default:
                 System.out.println("请按照要求输入哦！");
                 System.exit(0);
@@ -59,12 +66,25 @@ public class CLoginViewHandler{
         // message.setPhonenumber(pn1);
         ctx.writeAndFlush(message);
 
-        //    ctx.writeAndFlush("1233213244");
+        //这里需要加锁，服务端返回消息后，客户端继续
+        try {
+            synchronized (waitMessage){
+                waitMessage.wait();
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(waitSuccess==1){
+            System.out.println("注册成功，请选择接下来的操作");
+            new CLoginViewHandler(ctx);
+        }
+        //System.out.println("1111111111");
 
 
 
-
-
+    }
+    public void login(ChannelHandlerContext ctx){
 
     }
 

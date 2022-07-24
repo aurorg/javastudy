@@ -1,7 +1,6 @@
 package client;
 
 import client.clienthandler.CLoginViewHandler;
-import client.clienthandler.ResponseHandler;
 import common.MessageCodec;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -12,9 +11,12 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import message.ServerToClientmsg;
 
 public class ChatNettyClient {
+
+    public static final Object waitMessage=new Object();//服务端消息返回时，notify线程 View handler
+    public static volatile int waitSuccess=0;//1表示消息成功、0表示消息失败
+
     public static void main(String[] args) throws Exception{
 
         //客户端需要一个事件循环组

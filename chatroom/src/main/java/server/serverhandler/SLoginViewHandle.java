@@ -3,6 +3,7 @@ package server.serverhandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.Enrollmsg;
+import message.Message;
 import message.ServerToClientmsg;
 
 import java.sql.*;
@@ -114,12 +115,14 @@ public class SLoginViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
                     int userid =rs.getInt("userid");
                     System.out.println("您的账号是：" + userid);
                     message1 = new ServerToClientmsg(true,"您的Id号是（以后登录的账号）" + userid);
-                    System.out.println(message1);
-                    ctx.writeAndFlush(message1);
-
+//                    System.out.println(message1);
+//                    ctx.writeAndFlush(message1);
                 }
 
             }
+            message1.setMessageType(Message.Enrollmsg);
+            ctx.writeAndFlush(message1);
+
             // 完成后关闭
             rs.close();
             stat.close();

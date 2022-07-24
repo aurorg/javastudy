@@ -42,11 +42,11 @@ public class Enrollmsg extends Message {
         return this.password;
     }
 
-    @Override
-    public int getMessageType(){
-
-        return 0;
-    }
+//    @Override
+//    public int getMessageType(){
+//
+//        return 0;
+//    }
 
 
     public String toString(){

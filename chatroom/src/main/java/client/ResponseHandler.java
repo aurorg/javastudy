@@ -1,9 +1,13 @@
-package client.clienthandler;
+package client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.Message;
 import message.ServerToClientmsg;
+import client.clienthandler.CLoginViewHandler;
+
+import static client.ChatNettyClient.waitMessage;
+import static client.ChatNettyClient.waitSuccess;
 
 public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientmsg> {
 
@@ -16,20 +20,21 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 
         if(!success){
             System.out.print("操作失败 "+reason);
-//            waitSuccess=0;
-        }else{
-//            if(message.getMessageType()== Message.noticeMapMessage){
-//                noticeMap=msg.getNoticeMap();
-//                synchronized (waitMessage){
-//                    waitMessage.notifyAll();
-//                }
-//                return;
-//            }
-            System.out.print("操作成功 "+reason);
-//            waitSuccess=1;
+            waitSuccess=0;
         }
-//        synchronized (waitMessage){
-//            waitMessage.notifyAll();
-//        }
+        else{
+ //          if(message.getMessageType()== Message.noticeMapMessage) {
+//                noticeMap=msg.getNoticeMap();
+               synchronized (waitMessage) {
+                   waitMessage.notifyAll();
+               }
+               //return;
+//           }
+            System.out.print("操作成功 "+reason);
+            waitSuccess=1;
+        }
+        synchronized (waitMessage){
+            waitMessage.notifyAll();
+        }
     }
 }
