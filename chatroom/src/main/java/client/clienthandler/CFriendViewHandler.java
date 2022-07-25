@@ -25,24 +25,31 @@ public class CFriendViewHandler {
         switch (n){
             case 1:
                 //添加好友
+                addfriend(ctx);
                 break;
             case 2:
                 //删除好友
+                deletefriend(ctx);
                 break;
             case 3:
                 //好友列表
+                friendlist(ctx);
                 break;
             case 4:
                 //查询好友
+                findfriend(ctx);
                 break;
             case 5:
                 //屏蔽好友
+                shieldfriend(ctx);
                 break;
             case 6:
                 //好友聊天
+                friendlist(ctx);
                 break;
             case 0:
                 //返回主界面
+                new CMainViewHandler(ctx);
                 break;
 
             default:
@@ -51,22 +58,39 @@ public class CFriendViewHandler {
 
         }
     }
-    //添加好友
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //1  添加好友
     public void addfriend(ChannelHandlerContext ctx){
 
     }
-
-    //删除好友
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //2  删除好友
     public void deletefriend(ChannelHandlerContext ctx){
 
     }
-    //好友列表
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+    //3  好友列表
     public void friendlist(ChannelHandlerContext ctx){
-        
+
     }
-    //查询好友
-    //屏蔽好友
-    //好友聊天
-    //返回主界面
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    //4  查询好友
+    public void findfriend(ChannelHandlerContext ctx){
+
+    }
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //5  屏蔽好友
+    public void shieldfriend(ChannelHandlerContext ctx){
+
+    }
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //6  好友聊天
+    public void friendchat(ChannelHandlerContext ctx){
+
+    }
+
 
 }
