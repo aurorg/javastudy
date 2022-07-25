@@ -1,21 +1,28 @@
 package message;
 
 public class FriendChatmsg  extends Message{
-    private int userid;
-    private int friendid;
+
+    private int userid;//用户id
+
+    private int friendid;//好友的id
 
     private String messagetype;//T代指文本消息、F代指文件消息
 
-    private String message;
+    private String message; //用户和好友之间进行交流的消息
 
-    private String chattype;//G消息来自群组,F消息来自个人 //chattype默认为F=friend
+    //用来区分群消息和个人消息
+    //G好友消息,F群消息;chattype一般情况下为好友消息
+    private String chattype;
+
     private int Group=0;
+
     public  FriendChatmsg(){}
-    public  FriendChatmsg(int userID,int FriendId,String message,String msg_type){
+
+    public  FriendChatmsg(int userid,int friendid,String message,String messagetype){
         this.userid=userid;
         this.friendid=friendid;
         this.message=message;
-        this.messagetype=msg_type;
+        this.messagetype=messagetype;
     }
 
 
@@ -35,19 +42,26 @@ public class FriendChatmsg  extends Message{
         return Group;
     }
 
-    public String getMsg_type() {
-        return msg_type;
+    public String getMessagetype() {
+        return messagetype;
     }
 
-    public String getMessage(){return this.message;}
-    public int getFriendId(){return this.FriendId;}
-    public int getUserID(){return this.userID;}
+    public String getMessage(){
+        return this.message;
+    }
+    public int getFriendid(){
+        return this.friendid;
+    }
+    public int getUserid(){
+        return this.userid;
+    }
+
     /*    @Override
         public int getMessageType() {
             return FriendChatRequestMessage;
         }*/
     public String toString(){
-        return "userID = "+userID+", FriendId = "+FriendId+" message = "+message;
+        return "userid = "+userid+", friendid = "+friendid+" message = "+message;
     }
 
 

@@ -1,8 +1,12 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.FriendChatmsg;
+import message.Informationmsg;
 
 import java.util.Scanner;
+
+import static client.ChatNettyClient.waitMessage;
 
 public class CFriendViewHandler {
     //用户输入
@@ -93,17 +97,30 @@ public class CFriendViewHandler {
      * 1、输入好友的id账号
      * 2、发消息给服务端告诉好友的id号，
      * 3、服务器去查找是否好友，是否被屏蔽，是否离线，发消息告诉给客户端
-     * 4、【①不是好友，被屏蔽了满足其一】都不能发消息（返回界面）
+     * 4 【①不是好友，被屏蔽了满足其一】都不能发消息（返回界面）
      *   【②离线的话可以发消息存到数据库中，好友收不到】（发完返回界面层）
      *   【③是好友，没有被屏蔽，没有离线】就可以开始聊天
      *
      */
+
     public void friendchat(ChannelHandlerContext ctx){
         System.out.println("请输入您的id：");
-        int id1=input.nextInt();
+        int userid1=input.nextInt();
 
         System.out.println("请输入你需要发消息的好友id:");
         int friendid1 = input.nextInt();
+
+        Informationmsg message1 = new Informationmsg(userid1,friendid1);
+        ctx.writeAndFlush(message1);
+
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
 
 
     }
