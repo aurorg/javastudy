@@ -13,8 +13,10 @@ public class TestMap {
         hashMap.put("lili",3);
         hashMap.put("yuyu",4);
 
+
         System.out.println("Display entries in hashMap");
         System.out.println(hashMap + "\n");
+
 
         Map<String,Integer> treeMap = new TreeMap<>(hashMap);//TreeMap中的条目是按照键的升序排列的
         System.out.println("Display entries in ascending order of key");
