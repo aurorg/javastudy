@@ -12,11 +12,18 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import java.util.List;
+import java.util.Map;
+
 public class ChatNettyClient {
 
-    public static final Object waitMessage=new Object();//服务端消息返回时，notify线程 View handler
+    public static final Object waitMessage=new Object();//服务端消息返回时，notify线程去通知
+
     public static volatile int waitSuccess=0;//1表示消息成功、0表示消息失败
+
+    public static volatile boolean unRead=false;//默认没有未读消息
     public static volatile boolean is1=false; //用来判断好友发消息的
+    //public static volatile Map<String, List<String>> informationMap;
 
 
     public static void main(String[] args) throws Exception{

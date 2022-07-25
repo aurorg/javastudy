@@ -99,7 +99,10 @@ public class CFriendViewHandler {
      *
      */
     public void friendchat(ChannelHandlerContext ctx){
-        System.out.println("请输入需要发消息的好友id:");
+        System.out.println("请输入您的id：");
+        int id1=input.nextInt();
+
+        System.out.println("请输入你需要发消息的好友id:");
         int friendid1 = input.nextInt();
 
 

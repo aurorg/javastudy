@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import message.FriendChatmsg;
 
 import static client.ChatNettyClient.is1;
+import static client.ChatNettyClient.unRead;
 
 public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatmsg>{
 
