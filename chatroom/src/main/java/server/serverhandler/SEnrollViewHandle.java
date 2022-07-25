@@ -47,11 +47,7 @@ public class SEnrollViewHandle extends  SimpleChannelInboundHandler<Enrollmsg>{
             String name1 =message.getName();
             String password1 =message.getPassword();
 
-
-
             ServerToClientmsg message1;
-
-
 
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);

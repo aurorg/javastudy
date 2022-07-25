@@ -3,6 +3,7 @@ package client.clienthandler;
 import io.netty.channel.ChannelHandlerContext;
 import message.Enrollmsg;
 
+import message.Loginmsg;
 import message.Logoutmsg;
 
 import java.util.Scanner;
@@ -89,27 +90,55 @@ public class CDengLuViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //登录操作
-    public void login(ChannelHandlerContext ctx){
+    public void login(ChannelHandlerContext ctx) {
         System.out.println("请输入您的账号【id】:");
-        int userid1 =input.nextInt();
+        int userid1 = input.nextInt();
 
         System.out.println("请输入您的密码：");
-        String psw1 =input.next();
+        String psw1 = input.next();
 
         System.out.println("请再次确认密码：");
-        String psw2 =input.next();
+        String psw2 = input.next();
+
+        /**
+         * 将id号发给服务端，让服务端去数据库查找有没有这个账号，核对密码对不对
+         */
+        //向客户端将账号和id发过去
+        Loginmsg loginmsg = new Loginmsg(userid1, psw1);
+        ctx.writeAndFlush(loginmsg);
+
+        //这里需要加锁，服务端返回消息后，客户端继续
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         //如果两次密码相同就成功登录
         //不相同的话重新输入密码
-        if(psw1.equals(psw2)){
-            //登录成功
-            System.out.println("登陆成功啦！");
-            System.out.println("接下来，您可以根据需求选择功能哦！");
+        if (waitSuccess == 1) {
 
-            //调用主要的功能函数
-            new CMainViewHandler(ctx);
-            //下一步
-            //聊天功能+注销
+            if (psw1.equals(psw2)) {
+                //登录成功
+                System.out.println("登陆成功啦！");
+                System.out.println("接下来，您可以根据需求选择功能哦！");
+
+                //调用主要的功能函数
+                new CMainViewHandler(ctx);
+                //下一步
+                //聊天功能+注销
+
+            }
+            //第一次输入的密码和数据库的一样，第二次输入的不一样
+            else {
+                System.out.println("\n");
+                System.out.println("密码或者账号错误，请重新登录!!!");
+                login(ctx); //密码错了的话再次调用登录函数继续登录
+            }
 
         }else{
             System.out.println("密码或者账号错误，请重新登录!!!");
@@ -117,7 +146,6 @@ public class CDengLuViewHandler {
         }
 
     }
-
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

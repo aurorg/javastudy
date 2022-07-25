@@ -62,8 +62,6 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
             //使用jdk序列化
             ObjectInputStream ois=new ObjectInputStream(new ByteArrayInputStream(bytes));
             Message message=(Message) ois.readObject();
-            /*log.info("{}, {}, {}, {}, {}",magicNum,serializerType,messageType,sequenceId,length);
-            log.info("{}",message);*/
             list.add(message);
         }
 

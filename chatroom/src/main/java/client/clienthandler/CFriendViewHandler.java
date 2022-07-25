@@ -121,11 +121,12 @@ public class CFriendViewHandler {
             e.printStackTrace();
         }
 
-
+        System.out.println("\n");
         System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
-         is1=true;
+        is1=true;
         String chatmessage=input.nextLine();
         if(chatmessage.equals('Q')) {
+
             FriendChatmsg friendChatmsg = new FriendChatmsg(userid1, friendid1, chatmessage, "T");
             ctx.writeAndFlush(friendChatmsg);
 
@@ -136,6 +137,7 @@ public class CFriendViewHandler {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
             chatmessage=input.nextLine();
         }else{

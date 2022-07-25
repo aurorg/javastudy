@@ -17,7 +17,7 @@ public abstract  class Message  implements Serializable {
     public static final int Enrollmsg =0;   //【注册】    客户端发给服务端的消息
     private static final int Enrollmsg1 =1;  //【注册】    服务端向客户端发的消息
 
-    private static final int Loginmsg =2;    //【登录】    客户端发给服务端的消息
+    public static final int Loginmsg =2;    //【登录】    客户端发给服务端的消息
     private static final int Loginmsg1 =3;   //【登录】    服务端向客户端发的消息
 
     public static final int Logoutmsg =4;   //【注销】    客户端发给服务端的消息
@@ -26,12 +26,15 @@ public abstract  class Message  implements Serializable {
     private static final int Quit = 6;        //【退出系统】    客户端发给服务端的消息
     private static final int Quit1 =7;        //【退出系统】    服务端向客户端发的消息
 
+    public static final int FriendChatmsg =8;  //好友聊天
 
 
 
 
 
-//
+
+
+    //
 //    private static final Map<Integer,Class<?>> messageClasses = new HashMap<>();
 //
 //    public static Class<?> getMessageClass(int messageType){

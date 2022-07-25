@@ -39,17 +39,17 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
     protected void channelRead0(ChannelHandlerContext ctx, FriendChatmsg friendChatmsg) throws Exception {
 
         try{
-            System.out.println("22222222222");
+
         //每次先打印一下下，看消息发过来没有！！！！！！
         System.out.println("打印消息" + friendChatmsg);
-            System.out.println("111111111111");
 
         //接受消息的部分
         int userid1 = friendChatmsg.getUserid();
         int friendid1 = friendChatmsg.getFriendid();
+        String msg1 = friendChatmsg.getMessage();
 
 
-        ServerToClientmsg message1;
+        ServerToClientmsg message1 = null;
 
 
         //注册JDBC驱动
@@ -67,13 +67,13 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
 
         String sql;
-        sql = "SELECT isfriend,isshield,state FROM friendlist where (userid=? and friendid = ?) or (friendid = ? and userid = ?)";
+        sql = "SELECT isfriend,isshield,state FROM friendlist where (userid=? and friendid=?)";
         ps = conn.prepareStatement(sql);
         ps.setInt(1, userid1);
         ps.setInt(2, friendid1);
-        ps.setInt(3, friendid1);
-        ps.setInt(4, userid1);
-        rs = stat.executeQuery(sql);
+//        ps.setInt(3, friendid1);
+//        ps.setInt(4, userid1);
+        rs = ps.executeQuery();
 
         //ps.executeUpdate();
 
@@ -93,11 +93,13 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         while (rs.next()) {
 
+
             // 通过字段检索
             int isfriend1 = rs.getInt("isfriend");
             int isshield1 = rs.getInt("isshield");
             int state1 = rs.getInt("state");
 
+            System.out.println("是否好友" + isfriend1 + "是否屏蔽" + isshield1 + "是否在线" + state1);
             if (isfriend1 == 1 && isshield1 == 1 && state1 == 1) {
                 isexit = 1;
             } else if (isfriend1 == 1 && isshield1 == 1 && state1 == 2) {
@@ -108,30 +110,58 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         }
         //判断之后进行后续选择
+
+            //0: 表示之间不能通信（是因为两者之间不是好友）
         if (isexit == 0) {
             message1 = new ServerToClientmsg(false, "您和对方还不是好友");
             System.out.println(message1);
-            ctx.writeAndFlush(message1);
+          //  ctx.writeAndFlush(message1);
 
-        } else if (isexit == 3) {
+        }
+
+
+        //3：表示之间不能通信（是因为你和对方处于屏蔽状态）
+        else if (isexit == 3) {
             message1 = new ServerToClientmsg(false, "您和您的好友处于屏蔽状态");
             System.out.println(message1);
-            ctx.writeAndFlush(message1);
-        } else if (isexit == 1) {
+            //ctx.writeAndFlush(message1);
+            
+        }
+
+        //1：表示之间可以通信（是好友，没有屏蔽好友，好友在线）【消息可以存到数据库并且可以发出去】
+        else if (isexit == 1) {
+
             message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
+            System.out.println(message1);
+            
             String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";
             ps = conn.prepareStatement(sql1);
             ps.setInt(1, userid1);
             ps.setInt(2, friendid1);
-            ps.setInt(3, 1);
+            ps.setString(3, msg1);
             ps.setInt(4, 1);
             ps.executeUpdate();
+            
             // ResultSet rs2 = stat.executeQuery(sql1);
+        }
 
+        //2：表示消息可以发出去，但是对方是离线状态不接受（是好友，没有屏蔽好友，对方不在线）【消息可以存到数据库，但是不能发出去】
+        else if(isexit ==2){
+            message1 = new ServerToClientmsg(true, "您的好友没有上线哦，上线之后才可以看到消息");
+            System.out.println(message1);
+
+            String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";
+            ps = conn.prepareStatement(sql1);
+            ps.setInt(1, userid1);
+            ps.setInt(2, friendid1);
+            ps.setString(3,msg1 );
+            ps.setInt(4, 2);
+            ps.executeUpdate();
 
         }
-//        message1.setMessageType(Message.Enrollmsg);
-//        ctx.writeAndFlush(message1);
+
+        message1.setMessageType(Message.FriendChatmsg);
+        ctx.writeAndFlush(message1);
 
         // 完成后关闭
         rs.close();
