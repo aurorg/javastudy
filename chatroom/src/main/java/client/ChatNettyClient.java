@@ -16,6 +16,8 @@ public class ChatNettyClient {
 
     public static final Object waitMessage=new Object();//服务端消息返回时，notify线程 View handler
     public static volatile int waitSuccess=0;//1表示消息成功、0表示消息失败
+    public static volatile boolean is1=false; //用来判断好友发消息的
+
 
     public static void main(String[] args) throws Exception{
 
@@ -39,6 +41,7 @@ public class ChatNettyClient {
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new MessageCodec()); //解码编码的
                             ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
+                            ch.pipeline().addLast(new CFriendChatHandler());//好友聊天的
                             //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 
