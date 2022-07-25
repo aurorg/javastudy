@@ -37,8 +37,8 @@ public class ChatNettyClient {
                     .handler( new ChannelInitializer<NioSocketChannel>() {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new MessageCodec());
-                            ch.pipeline().addLast(new ResponseHandler());
+                            ch.pipeline().addLast(new MessageCodec()); //解码编码的
+                            ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
                             //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 
@@ -55,7 +55,7 @@ public class ChatNettyClient {
 
             System.out.println("客户端 ok.....");
 
-            
+
             //启动客户端取连接服务端
             //关于ChannelFuture需要分析：涉及netty的异步模型
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 6686).sync();
