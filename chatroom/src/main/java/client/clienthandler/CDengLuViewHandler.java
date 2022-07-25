@@ -48,8 +48,8 @@ public class CDengLuViewHandler {
                 System.out.println("退出啦！");
                 ctx.channel().close();
             default:
-                System.out.println("请按照要求输入哦！");
-                System.exit(0);
+                System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
+                new CDengLuViewHandler(ctx);
         }
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -125,7 +125,12 @@ public class CDengLuViewHandler {
             if (psw1.equals(psw2)) {
                 //登录成功
                 System.out.println("登陆成功啦！");
+
+                //登录成功之后就建立一个handler【为了后面发消息用，用map，键：用户的id,值：handler,对应起来】
+
                 System.out.println("接下来，您可以根据需求选择功能哦！");
+
+
 
                 //调用主要的功能函数
                 new CMainViewHandler(ctx);

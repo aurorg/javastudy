@@ -41,8 +41,8 @@ public class CMainViewHandler {
                 //返回上一层，也就是用户界面
                 new CDengLuViewHandler(ctx);
             default:
-                System.out.println("请按照要求输入哦！");
-                System.exit(0);
+                System.out.println("请按照要求输入哦!再给你一次重新输入的机会");
+                new CMainViewHandler(ctx);
         }
     }
 }

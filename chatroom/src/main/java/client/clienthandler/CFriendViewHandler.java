@@ -58,12 +58,13 @@ public class CFriendViewHandler {
 
             default:
                 System.out.println("请按照要求输入哦！");
-                System.exit(0);
+                new CFriendViewHandler(ctx);
 
         }
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //1  添加好友
+
     public void addfriend(ChannelHandlerContext ctx){
 
     }
@@ -121,8 +122,12 @@ public class CFriendViewHandler {
             e.printStackTrace();
         }
 
+        /**
+         * 让服务端建立一个channel，用map将（用户和对应的channel绑起来），然后开始发消息
+         */
+
         System.out.println("\n");
-        System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
+        System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
         is1=true;
         String chatmessage=input.nextLine();
         if(chatmessage.equals('Q')) {
@@ -140,7 +145,9 @@ public class CFriendViewHandler {
 
             System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
             chatmessage=input.nextLine();
-        }else{
+        }
+
+        else{
             is1 =false;
         }
 

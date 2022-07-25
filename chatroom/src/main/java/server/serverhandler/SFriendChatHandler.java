@@ -141,7 +141,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             ps.setString(3, msg1);
             ps.setInt(4, 1);
             ps.executeUpdate();
-            
+
             // ResultSet rs2 = stat.executeQuery(sql1);
         }
 

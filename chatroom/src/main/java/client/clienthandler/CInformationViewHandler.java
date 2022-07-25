@@ -33,8 +33,8 @@ public class CInformationViewHandler {
                new CMainViewHandler(ctx);
                break;
            default:
-               System.out.println("请按照要求输入哦！");
-               System.exit(0);
+               System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
+               new CInformationViewHandler(ctx);
        }
 
     }
