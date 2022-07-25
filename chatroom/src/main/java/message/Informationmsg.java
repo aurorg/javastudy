@@ -17,4 +17,7 @@ public class Informationmsg extends Message{
     public int getFriendid() {
         return friendid;
     }
+    public String toString(){
+        return "userid = "+userid+", friendid = "+friendid;
+    }
 }

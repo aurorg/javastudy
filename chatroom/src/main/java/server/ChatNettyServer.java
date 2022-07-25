@@ -81,7 +81,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SEnrollViewHandle()); //登录注册
                             //需要用什么处理器直接加就行了
                             ch.pipeline().addLast(new SLogoutmsgViewHandler());//注销
-                            ch.pipeline().addLast(new SFriendChatHandler());
+                            ch.pipeline().addLast(new SFriendChatHandler()); //好友聊天
 
                             //.addLast()
                         }

@@ -6,7 +6,7 @@ import message.Informationmsg;
 
 import java.util.Scanner;
 
-import static client.ChatNettyClient.waitMessage;
+import static client.ChatNettyClient.*;
 
 public class CFriendViewHandler {
     //用户输入
@@ -49,7 +49,7 @@ public class CFriendViewHandler {
                 break;
             case 6:
                 //好友聊天
-                friendlist(ctx);
+                friendchat(ctx);
                 break;
             case 0:
                 //返回主界面
@@ -110,7 +110,7 @@ public class CFriendViewHandler {
         System.out.println("请输入你需要发消息的好友id:");
         int friendid1 = input.nextInt();
 
-        Informationmsg message1 = new Informationmsg(userid1,friendid1);
+        FriendChatmsg message1 = new FriendChatmsg(userid1,friendid1,null,null);
         ctx.writeAndFlush(message1);
 
         try{
@@ -122,6 +122,25 @@ public class CFriendViewHandler {
         }
 
 
+        System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
+         is1=true;
+        String chatmessage=input.nextLine();
+        if(chatmessage.equals('Q')) {
+            FriendChatmsg friendChatmsg = new FriendChatmsg(userid1, friendid1, chatmessage, "T");
+            ctx.writeAndFlush(friendChatmsg);
+
+            try {
+                synchronized (waitMessage) {
+                    waitMessage.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
+            chatmessage=input.nextLine();
+        }else{
+            is1 =false;
+        }
 
     }
 
