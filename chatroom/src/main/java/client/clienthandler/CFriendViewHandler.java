@@ -136,7 +136,7 @@ public class CFriendViewHandler {
 
         //暂时这里有问题，只能发一条消息，退出不了
 
-    while(!chatmessage.equals('Q')) {
+    while(!chatmessage.equals("Q")) {
 
         FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "T");
         ctx.writeAndFlush(friendChatmsg2);
@@ -149,12 +149,13 @@ public class CFriendViewHandler {
             e.printStackTrace();
         }
 
-        System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
+        System.out.println("聊天内容(ENTER发送)[输入Q结束对话,返回主界面]：");
         chatmessage = input.nextLine();
     }
 
-    if(chatmessage.equals('Q')) {
+    if(chatmessage.equals("Q")) {
         is1 = false;
+        new CFriendViewHandler(ctx);
     }
 
 
