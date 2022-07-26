@@ -130,7 +130,7 @@ public class CFriendViewHandler {
          * 让服务端建立一个channel，用map将（用户和对应的channel绑起来），然后开始发消息
          */
         //System.out.println("\n");
-        System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
+        System.out.println("聊天对话消息(ENTER发送)[输入Q结束对话，返回主界面]：");
         is1=true;
         String chatmessage=input.next(); //输入聊天消息的
 
@@ -149,7 +149,7 @@ public class CFriendViewHandler {
             e.printStackTrace();
         }
 
-        System.out.println("聊天内容(ENTER发送)[输入Q结束对话,返回主界面]：");
+        System.out.println("聊天对话消息(ENTER发送)[输入Q结束对话,返回主界面]：");
         chatmessage = input.nextLine();
     }
 
