@@ -119,7 +119,11 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             }
 
         }
+
         //判断之后进行后续选择
+            /**
+             * 
+              */
 
             //0: 表示之间不能通信（是因为两者之间不是好友）
         if (isexit == 0) {
@@ -138,6 +142,10 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             
         }
 
+        /**
+         * 已经测试过，可以发；
+         * 【我的id:1,好友id：22】:是好友，没有屏蔽，都在线
+         */
         //1：表示之间可以通信（是好友，没有屏蔽好友，好友在线）【消息可以存到数据库并且可以发出去】
         else if (isexit == 1) {
 
@@ -170,6 +178,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         //2：表示消息可以发出去，但是对方是离线状态不接受（是好友，没有屏蔽好友，对方不在线）【消息可以存到数据库，但是不能发出去】
         else if(isexit ==2){
+
             message1 = new ServerToClientmsg(true, "您的好友没有上线哦，上线之后才可以看到消息");
             System.out.println(message1);
 
@@ -197,6 +206,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
     {
         // 处理 JDBC 错误
         se.printStackTrace();
+
     } catch(
     Exception e)
 
