@@ -46,9 +46,9 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
 
             //接受消息的部分
            int userid2 = informationmsg.getUserid();
-           int friendid2 =informationmsg.getFriendid()
+           int friendid2 =informationmsg.getFriendid();
 
-            ServerToClientmsg message1;
+            ServerToClientmsg message1 = null;
 
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
@@ -65,59 +65,41 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
 
 
             String sql;
-            sql = "SELECT phonenumber FROM ";
+            sql = "SELECT senderid,receiverid,message FROM message where (senderid=? and receiverid=?) or (receiverid=? and senderid=?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userid2);
+            ps.setInt(2, friendid2);
+            ps.setInt(3, userid2);
+            ps.setInt(4, friendid2);
+            rs = ps.executeQuery();
 
             //传输sql并且返回结果
-            ResultSet rs = stat.executeQuery(sql); //executeQuery(String sql) ：用于向数据发送查询语句
+            //ResultSet rs = stat.executeQuery(sql); //executeQuery(String sql) ：用于向数据发送查询语句
 
             //展开结果集数据库
             //next()会将光标向下移动一行，
             //并返回当前行是否有效，如果遍历完成整个表，则会返回false
 
-            boolean isexit =false; //临时变量，判断该电话号码是否存在
+            //boolean isexit =false; //临时变量，判断该电话号码是否存在
 
             while (rs.next()) {
 
                 // 通过字段检索
-                int phonenumber =rs.getInt("phonenumber");
-                if(pn1==phonenumber){
-                    isexit =true;
-                }
+                 int sendid1 =rs.getInt("senderid");
+                 int receiver1=rs.getInt("receiverid");
+                 String message=rs.getString("message");
+
+                 //输出数据
+                System.out.println("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 + " ,发的消息是message: " + message);
+//                System.out.print(" ,接受者receiverid: " + receiver1);
+//                System.out.print(" ,发的消息是message: " + message);
+              //  System.out.print("\n");
+
+                message1=new SInformationHandler(sendid1,receiver1,message);
 
             }
             //判断之后进行后续选择
-            if(isexit){
-                message1 = new ServerToClientmsg(false,"您的手机号已经注册过账号");
-                System.out.println(message1);
-                ctx.writeAndFlush(message1);
-
-            }
-            else{
-                message1 = new ServerToClientmsg(true,"注册成功");
-                String sql1 ="insert into usermsg(username,userpassword,phonenumber) values(?,?,?) ";
-                ps=conn.prepareStatement(sql1);
-                ps.setString(1,name1);
-                ps.setString(2,password1);
-                ps.setInt(3,pn1);
-                ps.executeUpdate();
-                // ResultSet rs2 = stat.executeQuery(sql1);
-
-                String sql2 ="SELECT userid FROM usermsg where phonenumber = ? ";
-                ps=conn.prepareStatement(sql2);
-                ps.setInt(1,pn1);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-
-                    // 通过字段检索
-                    int userid =rs.getInt("userid");
-                    System.out.println("您的账号是：" + userid);
-                    message1 = new ServerToClientmsg(true,"您的Id号是（以后登录的账号）" + userid);
-//                    System.out.println(message1);
-//                    ctx.writeAndFlush(message1);
-                }
-
-            }
-            message1.setMessageType(Message.Enrollmsg);
+            message1.setMessageType(Message.Informationmsg);
             ctx.writeAndFlush(message1);
 
             // 完成后关闭

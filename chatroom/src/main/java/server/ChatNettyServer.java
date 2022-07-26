@@ -9,10 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import server.serverhandler.SEnrollViewHandle;
-import server.serverhandler.SFriendChatHandler;
-import server.serverhandler.SLoginViewHandler;
-import server.serverhandler.SLogoutmsgViewHandler;
+import server.serverhandler.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -78,12 +75,13 @@ public class ChatNettyServer {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new MessageCodec());
-
-                            ch.pipeline().addLast(new SEnrollViewHandle()); //注册
-                            ch.pipeline().addLast(new SLoginViewHandler());
                             //需要用什么处理器直接加就行了
+                            ch.pipeline().addLast(new SEnrollViewHandle()); //注册
+                            ch.pipeline().addLast(new SLoginViewHandler());//登录
                             ch.pipeline().addLast(new SLogoutmsgViewHandler());//注销
+
                             ch.pipeline().addLast(new SFriendChatHandler()); //好友聊天
+                            ch.pipeline().addLast(new SInformationHandler()); //查看好友未读消息
 
                             //.addLast()
                         }

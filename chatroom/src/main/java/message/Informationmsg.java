@@ -1,8 +1,9 @@
 package message;
 
 public class Informationmsg extends Message{
-    int userid;
-    int friendid;
+    private int userid;
+    private int friendid;
+    private String message;
 
 
     public Informationmsg(int userid,int friendid){
@@ -17,6 +18,11 @@ public class Informationmsg extends Message{
     public int getFriendid() {
         return friendid;
     }
+
+    public String getMessage(){
+        return message;
+    }
+
     public String toString(){
         return "userid = "+userid+", friendid = "+friendid;
     }
