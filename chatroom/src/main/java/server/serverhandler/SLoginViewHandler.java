@@ -1,5 +1,6 @@
 package server.serverhandler;
 
+import common.ChatHandlerMap;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.Loginmsg;
@@ -89,6 +90,10 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
             if(isexit){
                 message1 = new ServerToClientmsg(true,"数据库核对成功（该账号存在，密码输入正确）");
                 System.out.println(message1);
+
+                //建一个handler
+                ChatHandlerMap.add(userid1,ctx.channel());
+
                 //ctx.writeAndFlush(message1);
             }else{
                 message1 = new ServerToClientmsg(false,"您的账号不存在或者密码错误");

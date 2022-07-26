@@ -15,6 +15,7 @@ public class FriendChatmsg  extends Message{
     private String chattype;
 
     private int Group=0;
+    private int cishu;//记录发消息是第几次
 
     public  FriendChatmsg(){}
 
@@ -23,6 +24,7 @@ public class FriendChatmsg  extends Message{
         this.friendid=friendid;
         this.message=message;
         this.messagetype=messagetype;
+
     }
 
 
@@ -33,6 +35,10 @@ public class FriendChatmsg  extends Message{
     public void setGroup(int group) {
         Group = group;
     }
+
+//    public void setCishu(int cishu){
+//        cishu=cishu;
+//    }
 
     public String getChattype() {
         return chattype;
@@ -55,6 +61,9 @@ public class FriendChatmsg  extends Message{
     public int getUserid(){
         return this.userid;
     }
+//    public int getCishu(){
+//        return this.cishu;
+//    }
 
     /*    @Override
         public int getMessageType() {

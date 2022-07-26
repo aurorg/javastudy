@@ -1,5 +1,7 @@
 package server.serverhandler;
 
+import common.ChatHandlerMap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.FriendChatmsg;
@@ -41,6 +43,14 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         try{
 
         //每次先打印一下下，看消息发过来没有！！！！！！
+//            int cishu1 =friendChatmsg.getCishu();
+//            if(cishu1==1){
+//                System.out.println("打印消息1" + friendChatmsg);
+//            }
+//            else{
+//                System.out.println("打印消息2" + friendChatmsg);
+//            }
+
         System.out.println("打印消息" + friendChatmsg);
 
         //接受消息的部分
@@ -130,9 +140,15 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         //1：表示之间可以通信（是好友，没有屏蔽好友，好友在线）【消息可以存到数据库并且可以发出去】
         else if (isexit == 1) {
+            //打印消息
+            System.out.println(friendChatmsg);
+
+            Channel channel= ChatHandlerMap.getChannel(userid1);
+            channel.writeAndFlush(friendChatmsg);
 
             message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
             System.out.println(message1);
+
             
             String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";
             ps = conn.prepareStatement(sql1);

@@ -23,7 +23,8 @@ public class ChatNettyClient {
 
     public static volatile boolean unRead=false;//默认没有未读消息
     public static volatile boolean is1=false; //用来判断好友发消息的
-    //public static volatile Map<String, List<String>> informationMap;
+    public static volatile Map<String, List<String>> informationMap;
+    public static volatile List<String> friendlist;//查询朋友列表
 
 
     public static void main(String[] args) throws Exception{

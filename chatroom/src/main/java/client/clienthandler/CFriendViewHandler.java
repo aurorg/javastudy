@@ -110,30 +110,36 @@ public class CFriendViewHandler {
 
         System.out.println("请输入你需要发消息的好友id:");
         int friendid1 = input.nextInt();
+//
+//        Informationmsg message1 = new Informationmsg(userid1,friendid1);
+//        ctx.writeAndFlush(message1);
+//
 
-        FriendChatmsg message1 = new FriendChatmsg(userid1,friendid1,null,null);
-        ctx.writeAndFlush(message1);
-
-        try{
-            synchronized(waitMessage){
-                waitMessage.wait();
-            }
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
+//        FriendChatmsg message1 = new FriendChatmsg(userid1,friendid1,null,null);
+//        ctx.writeAndFlush(message1);
+//
+//        try{
+//            synchronized(waitMessage){
+//                waitMessage.wait();
+//            }
+//        }catch (InterruptedException e){
+//            e.printStackTrace();
+//        }
 
         /**
          * 让服务端建立一个channel，用map将（用户和对应的channel绑起来），然后开始发消息
          */
 
-        System.out.println("\n");
+        //System.out.println("\n");
+
         System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
         is1=true;
-        String chatmessage=input.nextLine();
-        if(chatmessage.equals('Q')) {
+        String chatmessage=input.next(); //输入聊天消息的
 
-            FriendChatmsg friendChatmsg = new FriendChatmsg(userid1, friendid1, chatmessage, "T");
-            ctx.writeAndFlush(friendChatmsg);
+        if(!chatmessage.equals('Q')) {
+
+            FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1,chatmessage, "T");
+            ctx.writeAndFlush(friendChatmsg2);
 
             try {
                 synchronized (waitMessage) {
@@ -143,7 +149,7 @@ public class CFriendViewHandler {
                 e.printStackTrace();
             }
 
-            System.out.println("聊天内容(按下回车发送)[输入Q结束对话]：");
+            System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
             chatmessage=input.nextLine();
         }
 
