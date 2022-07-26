@@ -5,6 +5,7 @@ import io.netty.channel.Channel;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class ChatHandlerMap {
+
     private static ConcurrentHashMap<Integer, Channel> mapToChannel=new ConcurrentHashMap<>();
     private static ConcurrentHashMap<Channel,Integer> mapToUser=new ConcurrentHashMap<>();
 

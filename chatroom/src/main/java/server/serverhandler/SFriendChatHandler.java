@@ -125,7 +125,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         if (isexit == 0) {
             message1 = new ServerToClientmsg(false, "您和对方还不是好友");
             System.out.println(message1);
-          //  ctx.writeAndFlush(message1);
+           ctx.writeAndFlush(message1);
 
         }
 
@@ -134,7 +134,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         else if (isexit == 3) {
             message1 = new ServerToClientmsg(false, "您和您的好友处于屏蔽状态");
             System.out.println(message1);
-            //ctx.writeAndFlush(message1);
+            ctx.writeAndFlush(message1);
             
         }
 
@@ -144,7 +144,9 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             System.out.println("111111111");
             System.out.println(friendChatmsg);
 
-            Channel channel= ChatHandlerMap.getChannel(friendid1);
+            Channel channel;
+            channel= ChatHandlerMap.getChannel(friendid1);
+
             channel.writeAndFlush(friendChatmsg);
 
             message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
@@ -177,8 +179,8 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         }
 
-        message1.setMessageType(Message.FriendChatmsg);
-        ctx.writeAndFlush(message1);
+//        message1.setMessageType(Message.FriendChatmsg);
+//        ctx.writeAndFlush(message1);
 
         // 完成后关闭
         rs.close();

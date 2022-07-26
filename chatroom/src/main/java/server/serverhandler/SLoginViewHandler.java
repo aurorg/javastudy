@@ -93,6 +93,8 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
 
                 //建一个handler
                 ChatHandlerMap.add(userid1,ctx.channel());
+                System.out.println(userid1 );
+                System.out.println(ctx.channel());
 
                 //ctx.writeAndFlush(message1);
             }else{
