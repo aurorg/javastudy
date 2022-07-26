@@ -121,8 +121,9 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         }
 
         //判断之后进行后续选择
+
             /**
-             * 
+             * 【我的id:11,好友id:31】：不是好友，屏蔽了，好友在线
               */
 
             //0: 表示之间不能通信（是因为两者之间不是好友）
