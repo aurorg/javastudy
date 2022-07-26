@@ -136,26 +136,28 @@ public class CFriendViewHandler {
         is1=true;
         String chatmessage=input.next(); //输入聊天消息的
 
-        if(!chatmessage.equals('Q')) {
 
-            FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1,chatmessage, "T");
-            ctx.writeAndFlush(friendChatmsg2);
+    while(!chatmessage.equals('Q')) {
 
-            try {
-                synchronized (waitMessage) {
-                    waitMessage.wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "T");
+        ctx.writeAndFlush(friendChatmsg2);
+
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
             }
-
-            System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
-            chatmessage=input.nextLine();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        else{
-            is1 =false;
-        }
+        System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
+        chatmessage = input.nextLine();
+    }
+
+    if(chatmessage.equals('Q')) {
+        is1 = false;
+    }
+
 
     }
 
