@@ -129,13 +129,12 @@ public class CFriendViewHandler {
         /**
          * 让服务端建立一个channel，用map将（用户和对应的channel绑起来），然后开始发消息
          */
-
         //System.out.println("\n");
-
         System.out.println("聊天内容(ENTER发送)[输入Q结束对话]：");
         is1=true;
         String chatmessage=input.next(); //输入聊天消息的
 
+        //暂时这里有问题，只能发一条消息，退出不了
 
     while(!chatmessage.equals('Q')) {
 

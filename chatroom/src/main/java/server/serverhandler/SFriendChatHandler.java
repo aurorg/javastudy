@@ -140,6 +140,10 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         //1：表示之间可以通信（是好友，没有屏蔽好友，好友在线）【消息可以存到数据库并且可以发出去】
         else if (isexit == 1) {
+
+            message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
+            System.out.println(message1);
+
             //打印消息
             System.out.println("111111111");
             System.out.println(friendChatmsg);
@@ -149,8 +153,8 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
             channel.writeAndFlush(friendChatmsg);
 
-            message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
-            System.out.println(message1);
+//            message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
+//            System.out.println(message1);
 
             
             String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";

@@ -88,8 +88,22 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
             }
             //判断之后进行后续选择
             if(isexit){
+                String sql2 ="update usermsg set userstate =1 where userid =?";
+                ps=conn.prepareStatement(sql2);
+                ps.setInt(1,userid1);
+                ps.executeUpdate();
+                System.out.println("111111111111ceshi");
+                System.out.println("已将您的状态改为上线");
+
                 message1 = new ServerToClientmsg(true,"数据库核对成功（该账号存在，密码输入正确）");
                 System.out.println(message1);
+
+                //将用户的在线状态改为1【在线】，默认是不在线的2
+//                String sql2 ="update usermsg set userstate =1 where userid =?";
+//                ps=conn.prepareStatement(sql2);
+//                ps.setInt(1,userid1);
+//                ps.executeUpdate();
+//                System.out.println("已将您的状态改为上线");
 
                 //建一个handler
                 ChatHandlerMap.add(userid1,ctx.channel());
