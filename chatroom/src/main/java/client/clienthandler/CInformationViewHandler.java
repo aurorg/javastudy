@@ -1,6 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.Informationmsg;
 
 import java.util.Scanner;
 
@@ -19,12 +20,12 @@ public class CInformationViewHandler {
        int n =input.nextInt();
        switch(n){
            case 1:
-               //查看未读消息函数
+               //查看未读消息函数（这里查的是客户没有上线的时候的消息）
                unreadmsg(ctx);
                break;
 
            case 2:
-               //查看历史消息记录
+               //查看历史消息记录（客户上线了之后的消息在这里查）
                historymsg(ctx);
                break;
 
@@ -42,6 +43,14 @@ public class CInformationViewHandler {
 
     //查看未读消息函数
     public void unreadmsg(ChannelHandlerContext ctx){
+        System.out.println("请输入您的账号【id号】：");
+        int userid1 =input.nextInt();
+        System.out.println("请输入您的好友的账号【id号】：");
+        int friendid1 =input.nextInt();
+
+        Informationmsg informationmsg = new Informationmsg(userid1,friendid1);
+        ctx.writeAndFlush(informationmsg);
+
 
     }
 

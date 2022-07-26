@@ -123,9 +123,8 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         //判断之后进行后续选择
 
             /**
-             * 【我的id:11,好友id:31】：不是好友，屏蔽了，好友在线
+             * 【我的id:11,好友id:31】：不是好友，屏蔽了(这里屏蔽不屏蔽无所谓)，好友在线
               */
-
             //0: 表示之间不能通信（是因为两者之间不是好友）
         if (isexit == 0) {
             message1 = new ServerToClientmsg(false, "您和对方还不是好友");
@@ -134,7 +133,9 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         }
 
-
+        /**
+         * 【我的id:4，好友的id：24】：是好友，屏蔽了，在线
+         */
         //3：表示之间不能通信（是因为你和对方处于屏蔽状态）
         else if (isexit == 3) {
             message1 = new ServerToClientmsg(false, "您和您的好友处于屏蔽状态");
@@ -177,11 +178,16 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             // ResultSet rs2 = stat.executeQuery(sql1);
         }
 
+        /**
+         *
+         * 【我的id:2,好友id：23】：是好友，没有屏蔽好友，对方不在线
+         */
         //2：表示消息可以发出去，但是对方是离线状态不接受（是好友，没有屏蔽好友，对方不在线）【消息可以存到数据库，但是不能发出去】
         else if(isexit ==2){
 
-            message1 = new ServerToClientmsg(true, "您的好友没有上线哦，上线之后才可以看到消息");
+            message1 = new ServerToClientmsg(false, "您的好友没有上线哦，上线之后才可以看到消息");
             System.out.println(message1);
+            ctx.writeAndFlush(message1);
 
             String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";
             ps = conn.prepareStatement(sql1);
