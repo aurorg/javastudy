@@ -28,7 +28,8 @@ public class CFriendViewHandler {
         switch (n){
             case 1:
                 //添加好友
-                addfriend(ctx);
+                new CAddFriendView(ctx);
+                //addfriend(ctx);
                 break;
             case 2:
                 //删除好友
@@ -64,9 +65,9 @@ public class CFriendViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //1  添加好友
 
-    public void addfriend(ChannelHandlerContext ctx){
-
-    }
+//    public void addfriend(ChannelHandlerContext ctx){
+//
+//    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //2  删除好友
     public void deletefriend(ChannelHandlerContext ctx){
