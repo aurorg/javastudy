@@ -120,6 +120,16 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
            // System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
 
+            String sql1;
+            sql1 = "update message set issuccess =1 where (senderid =? and receiverid=?) or (receiverid=? and senderid =?)";
+            ps=conn.prepareStatement(sql1);
+            ps.setInt(1,userid2);
+            ps.setInt(2, friendid2);
+            ps.setInt(3,userid2);
+            ps.setInt(4, friendid2);
+            ps.executeUpdate();
+            System.out.println("因为你浏览历史消息的时候将所有消息看过了，所以将你的未读消息改为已读消息");
+
             // 完成后关闭
             rs.close();
             stat.close();

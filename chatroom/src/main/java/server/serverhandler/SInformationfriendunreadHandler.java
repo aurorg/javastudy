@@ -84,7 +84,7 @@ public class SInformationfriendunreadHandler extends SimpleChannelInboundHandler
             //并返回当前行是否有效，如果遍历完成整个表，则会返回false
 
             //boolean isexit =false; //临时变量，判断该电话号码是否存在
-            List<String> messagelist =new ArrayList<>();
+            List<String> messagelist1 =new ArrayList<>();
             while (rs.next()) {
 
                 // 通过字段检索
@@ -103,7 +103,7 @@ public class SInformationfriendunreadHandler extends SimpleChannelInboundHandler
 
                 //明天改，将消息存到list中
                 //List<String> messagelist =new ArrayList<>();
-                messagelist.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 +
+                messagelist1.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 +
                         " ,发的消息是message: " + message  +  " ,聊天类型chattype:"+chattype + " ,消息类型message:" + messagetype);
 
                 //message1=new SInformationHandler(sendid1,receiver1,message);
@@ -113,11 +113,22 @@ public class SInformationfriendunreadHandler extends SimpleChannelInboundHandler
             // System.out.println("11111111");
             ServerToClientmsg message1 = new ServerToClientmsg(true,"");
             // System.out.println("111111112222");
-            message1.setFriendmsglist(messagelist);
+            message1.setFriendmsglist1(messagelist1);
             // System.out.println("11111111333333333");
-            message1.setMessageType(Message.Informationfriendhistorymsg);
+            message1.setMessageType(Message.Informationfriendunreadmsg);
             // System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
+
+            String sql1;
+            sql1 = "update message set issuccess =1 where (senderid =? and receiverid=?) or (receiverid=? and senderid =?)";
+            ps=conn.prepareStatement(sql1);
+            ps.setInt(1,userid2);
+            ps.setInt(2, friendid2);
+            ps.setInt(3,userid2);
+            ps.setInt(4, friendid2);
+            ps.executeUpdate();
+            System.out.println("已经将未读消息改为已读消息");
+
 
             // 完成后关闭
             rs.close();

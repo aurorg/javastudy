@@ -101,14 +101,35 @@ public class CInformationViewHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        for(String s1 : friendmsglist1){
+            System.out.println(s1);
+        }
+
+        System.out.println("已经查看");
+
+        //后续再给服务器发消息，因为已经将未读消息看过了，所以把未读消息改为已读消息
+//        Informationfriendunreadmsg informationfriendunreadmsg2 = new Informationfriendunreadmsg(userid1,friendid1);
+//        ctx.writeAndFlush(informationfriendunreadmsg2);
+//        try {
+//            synchronized (waitMessage) {
+//                waitMessage.wait();
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        for(String s1 : friendmsglist1){
+//            System.out.println(s1);
+//        }
+
+
+        System.out.println("未读的消息如上文，接下来给你返回主界面");
+        new CInformationViewHandler(ctx);
+
 
 
 
 
     }
-
-
-
 
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

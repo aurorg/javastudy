@@ -33,6 +33,10 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
                 friendmsglist=message.friendmsglist;
             }
 
+            else if (message.getMessageType()==Message.Informationfriendunreadmsg){
+                friendmsglist1=message.friendmsglist1;
+            }
+
             else {
                 System.out.print("操作成功 " + reason);
                 waitSuccess = 1;

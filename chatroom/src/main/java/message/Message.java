@@ -30,6 +30,8 @@ public abstract  class Message  implements Serializable {
 
     public static final int Informationfriendhistorymsg=9; //查看好友历史消息的
 
+    public static final int Informationfriendunreadmsg=10; //查看好友未读消息的
+
 
 
 

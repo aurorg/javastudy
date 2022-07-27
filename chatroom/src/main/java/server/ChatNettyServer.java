@@ -84,7 +84,8 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SLogoutmsgViewHandler());//注销
 
                             ch.pipeline().addLast(new SFriendChatHandler()); //好友聊天
-                            ch.pipeline().addLast(new SInformationfriendhistoryHandler()); //查看好友未读消息
+                            ch.pipeline().addLast(new SInformationfriendhistoryHandler()); //查看好友历史消息
+                            ch.pipeline().addLast(new SInformationfriendunreadHandler());  //查看好友未读消息的
 
                             //.addLast()
                         }
