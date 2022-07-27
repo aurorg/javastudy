@@ -2,16 +2,15 @@ package server.serverhandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import message.Informationmsg;
+import message.Informationfriendhistorymsg;
 import message.Message;
 import message.ServerToClientmsg;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class SInformationHandler extends SimpleChannelInboundHandler<Informationmsg> {
+public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandler<Informationfriendhistorymsg> {
 
     // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -39,7 +38,7 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
 
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Informationmsg informationmsg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Informationfriendhistorymsg informationmsg) throws Exception {
 
         try {
 

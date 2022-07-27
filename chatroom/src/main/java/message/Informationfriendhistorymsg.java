@@ -1,12 +1,12 @@
 package message;
 
-public class Informationmsg extends Message{
+public class Informationfriendhistorymsg extends Message{
     private int userid;
     private int friendid;
     private String message;
 
 
-    public Informationmsg(int userid,int friendid){
+    public Informationfriendhistorymsg(int userid, int friendid){
         this.friendid=friendid;
         this.userid=userid;
     }

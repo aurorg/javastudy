@@ -2,7 +2,6 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.FriendChatmsg;
-import message.Informationmsg;
 
 import java.util.Scanner;
 

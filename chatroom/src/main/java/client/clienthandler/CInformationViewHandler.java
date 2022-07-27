@@ -1,9 +1,8 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
-import message.Informationmsg;
+import message.Informationfriendhistorymsg;
 
-import java.util.List;
 import java.util.Scanner;
 
 import static client.ChatNettyClient.*;
@@ -61,7 +60,7 @@ public class CInformationViewHandler {
         System.out.println("请输入您的好友的账号【id号】：");
         int friendid1 = input.nextInt();
 
-        Informationmsg informationmsg = new Informationmsg(userid1, friendid1);
+        Informationfriendhistorymsg informationmsg = new Informationfriendhistorymsg(userid1, friendid1);
         ctx.writeAndFlush(informationmsg);
 
         try {
@@ -99,7 +98,7 @@ public class CInformationViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //查看群聊未读消息
     public void unreadgroupmsg(ChannelHandlerContext ctx){
-        
+
     }
 
 
