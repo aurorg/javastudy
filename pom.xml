@@ -35,15 +35,6 @@
             <artifactId>netty-transport</artifactId>
             <version>5.0.0.Alpha2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/pl.fhframework.dp/fhdp-cxf-bom -->
-
-        <!-- https://mvnrepository.com/artifact/pl.fhframework.dp/fhdp-cxf-bom -->
-        <dependency>
-            <groupId>pl.fhframework.dp</groupId>
-            <artifactId>fhdp-cxf-bom</artifactId>
-            <version>4.9.26</version>
-        </dependency>
-
     </dependencies>
 
 </project>
