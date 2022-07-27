@@ -1,6 +1,7 @@
 package server;
 
 import common.MessageCodec;
+import common.ProtocolFrameDecoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -74,7 +75,9 @@ public class ChatNettyServer {
                         //给pipeline设置处理器
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(new ProtocolFrameDecoder());
                             ch.pipeline().addLast(new MessageCodec());
+
                             //需要用什么处理器直接加就行了
                             ch.pipeline().addLast(new SEnrollViewHandle()); //注册
                             ch.pipeline().addLast(new SLoginViewHandler());//登录

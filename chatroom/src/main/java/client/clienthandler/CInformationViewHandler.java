@@ -63,8 +63,8 @@ public class CInformationViewHandler {
             e.printStackTrace();
         }
 
-        List<String> friend=informationMap.get("F");
-        List<String> group=informationMap.get("G");
+        List<String> friend=informationMap.get("FRIEND");
+        List<String> group=informationMap.get("GROUP");
         for(String s1:friend){
             System.out.println(s1);
         }

@@ -8,6 +8,7 @@ import message.ServerToClientmsg;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SInformationHandler extends SimpleChannelInboundHandler<Informationmsg> {
@@ -50,7 +51,7 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
            int userid2 = informationmsg.getUserid();
            int friendid2 =informationmsg.getFriendid();
 
-            ServerToClientmsg message1 = null;
+            //ServerToClientmsg message1 = null;
 
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
@@ -83,7 +84,7 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
             //并返回当前行是否有效，如果遍历完成整个表，则会返回false
 
             //boolean isexit =false; //临时变量，判断该电话号码是否存在
-
+            List<String> messagelist =new ArrayList<>();
             while (rs.next()) {
 
                 // 通过字段检索
@@ -98,15 +99,20 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
               //  System.out.print("\n");
 
                 //明天改，将消息存到list中
-                List<String> messagelist =new ArrayList<>();
+                //List<String> messagelist =new ArrayList<>();
                 messagelist.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 + " ,发的消息是message: " + message);
 
                 //message1=new SInformationHandler(sendid1,receiver1,message);
 
             }
             //判断之后进行后续选择
-
+            System.out.println("11111111");
+            ServerToClientmsg message1 = new ServerToClientmsg(true,"");
+            System.out.println("111111112222");
+            message1.setFriendlist(messagelist);
+            System.out.println("11111111333333333");
             message1.setMessageType(Message.Informationmsg);
+            System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
 
             // 完成后关闭

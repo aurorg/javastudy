@@ -207,7 +207,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 //        ctx.writeAndFlush(message1);
 
         // 完成后关闭
-        rs.close();
+        //rs.close();
         stat.close();
         conn.close();
 
