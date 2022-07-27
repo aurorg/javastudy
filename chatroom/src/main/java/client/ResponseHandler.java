@@ -24,11 +24,14 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 
         else{
             waitSuccess=1;
-            if(message.getMessageType()== Message.Informationmsg){
-                informationMap=message.getInformationMap();
-
-            }
+//            if(message.getMessageType()== Message.Informationmsg){
+//                informationMap=message.getInformationMap();
+//
+//            }
 //            else if(message.getMessageType()==)
+            if(message.getMessageType()==Message.Informationmsg){
+                friendlist=message.friendlist;
+            }
 
             else {
                 System.out.print("操作成功 " + reason);

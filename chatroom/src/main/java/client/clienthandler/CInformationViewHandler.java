@@ -6,8 +6,7 @@ import message.Informationmsg;
 import java.util.List;
 import java.util.Scanner;
 
-import static client.ChatNettyClient.informationMap;
-import static client.ChatNettyClient.waitMessage;
+import static client.ChatNettyClient.*;
 
 public class CInformationViewHandler {
     //用户输入
@@ -63,14 +62,14 @@ public class CInformationViewHandler {
             e.printStackTrace();
         }
 
-        List<String> friend=informationMap.get("FRIEND");
-        List<String> group=informationMap.get("GROUP");
-        for(String s1:friend){
+//        List<String> friend=friendlist.get();
+//        List<String> group=friendlist.get();
+        for(String s1:friendlist){
             System.out.println(s1);
         }
-        for(String s1:group){
-            System.out.println(s1);
-        }
+//        for(String s1:group){
+//            System.out.println(s1);
+//        }
 
     }
 
