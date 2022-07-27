@@ -9,8 +9,10 @@ public class ServerToClientmsg extends Message {
 
     private boolean success;
     private String reason;
-    private Map<String, List<String>> informationMap; //消息
-    public List<String> friendlist;//好友
+    private Map<String, List<String>> informationMap; //暂时的消息
+    public List<String> friendmsglist;//好友历史消息列表
+
+
     private int ServerToClientmsg;
     int MessageType=ServerToClientmsg;
     
@@ -49,11 +51,11 @@ public class ServerToClientmsg extends Message {
         return informationMap;
     }
 
-    public void setFriendlist(List<String> friendlist){
-        this.friendlist=friendlist;
+    public void setFriendmsglist(List<String> friendmsglist){
+        this.friendmsglist=friendmsglist;
     }
-    public List<String> getFriendlist(){
-        return friendlist;
+    public List<String> getFriendmsglist(){
+        return friendmsglist;
     }
 
 

@@ -2,7 +2,7 @@ package server.serverhandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import message.Informationfriendhistorymsg;
+import message.Informationfriendunreadmsg;
 import message.Message;
 import message.ServerToClientmsg;
 
@@ -10,8 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandler<Informationfriendhistorymsg> {
-
+public class SInformationfriendunreadHandler extends SimpleChannelInboundHandler<Informationfriendunreadmsg> {
     // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/chatroom?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
@@ -36,19 +35,17 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
     //用户输入
 //    static Scanner input = new Scanner(System.in);
 
-
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Informationfriendhistorymsg informationmsg) throws Exception {
-
+    protected void channelRead0(ChannelHandlerContext ctx, Informationfriendunreadmsg informationfriendunreadmsg) throws Exception {
         try {
 
             //每次先打印一下下，看消息发过来没有！！！！！！
-            System.out.println("打印消息"+informationmsg);
+            System.out.println("打印消息"+informationfriendunreadmsg);
 
 
             //接受消息的部分
-           int userid2 = informationmsg.getUserid();
-           int friendid2 =informationmsg.getFriendid();
+            int userid2 = informationfriendunreadmsg.getUserid();
+            int friendid2 =informationfriendunreadmsg.getFriendid();
 
             //ServerToClientmsg message1 = null;
 
@@ -67,14 +64,16 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
 
 
             String sql;
-            sql = "SELECT senderid,receiverid,message,messagetype,chattype FROM message where (senderid=? and receiverid=? and chattype=?) or (receiverid=? and senderid=? and chattype=?)";
+            sql = "SELECT senderid,receiverid,issuccess,message,messagetype,chattype FROM message where (senderid=? and receiverid=? and issuccess=? and chattype=?) or (receiverid=? and senderid=? and issuccess=? and chattype=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
-            ps.setString(3,"FRIEND");
-            ps.setInt(4, userid2);
-            ps.setInt(5, friendid2);
-            ps.setString(6,"FRIEND");
+            ps.setInt(3,2);
+            ps.setString(4,"FRIEND");
+            ps.setInt(5, userid2);
+            ps.setInt(6, friendid2);
+            ps.setInt(7,2);
+            ps.setString(8,"FRIEND");
             rs = ps.executeQuery();
 
             //传输sql并且返回结果
@@ -89,18 +88,18 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
             while (rs.next()) {
 
                 // 通过字段检索
-                 int sendid1 =rs.getInt("senderid");
-                 int receiver1=rs.getInt("receiverid");
-                 String message=rs.getString("message");
-                 String chattype=rs.getString("chattype");
-                 String messagetype=rs.getString("messagetype");
+                int sendid1 =rs.getInt("senderid");
+                int receiver1=rs.getInt("receiverid");
+                String message=rs.getString("message");
+                String chattype=rs.getString("chattype");
+                String messagetype=rs.getString("messagetype");
 
-                 //输出数据
+                //输出数据
                 System.out.println("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 +
                         " ,发的消息是message: " + message  +  " ,聊天类型chattype:"+chattype + " ,消息类型message:" + messagetype);
 //                System.out.print(" ,接受者receiverid: " + receiver1);
 //                System.out.print(" ,发的消息是message: " + message);
-              //  System.out.print("\n");
+                //  System.out.print("\n");
 
                 //明天改，将消息存到list中
                 //List<String> messagelist =new ArrayList<>();
@@ -111,13 +110,13 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
 
             }
             //判断之后进行后续选择
-           // System.out.println("11111111");
+            // System.out.println("11111111");
             ServerToClientmsg message1 = new ServerToClientmsg(true,"");
-           // System.out.println("111111112222");
+            // System.out.println("111111112222");
             message1.setFriendmsglist(messagelist);
-           // System.out.println("11111111333333333");
+            // System.out.println("11111111333333333");
             message1.setMessageType(Message.Informationfriendhistorymsg);
-           // System.out.println("4444444444444444");
+            // System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
 
             // 完成后关闭
@@ -144,6 +143,10 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
             }
 
         }
+
+
+
+
 
 
     }

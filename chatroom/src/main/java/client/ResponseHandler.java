@@ -29,8 +29,8 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 //
 //            }
 //            else if(message.getMessageType()==)
-            if(message.getMessageType()==Message.Informationmsg){
-                friendlist=message.friendlist;
+            if(message.getMessageType()==Message.Informationfriendhistorymsg){
+                friendmsglist=message.friendmsglist;
             }
 
             else {

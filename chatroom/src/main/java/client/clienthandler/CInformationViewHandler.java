@@ -2,6 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.Informationfriendhistorymsg;
+import message.Informationfriendunreadmsg;
 
 import java.util.Scanner;
 
@@ -73,7 +74,7 @@ public class CInformationViewHandler {
 
 //        List<String> friend=friendlist.get();
 //        List<String> group=friendlist.get();
-        for (String s1 : friendlist) {
+        for (String s1 : friendmsglist) {
             System.out.println(s1);
         }
 //        for(String s1:group){
@@ -81,15 +82,35 @@ public class CInformationViewHandler {
 //        }
             System.out.println("所有的消息如上文，接下来给你返回主界面");
             new CInformationViewHandler(ctx);
-
-
-
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //查看好友未读消息记录
     public void unreadfriendmsg(ChannelHandlerContext ctx) {
+        System.out.println("请输入您的账号【id号】：");
+        int userid1 = input.nextInt();
+        System.out.println("请输入您的好友的账号【id号】：");
+        int friendid1 = input.nextInt();
+
+        Informationfriendunreadmsg informationfriendunreadmsg = new Informationfriendunreadmsg(userid1,friendid1);
+        ctx.writeAndFlush(informationfriendunreadmsg);
+
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
 
     }
+
+
+
+
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //查看群聊历史消息
     public void historygroupmsg(ChannelHandlerContext ctx){

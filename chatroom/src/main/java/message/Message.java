@@ -28,7 +28,7 @@ public abstract  class Message  implements Serializable {
 
     public static final int FriendChatmsg =8;  //好友聊天
 
-    public static final int Informationmsg=9; //查看消息的
+    public static final int Informationfriendhistorymsg=9; //查看好友历史消息的
 
 
 
