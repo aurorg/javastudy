@@ -90,6 +90,9 @@ public class CFriendViewHandler {
             e.printStackTrace();
         }
 
+        System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
+        new CFriendViewHandler(ctx);
+
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //2  删除好友

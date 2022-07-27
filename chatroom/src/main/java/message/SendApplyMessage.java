@@ -39,4 +39,7 @@ public class SendApplyMessage extends Message{
     public String getMessage() {
         return message;
     }
+    public String toString(){
+        return "userid =" + userid + ",friendid =" + friendid + " , message= " + message;
+    }
 }

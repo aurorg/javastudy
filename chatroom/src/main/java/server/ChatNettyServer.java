@@ -86,7 +86,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SFriendChatHandler()); //好友聊天
                             ch.pipeline().addLast(new SInformationfriendhistoryHandler()); //查看好友历史消息
                             ch.pipeline().addLast(new SInformationfriendunreadHandler());  //查看好友未读消息的
-
+                            ch.pipeline().addLast(new SSendApplyHandler()); //发送好友申请
                             //.addLast()
                         }
 

@@ -1,7 +1,10 @@
 package server.serverhandler;
 
+import common.ChatHandlerMap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import message.FriendChatmsg;
 import message.SendApplyMessage;
 import message.ServerToClientmsg;
 
@@ -60,37 +63,60 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
             stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
 
             String sql;
-            sql="SELECT userid,friendid FROM friendlist where(userid=? and friendid=?)  or (friendid=? and userid=?)";
+            sql="SELECT userid,friendid,isfriend FROM friendlist where(userid=? and friendid=?)  or (friendid=? and userid=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
             ps.setInt(3, userid2);
             ps.setInt(4, friendid2);
             rs = ps.executeQuery();
-            if(rs.next()){
-                message1= new ServerToClientmsg(false,"嗯哼？！你俩已经是好友了");
+
+            while(rs.next()){
+                int isfriend1 = rs.getInt("isfriend");
+                if(isfriend1==1) {
+                    message1 = new ServerToClientmsg(false, "嗯哼？！你俩已经是好友了");
+                }else{
+                    String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
+                    ps = conn.prepareStatement(sql1);
+                    ps.setInt(1, userid2);
+                    ps.setInt(2, friendid2);
+                    ps.setString(3,"请求加好友" );
+                    ps.setInt(4, 2);
+                    ps.setString(5,"APPLY");
+                    ps.setString(6,"FRIEND");
+                    ps.executeUpdate();
+
+                    message1=new ServerToClientmsg(true,"可以添加");
+
+                    Channel channel = ChatHandlerMap.getChannel(friendid2);
+                    if(channel==null){
+                        channel.writeAndFlush(new FriendChatmsg());
+                    }
+
             }
-            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//            String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
+//            ps = conn.prepareStatement(sql1);
+//            ps.setInt(1, userid2);
+//            ps.setInt(2, friendid2);
+//            ps.setString(3,"请求加好友" );
+//            ps.setInt(4, 2);
+//            ps.setString(5,"APPLY");
+//            ps.setString(6,"FRIEND");
+//            int row =ps.executeUpdate();
+//            if(row==1){
+//                message1=new ServerToClientmsg(true,"添加成功");
+//
+//                Channel channel = ChatHandlerMap.getChannel(friendid2);
+//                if(channel==null){
+//                    channel.writeAndFlush(new FriendChatmsg());
+//
+//                }
+//            }else{
+//                message1 =new ServerToClientmsg(false,"申请失败啦");
+//
+            }
+            ctx.writeAndFlush(message1);
             stat.close();
             conn.close();
         }catch(
