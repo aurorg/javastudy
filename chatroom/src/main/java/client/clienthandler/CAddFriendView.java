@@ -20,13 +20,13 @@ public class CAddFriendView {
         int n = input.nextInt();
         switch (n) {
             case 1:
-                addfriend(ctx);
+                passfriend(ctx);
                 break;
             case 2:
-                unaddfriend(ctx);
+                unpassfriend(ctx);
                 break;
             case 0:
-                System.out.println("不处理就退出啦！");
+                System.out.println("暂时不处理就退出啦！");
                 ctx.channel().close();
             default:
                 System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
@@ -35,14 +35,15 @@ public class CAddFriendView {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void  addfriend(ChannelHandlerContext ctx){
+    public void  passfriend(ChannelHandlerContext ctx){
+
 
     }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void unaddfriend(ChannelHandlerContext ctx){
+    public void unpassfriend(ChannelHandlerContext ctx){
 
     }
- 
+
 
 }

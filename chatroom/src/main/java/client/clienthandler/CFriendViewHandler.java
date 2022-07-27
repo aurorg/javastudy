@@ -1,5 +1,6 @@
 package client.clienthandler;
 
+import com.mysql.cj.util.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 import message.FriendChatmsg;
 
@@ -21,15 +22,22 @@ public class CFriendViewHandler {
         System.out.println("*         [4]:查询好友          *");
         System.out.println("*         [5]:屏蔽好友          *");
         System.out.println("*         [6]:好友聊天          *");
+        System.out.println("*         [7]:查看好友申请       *");
         System.out.println("*         [0]:返回主界面         *");
         System.out.println("*******************************");
 
-        int n = input.nextInt();
-        switch (n){
+        //暂时先不处理
+//        String n1 = input.nextLine();
+//        while(!StringUtils.isNumber(n1)){
+//            System.out.println("输入不规范，请重新输入您的选择：");
+//            n1=input.nextInt();
+//        }
+       int n = input.nextInt();
+
+        switch (n) {
             case 1:
                 //添加好友
-                new CAddFriendView(ctx);
-                //addfriend(ctx);
+                addfriend(ctx);
                 break;
             case 2:
                 //删除好友
@@ -51,23 +59,28 @@ public class CFriendViewHandler {
                 //好友聊天
                 friendchat(ctx);
                 break;
+            case 7:
+                //查看好友的申请
+                new CAddFriendView(ctx);
             case 0:
                 //返回主界面
                 new CMainViewHandler(ctx);
                 break;
-
             default:
                 System.out.println("请按照要求输入哦！");
                 new CFriendViewHandler(ctx);
-
+         }
         }
-    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //1  添加好友
 
-//    public void addfriend(ChannelHandlerContext ctx){
-//
-//    }
+    public void addfriend(ChannelHandlerContext ctx){
+        System.out.println("请输入您的账号【id】：");
+        int userid1 = input.nextInt();
+        System.out.println("请输入您需要添加好友的账号【id】");
+        int friendid1=input.nextInt();
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //2  删除好友
     public void deletefriend(ChannelHandlerContext ctx){
