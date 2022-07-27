@@ -13,7 +13,7 @@ public class CMainViewHandler {
     static Scanner input = new Scanner(System.in);
 
     public CMainViewHandler(ChannelHandlerContext ctx){
-        System.out.println("reiulhfglihgvh111111");
+        //System.out.println("reiulhfglihgvh111111");
         System.out.println("********************************");
         System.out.println("*         欢迎来到主界面！        *");
         System.out.println("*       根据您的需求进行选择！     *");

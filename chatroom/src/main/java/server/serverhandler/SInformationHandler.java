@@ -68,12 +68,14 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
 
 
             String sql;
-            sql = "SELECT senderid,receiverid,message FROM message where (senderid=? and receiverid=?) or (receiverid=? and senderid=?)";
+            sql = "SELECT senderid,receiverid,message,messagetype,chattype FROM message where (senderid=? and receiverid=? and chattype=?) or (receiverid=? and senderid=? and chattype=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
-            ps.setInt(3, userid2);
-            ps.setInt(4, friendid2);
+            ps.setString(3,"FRIEND");
+            ps.setInt(4, userid2);
+            ps.setInt(5, friendid2);
+            ps.setString(6,"FRIEND");
             rs = ps.executeQuery();
 
             //传输sql并且返回结果
@@ -91,28 +93,32 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
                  int sendid1 =rs.getInt("senderid");
                  int receiver1=rs.getInt("receiverid");
                  String message=rs.getString("message");
+                 String chattype=rs.getString("chattype");
+                 String messagetype=rs.getString("messagetype");
 
                  //输出数据
-                System.out.println("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 + " ,发的消息是message: " + message);
+                System.out.println("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 +
+                        " ,发的消息是message: " + message  +  " ,聊天类型chattype:"+chattype + " ,消息类型message:" + messagetype);
 //                System.out.print(" ,接受者receiverid: " + receiver1);
 //                System.out.print(" ,发的消息是message: " + message);
               //  System.out.print("\n");
 
                 //明天改，将消息存到list中
                 //List<String> messagelist =new ArrayList<>();
-                messagelist.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 + " ,发的消息是message: " + message);
+                messagelist.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 +
+                        " ,发的消息是message: " + message  +  " ,聊天类型chattype:"+chattype + " ,消息类型message:" + messagetype);
 
                 //message1=new SInformationHandler(sendid1,receiver1,message);
 
             }
             //判断之后进行后续选择
-            System.out.println("11111111");
+           // System.out.println("11111111");
             ServerToClientmsg message1 = new ServerToClientmsg(true,"");
-            System.out.println("111111112222");
+           // System.out.println("111111112222");
             message1.setFriendlist(messagelist);
-            System.out.println("11111111333333333");
+           // System.out.println("11111111333333333");
             message1.setMessageType(Message.Informationmsg);
-            System.out.println("4444444444444444");
+           // System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
 
             // 完成后关闭
