@@ -3,6 +3,7 @@ package client.clienthandler;
 import com.mysql.cj.util.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 import message.FriendChatmsg;
+import message.SendApplyMessage;
 
 import java.util.Scanner;
 
@@ -79,6 +80,15 @@ public class CFriendViewHandler {
         int userid1 = input.nextInt();
         System.out.println("请输入您需要添加好友的账号【id】");
         int friendid1=input.nextInt();
+        SendApplyMessage sendapplymessage = new SendApplyMessage(userid1,friendid1,"对方想加你好友");
+        ctx.writeAndFlush(sendapplymessage);
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
