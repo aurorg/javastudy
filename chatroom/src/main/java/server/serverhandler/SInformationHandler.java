@@ -7,6 +7,8 @@ import message.Message;
 import message.ServerToClientmsg;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SInformationHandler extends SimpleChannelInboundHandler<Informationmsg> {
 
@@ -95,10 +97,15 @@ public class SInformationHandler extends SimpleChannelInboundHandler<Information
 //                System.out.print(" ,发的消息是message: " + message);
               //  System.out.print("\n");
 
-                message1=new SInformationHandler(sendid1,receiver1,message);
+                //明天改，将消息存到list中
+                List<String> messagelist =new ArrayList<>();
+                messagelist.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 + " ,发的消息是message: " + message);
+
+                //message1=new SInformationHandler(sendid1,receiver1,message);
 
             }
             //判断之后进行后续选择
+
             message1.setMessageType(Message.Informationmsg);
             ctx.writeAndFlush(message1);
 

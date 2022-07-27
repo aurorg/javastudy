@@ -3,7 +3,11 @@ package client.clienthandler;
 import io.netty.channel.ChannelHandlerContext;
 import message.Informationmsg;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static client.ChatNettyClient.informationMap;
+import static client.ChatNettyClient.waitMessage;
 
 public class CInformationViewHandler {
     //用户输入
@@ -51,6 +55,22 @@ public class CInformationViewHandler {
         Informationmsg informationmsg = new Informationmsg(userid1,friendid1);
         ctx.writeAndFlush(informationmsg);
 
+        try{
+            synchronized (waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        List<String> friend=informationMap.get("F");
+        List<String> group=informationMap.get("G");
+        for(String s1:friend){
+            System.out.println(s1);
+        }
+        for(String s1:group){
+            System.out.println(s1);
+        }
 
     }
 

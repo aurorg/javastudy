@@ -2,10 +2,10 @@ package client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import message.Message;
 import message.ServerToClientmsg;
 
-import static client.ChatNettyClient.waitMessage;
-import static client.ChatNettyClient.waitSuccess;
+import static client.ChatNettyClient.*;
 
 public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientmsg> {
 
@@ -20,9 +20,19 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             System.out.print("操作失败 "+reason);
             waitSuccess=0;
         }
+        //成功里面分好多种情况
+
         else{
-            System.out.print("操作成功 "+reason);
             waitSuccess=1;
+            if(message.getMessageType()== Message.Informationmsg){
+                informationMap=message.getInformationMap();
+
+            }
+
+            else {
+                System.out.print("操作成功 " + reason);
+                waitSuccess = 1;
+            }
         }
 
         //不管操作成功还是失败都需要唤醒界面的主线程

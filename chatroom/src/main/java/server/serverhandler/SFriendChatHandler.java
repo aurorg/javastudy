@@ -109,7 +109,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             int isshield1 = rs.getInt("isshield");
             int state1 = rs.getInt("state");
 
-            System.out.println("是否好友" + isfriend1 + "是否屏蔽" + isshield1 + "是否在线" + state1);
+            System.out.println("是否好友:" + isfriend1 + "是否屏蔽:" + isshield1 + "是否在线:" + state1);
             if (isfriend1 == 1 && isshield1 == 1 && state1 == 1) {
                 isexit = 1;
             } else if (isfriend1 == 1 && isshield1 == 1 && state1 == 2) {
@@ -155,8 +155,8 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             System.out.println(message1);
 
             //打印消息
-            System.out.println("111111111");
-            System.out.println(friendChatmsg);
+            //System.out.println("111111111");
+            System.out.println("打印消息"+friendChatmsg);
 
             Channel channel;
             channel= ChatHandlerMap.getChannel(friendid1);
@@ -167,12 +167,14 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 //            System.out.println(message1);
 
             
-            String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";
+            String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
             ps = conn.prepareStatement(sql1);
             ps.setInt(1, userid1);
             ps.setInt(2, friendid1);
             ps.setString(3, msg1);
             ps.setInt(4, 1);
+            ps.setString(5,"TEXT");
+            ps.setString(6,"FRIEND");
             ps.executeUpdate();
 
             // ResultSet rs2 = stat.executeQuery(sql1);
@@ -189,12 +191,14 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             System.out.println(message1);
             ctx.writeAndFlush(message1);
 
-            String sql1 = "insert into message(senderid,receiverid,message,issuccess) values(?,?,?,?) ";
+            String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
             ps = conn.prepareStatement(sql1);
             ps.setInt(1, userid1);
             ps.setInt(2, friendid1);
             ps.setString(3,msg1 );
             ps.setInt(4, 2);
+            ps.setString(5,"TEXT");
+            ps.setString(6,"FRIEND");
             ps.executeUpdate();
 
         }

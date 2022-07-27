@@ -6,12 +6,13 @@ public class FriendChatmsg  extends Message{
 
     private int friendid;//好友的id
 
-    private String messagetype;//T代指文本消息、F代指文件消息
+    //来区分消息的类型
+    private String messagetype;//Text代指文本消息、File代指文件消息
 
     private String message; //用户和好友之间进行交流的消息
 
-    //用来区分群消息和个人消息
-    //G好友消息,F群消息;chattype一般情况下为好友消息
+    //用来区分聊天的类型，群聊消息，还是好有个人消息
+    //Group好友消息,Friend群消息;chattype一般情况下为好友消息
     private String chattype;
 
     private int Group=0;
