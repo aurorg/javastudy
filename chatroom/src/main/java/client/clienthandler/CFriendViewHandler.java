@@ -1,6 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import jdk.swing.interop.SwingInterOpUtils;
 import message.*;
 
 import java.util.Scanner;
@@ -232,10 +233,14 @@ public class CFriendViewHandler {
         }
 
         System.out.println("[输入Q,返回主界面]：");
+
         chatmessage = input.nextLine();
+        System.out.println("hahahahah" +chatmessage + "dayhigfgas");
+        System.out.println(chatmessage.length());
     }
 
     if(chatmessage.equals("Q")) {
+
         is1 = false;
         new CFriendViewHandler(ctx);
     }
