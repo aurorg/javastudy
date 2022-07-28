@@ -1,10 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
-import message.DeleteFriendmsg;
-import message.FriendChatmsg;
-import message.SendApplyMessage;
-import message.ShieldFriendmsg;
+import message.*;
 
 import java.util.Scanner;
 
@@ -13,7 +10,6 @@ import static client.ChatNettyClient.*;
 public class CFriendViewHandler {
     //用户输入
     static Scanner input = new Scanner(System.in);
-    ,private int f;
 
     public CFriendViewHandler(ChannelHandlerContext ctx){
         System.out.println("*******************************");
@@ -132,6 +128,21 @@ public class CFriendViewHandler {
 
     //3  好友列表
     public void friendlist(ChannelHandlerContext ctx){
+        System.out.println("请输入您的账号【id】：");
+        int userid1 = input.nextInt();
+        FriendListmsg friendListmsg = new FriendListmsg();
+        ctx.writeAndFlush(friendListmsg);
+
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
+        new CFriendViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
