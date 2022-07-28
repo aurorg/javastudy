@@ -1,6 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.DeleteFriendmsg;
 import message.FriendChatmsg;
 import message.SendApplyMessage;
 
@@ -19,10 +20,10 @@ public class CFriendViewHandler {
         System.out.println("*         [1]:添加好友          *");
         System.out.println("*         [2]:删除好友          *");
         System.out.println("*         [3]:好友列表          *");
-        System.out.println("*         [4]:查询好友          *");
-        System.out.println("*         [5]:屏蔽好友          *");
-        System.out.println("*         [6]:好友聊天          *");
-        System.out.println("*         [7]:查看好友申请       *");
+       // System.out.println("*         [4]:查询好友          *");
+        System.out.println("*         [4]:屏蔽好友          *");
+        System.out.println("*         [5]:好友聊天          *");
+        System.out.println("*         [6]:查看好友申请       *");
         System.out.println("*         [0]:返回主界面         *");
         System.out.println("*******************************");
 
@@ -48,20 +49,17 @@ public class CFriendViewHandler {
                 friendlist(ctx);
                 break;
             case 4:
-                //查询好友
-                findfriend(ctx);
-                break;
-            case 5:
                 //屏蔽好友
                 shieldfriend(ctx);
                 break;
-            case 6:
+            case 5:
                 //好友聊天
                 friendchat(ctx);
                 break;
-            case 7:
+            case 6:
                 //查看好友的申请
                 new CPassFriendApplyView(ctx);
+                break;
             case 0:
                 //返回主界面
                 new CMainViewHandler(ctx);
@@ -100,12 +98,27 @@ public class CFriendViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //2  删除好友
-
     /**
      * 输入您的id号和删除好友的id号，从friendlist表中删除数据
      * @param ctx
      */
     public void deletefriend(ChannelHandlerContext ctx){
+        System.out.println("请输入您的账号【id】：");
+        int userid1 = input.nextInt();
+        System.out.println("请输入您需要删除好友的账号【id】");
+        int friendid1=input.nextInt();
+        DeleteFriendmsg deletefriendmsg = new DeleteFriendmsg(userid1,friendid1);
+        ctx.writeAndFlush(deletefriendmsg);
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
+        new CFriendViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -121,17 +134,12 @@ public class CFriendViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    //4  查询好友
-    public void findfriend(ChannelHandlerContext ctx){
-
-    }
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    //5  屏蔽好友
+    //4  屏蔽好友
     public void shieldfriend(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    //6  好友聊天
+    //5  好友聊天
 
     /**
      * 1、输入好友的id账号
