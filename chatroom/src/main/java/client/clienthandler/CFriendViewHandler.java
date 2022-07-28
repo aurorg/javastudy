@@ -216,11 +216,11 @@ public class CFriendViewHandler {
         is1=true;
         String chatmessage=input.next(); //输入聊天消息的
 
-        //暂时这里有问题，只能发一条消息，退出不了
+        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了
 
     while(!chatmessage.equals("Q")) {
 
-        FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "T");
+        FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "TEXT");
         ctx.writeAndFlush(friendChatmsg2);
 
         try {
