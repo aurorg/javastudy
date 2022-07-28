@@ -82,18 +82,17 @@ public class SPassFriendApplyHandler extends SimpleChannelInboundHandler<Addfrie
                     ps.setInt(4, friendid2);
                     ps.executeUpdate();
 
-                    //更新friendlist表中是否是好友关系这一栏
-                    //先更新消息表中的信息
-                    String sql2 = " update friendlist set isfriend =1  where ((userid=? and friendid=?)  or (friendid=?and userid=?) )";
+                    //将好友信息添加到friendlist中
+                    String sql2 = "insert into friendlist(userid,friendid,isfriend,isshield) value(?,?,?,?)  ";
                     ps = conn.prepareStatement(sql2);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);
-                    ps.setInt(3, userid2);
-                    ps.setInt(4, friendid2);
+                    ps.setInt(3, 1);
+                    ps.setInt(4, 1);
                     ps.executeUpdate();
 
 
-                    message1=new ServerToClientmsg(true,"申请已经通过");
+                    message1=new ServerToClientmsg(true,"申请已经通过,已经添加到您的好友列表中");
 
 //                    Channel channel = ChatHandlerMap.getChannel(friendid2);
 //                    if(channel==null){
