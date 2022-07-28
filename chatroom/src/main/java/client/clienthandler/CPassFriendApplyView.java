@@ -17,7 +17,8 @@ public class CPassFriendApplyView {
         System.out.println("*      根据您的需求进行选择        *");
         System.out.println("*       [1]:同意好友请求         *");
         System.out.println("*       [2]:拒绝好友请求         *");
-        System.out.println("*       [0]:暂时不处理           *");
+        System.out.println("*       [3]:暂时不处理           *");
+        System.out.println("*       [0]:返回好友界面         *");
         System.out.println("*******************************");
 
         int n = input.nextInt();
@@ -26,11 +27,17 @@ public class CPassFriendApplyView {
                 passfriend(ctx);
                 break;
             case 2:
-                unpassfriend(ctx);
+                System.out.println("不通过好友申请成功，接下来给你返回好友界面");
+                new CFriendViewHandler(ctx);
+                break;
+            case 3:
+                System.out.println("暂时不处理就退出啦！");
+                new CFriendViewHandler(ctx);
                 break;
             case 0:
-                System.out.println("暂时不处理就退出啦！");
-                ctx.channel().close();
+                new CFriendViewHandler(ctx);
+                break;
+
             default:
                 System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
                 new CPassFriendApplyView(ctx);
@@ -62,9 +69,7 @@ public class CPassFriendApplyView {
     }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void unpassfriend(ChannelHandlerContext ctx){
-
-    }
+//
 
 
 }

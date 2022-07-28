@@ -74,6 +74,11 @@ public class CFriendViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //1  添加好友
 
+    /**
+     * 暂时是确保对方在线，绑定管道，将申请发给对方，发申请的信息存在message表中，等待对方去查看好友申请
+     * @param ctx
+     */
+
     public void addfriend(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
         int userid1 = input.nextInt();
