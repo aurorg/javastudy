@@ -84,7 +84,7 @@ public class SPassFriendApplyHandler extends SimpleChannelInboundHandler<Addfrie
 
                     //更新friendlist表中是否是好友关系这一栏
                     //先更新消息表中的信息
-                    String sql2 = " update friendlist set isfriend =1  where(userid=? and friendid=?)  or (friendid=?and userid=?)";
+                    String sql2 = " update friendlist set isfriend =1  where ((userid=? and friendid=?)  or (friendid=?and userid=?) )";
                     ps = conn.prepareStatement(sql2);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);
