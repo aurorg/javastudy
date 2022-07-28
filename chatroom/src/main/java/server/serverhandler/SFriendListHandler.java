@@ -64,16 +64,11 @@ public class SFriendListHandler extends SimpleChannelInboundHandler<FriendListms
 
 
             String sql;
-            sql = "SELECT userid,friendid,isfriend,isshield FROM friendlist where userid=?  or friendid=?  )";
+            sql = "SELECT userid,friendid,isfriend,isshield FROM friendlist where (userid=?) or (friendid=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, userid2);
-            int count = ps.executeUpdate();
-            if(count>0){
-                message1=new ServerToClientmsg(true,"查询好友列表成功。");
-            }else{
-                message1=new ServerToClientmsg(false,"你还没有添加过好友哦？？！");
-            }
+            rs=ps.executeQuery();
 
             //传输sql并且返回结果
             //ResultSet rs = stat.executeQuery(sql); //executeQuery(String sql) ：用于向数据发送查询语句
@@ -88,9 +83,9 @@ public class SFriendListHandler extends SimpleChannelInboundHandler<FriendListms
 
                 // 通过字段检索
                 int userid1 =rs.getInt("userid");
-                int friendid1=rs.getInt("friendid1");
-                int isfriend1=rs.getInt("isfriend1");
-                int isshield1=rs.getInt("isshield1");
+                int friendid1=rs.getInt("friendid");
+                int isfriend1=rs.getInt("isfriend");
+                int isshield1=rs.getInt("isshield");
 
                 //输出数据
                 System.out.println("你的账号userid: " + userid1 + " ,好友的账号friendid: " + friendid1 +
