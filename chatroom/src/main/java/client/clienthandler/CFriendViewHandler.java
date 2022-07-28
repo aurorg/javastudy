@@ -144,6 +144,7 @@ public class CFriendViewHandler {
         int friendid1=input.nextInt();
         ShieldFriendmsg shieldFriendmsg=new ShieldFriendmsg(userid1,friendid1);
         ctx.writeAndFlush(shieldFriendmsg);
+
         try{
             synchronized(waitMessage){
                 waitMessage.wait();
