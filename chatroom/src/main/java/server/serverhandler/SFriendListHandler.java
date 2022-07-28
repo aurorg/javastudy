@@ -47,7 +47,7 @@ public class SFriendListHandler extends SimpleChannelInboundHandler<FriendListms
             //接受消息的部分
             int userid2 = friendListmsg.getUserid();
 
-            ServerToClientmsg message1 = null;
+           // ServerToClientmsg message1 = null;
 
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
@@ -103,9 +103,9 @@ public class SFriendListHandler extends SimpleChannelInboundHandler<FriendListms
             }
             //判断之后进行后续选择
             // System.out.println("11111111");
-             message1 = new ServerToClientmsg(true,"好友列表如下：");
+            ServerToClientmsg message1 = new ServerToClientmsg(true,"好友列表如下：");
             // System.out.println("111111112222");
-            message1.setFriendmsglist(friendlist);
+            message1.setFriendlist(friendlist);
             // System.out.println("11111111333333333");
             message1.setMessageType(Message.FriendListmsg);
             // System.out.println("4444444444444444");

@@ -140,12 +140,10 @@ public class CFriendViewHandler {
         }catch (InterruptedException e){
             e.printStackTrace();
         }
-        System.out.println("111111111111");
-        //这里有问题！！！！！！
+
         for (String s1 : friendlist) {
             System.out.println(s1);
         }
-        System.out.println("2222222222222");
 
         System.out.println("您的好友列表入上文所显示。");
         System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");

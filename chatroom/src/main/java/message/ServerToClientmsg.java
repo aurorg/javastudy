@@ -10,6 +10,7 @@ public class ServerToClientmsg extends Message {
     private boolean success;
     private String reason;
     private Map<String, List<String>> informationMap; //暂时的消息
+
     public List<String> friendmsglist;//好友历史消息列表
     public List<String> friendmsglist1;//好友未读消息列表
     public List<String> friendlist;    //好友列表信息
