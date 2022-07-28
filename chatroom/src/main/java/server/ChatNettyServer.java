@@ -90,6 +90,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SPassFriendApplyHandler()); //通过好友申请的
                             ch.pipeline().addLast(new SDeleteFriendHandler());  //删除好友的
                             ch.pipeline().addLast(new SShieldFriendHandler()); //屏蔽好友的
+                            ch.pipeline().addLast(new SFriendListHandler()); //查看好友列表的
                             //.addLast()
                         }
 

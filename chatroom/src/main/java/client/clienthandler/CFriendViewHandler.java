@@ -130,8 +130,12 @@ public class CFriendViewHandler {
     public void friendlist(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
         int userid1 = input.nextInt();
-        FriendListmsg friendListmsg = new FriendListmsg();
+        FriendListmsg friendListmsg = new FriendListmsg(userid1);
         ctx.writeAndFlush(friendListmsg);
+
+        for (String s1 : friendlist) {
+            System.out.println(s1);
+        }
 
         try{
             synchronized(waitMessage){
@@ -141,6 +145,7 @@ public class CFriendViewHandler {
             e.printStackTrace();
         }
 
+        System.out.println("您的好友列表入上文所显示。");
         System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
         new CFriendViewHandler(ctx);
 

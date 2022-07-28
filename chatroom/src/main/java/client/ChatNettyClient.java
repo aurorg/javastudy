@@ -27,6 +27,7 @@ public class ChatNettyClient {
     public static volatile Map<String, List<String>> informationMap;//暂时
     public static volatile List<String> friendmsglist;//查询好友历史消息列表
     public static volatile List<String> friendmsglist1;//查询好友未读消息列表
+    public static volatile List<String> friendlist;
 
 
     public static void main(String[] args) throws Exception{

@@ -36,6 +36,10 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if (message.getMessageType()==Message.Informationfriendunreadmsg){
                 friendmsglist1=message.friendmsglist1;
             }
+            else if(message.getMessageType()==Message.FriendListmsg){
+                friendlist=message.friendlist;
+            }
+
 
             else {
                 System.out.print("操作成功 " + reason);

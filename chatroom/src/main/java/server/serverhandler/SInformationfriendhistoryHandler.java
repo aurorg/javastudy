@@ -102,7 +102,7 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
 //                System.out.print(" ,发的消息是message: " + message);
               //  System.out.print("\n");
 
-                //明天改，将消息存到list中
+
                 //List<String> messagelist =new ArrayList<>();
                 messagelist.add("发送者sendid: " + sendid1 + " ,接受者receiverid: " + receiver1 +
                         " ,发的消息是message: " + message  +  " ,聊天类型chattype:"+chattype + " ,消息类型message:" + messagetype);
