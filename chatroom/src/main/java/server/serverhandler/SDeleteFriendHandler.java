@@ -67,7 +67,7 @@ public class SDeleteFriendHandler extends SimpleChannelInboundHandler<DeleteFrie
             }else{
                 message1=new ServerToClientmsg(false,"没有这个朋友问什么要删除呢？？！");
             }
-            
+
             ctx.writeAndFlush(message1);
             stat.close();
             conn.close();
