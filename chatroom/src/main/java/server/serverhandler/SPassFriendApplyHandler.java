@@ -4,20 +4,20 @@ import common.ChatHandlerMap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import message.Addfriendmsg;
 import message.FriendChatmsg;
-import message.SendApplyMessage;
 import message.ServerToClientmsg;
 
 import java.sql.*;
 
-public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMessage> {
+public class SPassFriendApplyHandler extends SimpleChannelInboundHandler<Addfriendmsg> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, SendApplyMessage sendApplyMessage) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Addfriendmsg addfriendmsg) throws Exception {
 
         // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
-         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-         final String DB_URL = "jdbc:mysql://localhost:3306/chatroom?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        final String DB_URL = "jdbc:mysql://localhost:3306/chatroom?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
         //数据库用户和密码
         final String USER = "root";
@@ -25,27 +25,24 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
 
 
         //数据的连接对象
-          Connection conn = null;
+        Connection conn = null;
 
         //传输器
-          Statement stat = null;
+        Statement stat = null;
 
         //sql语句的执行结果
-          ResultSet rs = null;
+        ResultSet rs = null;
 
         //记录语句的输入
-          PreparedStatement ps = null;
+        PreparedStatement ps = null;
 
-        //用户输入
-//    static Scanner input = new Scanner(System.in);
         try{
             //打印接受的消息
-            System.out.println("打印消息" +sendApplyMessage );
+            System.out.println("打印消息" + addfriendmsg );
 
             //接收消息的部分
-            int userid2=sendApplyMessage.getUserid();
-            int friendid2=sendApplyMessage.getFriendid();
-            String message=sendApplyMessage.getMessage();
+            int userid2=addfriendmsg.getUserid();
+            int friendid2=addfriendmsg.getFriendid();
 
             ServerToClientmsg message1 = null;
 
@@ -63,7 +60,7 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
             stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
 
             String sql;
-            sql="SELECT userid,friendid,isfriend FROM friendlist where(userid=? and friendid=?)  or (friendid=? and userid=?)";
+            sql="SELECT issuccess FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
@@ -72,28 +69,38 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
             rs = ps.executeQuery();
 
             while(rs.next()){
-                int isfriend1 = rs.getInt("isfriend");
-                if(isfriend1==1) {
-                    message1 = new ServerToClientmsg(false, "嗯哼？！你俩已经是好友了");
-                }else{
-                    String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
+                int issuccess1 = rs.getInt("issuccess");
+                if(issuccess1==4) {
+                    message1 = new ServerToClientmsg(false, "嗯哼？！你已经通过好友申请了");
+                }else if(issuccess1==3){
+                    //先更新消息表中的信息
+                    String sql1 = " update message set issuccess =4  where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
                     ps = conn.prepareStatement(sql1);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);
-                    ps.setString(3,"请求加好友" );
-                    ps.setInt(4, 3);
-                    ps.setString(5,"APPLY");
-                    ps.setString(6,"FRIEND");
+                    ps.setInt(3, userid2);
+                    ps.setInt(4, friendid2);
                     ps.executeUpdate();
 
-                    message1=new ServerToClientmsg(true,"可以添加");
+                    //更新friendlist表中是否是好友关系这一栏
+                    //先更新消息表中的信息
+                    String sql2 = " update friendlist set isfriend =1  where(userid=? and friendid=?)  or (friendid=?and userid=?)";
+                    ps = conn.prepareStatement(sql2);
+                    ps.setInt(1, userid2);
+                    ps.setInt(2, friendid2);
+                    ps.setInt(3, userid2);
+                    ps.setInt(4, friendid2);
+                    ps.executeUpdate();
 
-                    Channel channel = ChatHandlerMap.getChannel(friendid2);
-                    if(channel==null){
-                        channel.writeAndFlush(new FriendChatmsg());
+
+                    message1=new ServerToClientmsg(true,"申请已经通过");
+
+//                    Channel channel = ChatHandlerMap.getChannel(friendid2);
+//                    if(channel==null){
+//                        channel.writeAndFlush(new FriendChatmsg());
                     }
 
-            }
+                }
 
 //            String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
 //            ps = conn.prepareStatement(sql1);
@@ -115,7 +122,7 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
 //            }else{
 //                message1 =new ServerToClientmsg(false,"申请失败啦");
 //
-            }
+
             ctx.writeAndFlush(message1);
             stat.close();
             conn.close();
@@ -143,6 +150,8 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
             }
 
         }
+
+
 
 
 

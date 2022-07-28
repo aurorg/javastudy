@@ -39,6 +39,6 @@ public class Addfriendmsg extends Message{
 
 
     public String toString(){
-        return "userID = "+userid+", FriendId = "+friendid;
+        return "userid = "+userid+", friendid = "+friendid;
     }
 }

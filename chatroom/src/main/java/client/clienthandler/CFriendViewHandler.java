@@ -1,6 +1,5 @@
 package client.clienthandler;
 
-import com.mysql.cj.util.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 import message.FriendChatmsg;
 import message.SendApplyMessage;
@@ -62,7 +61,7 @@ public class CFriendViewHandler {
                 break;
             case 7:
                 //查看好友的申请
-                new CAddFriendView(ctx);
+                new CPassFriendApplyView(ctx);
             case 0:
                 //返回主界面
                 new CMainViewHandler(ctx);

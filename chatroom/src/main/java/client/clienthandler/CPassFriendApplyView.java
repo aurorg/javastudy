@@ -1,14 +1,17 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.Addfriendmsg;
 
 import java.util.Scanner;
 
-public class CAddFriendView {
+import static client.ChatNettyClient.waitMessage;
+
+public class CPassFriendApplyView {
     //用户输入
     static Scanner input = new Scanner(System.in);
 
-    public CAddFriendView(ChannelHandlerContext ctx) {
+    public CPassFriendApplyView(ChannelHandlerContext ctx) {
         System.out.println("*******************************");
         System.out.println("*       欢迎来到添加好友界        *");
         System.out.println("*      根据您的需求进行选择        *");
@@ -30,13 +33,30 @@ public class CAddFriendView {
                 ctx.channel().close();
             default:
                 System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
-                new CAddFriendView(ctx);
-                
+                new CPassFriendApplyView(ctx);
+
         }
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     public void  passfriend(ChannelHandlerContext ctx){
+        System.out.println("请输入您的账号id:");
+        int userid1 =input.nextInt();
+        System.out.println("请输入你需要查看好友申请的好友账号id：");
+        int friendid1 = input.nextInt();
+
+        Addfriendmsg addfriendmsg =new Addfriendmsg(userid1,friendid1);
+        ctx.writeAndFlush(addfriendmsg);
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("申请已经通过，你们已经成为好友啦！");
+//        System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
+//        new CFriendViewHandler(ctx);
 
 
     }
