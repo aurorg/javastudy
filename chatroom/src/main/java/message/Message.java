@@ -33,6 +33,7 @@ public abstract  class Message  implements Serializable {
     public static final int Informationfriendunreadmsg=10; //查看好友未读消息的
     public static final int FriendListmsg=11; //查看好友列表的
 
+    public static final int FriendGetFilemsg=12; //接收文件的
 
 
 
