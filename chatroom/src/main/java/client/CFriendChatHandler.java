@@ -33,27 +33,18 @@ public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             waitMessage.notifyAll();
         }
 
-        if (is1 && friendChatmsg.getMessagetype().equals("FILE")) {
-            isyes = true;
-            System.out.println("好友给你发文件，y:处理文件,n:不处理");
-            new Thread(() -> {
-                while (!check.equalsIgnoreCase("y")) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
+//        if (is1 && friendChatmsg.getMessagetype().equals("FILE")) {
+//           // isyes = true;
+//            System.out.println("好友给你发文件，y:处理文件,n:不处理");
+//
+//
+//                }
 
                // CFriendViewHandler.receiveFile();
 
-                synchronized (waitfile) {
-                    waitfile.notifyAll();
-                }
 
-            }).start();
+
 
         }
     }
-}
+

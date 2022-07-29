@@ -33,9 +33,6 @@ public class ChatNettyClient {
 
 
 
-
-
-
     public static volatile Map<String, List<String>> informationMap;//
 
     public static volatile List<String> friendmsglist;//查询好友历史消息列表

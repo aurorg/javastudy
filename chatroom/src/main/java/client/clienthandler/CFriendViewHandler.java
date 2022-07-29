@@ -257,6 +257,8 @@ public class CFriendViewHandler {
         //ctx.writeAndFlush(friendChatmsg2);
 
         FriendChatmsg friendChatmsg2;
+
+
         //发送文件的情况
         if(chatmessage.equalsIgnoreCase("F")){
 
@@ -266,9 +268,9 @@ public class CFriendViewHandler {
 
             while(!file.exists()||!file.isFile()){
                 if(!file.exists()){
-                    System.out.println("文件不存在，请重新输入需要发送的文件的[绝对路径]");
+                    System.out.println("文件不存在，请重新输入需要发送的文件的绝对路径");
                 }else{
-                    System.out.println("不是文件，请重新输入需要发送的文件的[绝对路径]");
+                    System.out.println("不是文件，请重新输入需要发送的文件的绝对路径");
                 }
                 file=new File(input.nextLine());
 
@@ -294,22 +296,15 @@ public class CFriendViewHandler {
        // System.out.println("hahahahah" +chatmessage + "2222222222222");
         //System.out.println(chatmessage.length());
 
-    } else if(chatmessage.equalsIgnoreCase("Y") && isyes){ //这是另外一个新线程
-            check="y";
-            receiveFile(ctx,friendid1,userid1);
-            synchronized (waitfile){
-                try{
-                    waitfile.wait();
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-
-                check="n";
-            }
-
         }
-        else{
 
+        //接收文件的情况
+        else if(chatmessage.equalsIgnoreCase("Y")){
+            receiveFile(ctx,friendid1,userid1);
+        }
+
+        //发送文本消息
+        else{
             friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "TEXT");
             ctx.writeAndFlush(friendChatmsg2);
             try{
@@ -339,18 +334,20 @@ public class CFriendViewHandler {
     public static void receiveFile(ChannelHandlerContext ctx,int friendid,int userid){
         System.out.println("*********************");
         System.out.println("*你的好友给你发了一个文件*");
-        System.out.println("*******[T]:接受*******");
-        System.out.println("*******[F]:拒绝*******");
-        System.out.println("*******[P]:不处理******");
+        System.out.println("*******[Y]:接受*******");
+        System.out.println("*******[N]:拒绝*******");
+        System.out.println("*******[S]:不处理******");
         System.out.println("*********************");
 
         String choice=input.nextLine();
-        while(!choice.equalsIgnoreCase("T")&&!choice.equalsIgnoreCase("F")&&!choice.equalsIgnoreCase("P")){
+        while(!choice.equalsIgnoreCase("Y")&&!choice.equalsIgnoreCase("N")&&!choice.equalsIgnoreCase("S")){
             System.out.println("输入不规范，请重新输入");
             choice=input.nextLine();
         }
-        if(choice.equalsIgnoreCase("T")){
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid);
+
+        //接收文件的情况
+        if(choice.equalsIgnoreCase("Y")){
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"【接收文件消息】");
             ctx.writeAndFlush(friendGetFilemsg);
             System.out.println("1111111111111111111");
             try{
@@ -361,8 +358,11 @@ public class CFriendViewHandler {
                 e.printStackTrace();
             }
             System.out.println("222222222222222");
-        }else if(choice.equalsIgnoreCase("F")){
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid);
+        }
+
+        //不接收文件的情况
+        else if(choice.equalsIgnoreCase("N")){
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"【拒绝文件消息】");
             friendGetFilemsg.setRefuse(true);
             ctx.writeAndFlush(friendGetFilemsg);
             System.out.println("3333333333333333");
@@ -374,6 +374,8 @@ public class CFriendViewHandler {
                 e.printStackTrace();
             }
         }
+
+        //忽略，返回界面
         else{
             System.out.println("暂不处理就返回好友界面");
             new CFriendViewHandler(ctx);
