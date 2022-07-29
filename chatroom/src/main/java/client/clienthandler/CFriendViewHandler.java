@@ -275,7 +275,6 @@ public class CFriendViewHandler {
         }
             friendChatmsg2 = new FriendChatmsg(userid1, friendid1, file, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
-            ctx.writeAndFlush(friendChatmsg2);
 
         try {
             synchronized (waitMessage) {
