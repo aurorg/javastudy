@@ -225,6 +225,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             // ResultSet rs2 = stat.executeQuery(sql1);
         }
 
+        
         /**
          *
          * 【我的id:2,好友id：23】：是好友，没有屏蔽好友，对方不在线
