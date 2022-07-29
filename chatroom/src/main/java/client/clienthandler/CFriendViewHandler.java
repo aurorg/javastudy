@@ -375,6 +375,10 @@ public class CFriendViewHandler {
                 e.printStackTrace();
             }
         }
+        else{
+            System.out.println("暂不处理就返回好友界面");
+            new CFriendViewHandler(ctx);
+        }
     }
 
 }
