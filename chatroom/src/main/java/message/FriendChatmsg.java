@@ -1,5 +1,7 @@
 package message;
 
+import java.io.File;
+
 public class FriendChatmsg  extends Message{
 
     private int userid;//用户id
@@ -15,10 +17,23 @@ public class FriendChatmsg  extends Message{
     //Group好友消息,Friend群消息;chattype一般情况下为好友消息
     private String chattype;
 
+    private File file;
+
+    private int count =1;//未读消息的条数
+
+
+
     private int Group=0;
     private int cishu;//记录发消息是第几次
 
     public  FriendChatmsg(){}
+
+    public FriendChatmsg(int userid,int friendid,File file,String messagetype){
+        this.userid=userid;
+        this.friendid=friendid;
+        this.file=file;
+        this.messagetype=messagetype;
+    }
 
     public  FriendChatmsg(int userid,int friendid,String message,String messagetype){
         this.userid=userid;
@@ -28,6 +43,17 @@ public class FriendChatmsg  extends Message{
 
     }
 
+    public void setCount(int count){
+        this.count=count;
+    }
+
+    public void setMessage(String message){
+        this.message=message;
+    }
+
+    public void setFile(File file){
+        this.file=file;
+    }
 
     public void setChattype(String chattype) {
         this.chattype = chattype;
@@ -62,6 +88,15 @@ public class FriendChatmsg  extends Message{
     public int getUserid(){
         return this.userid;
     }
+
+    public File getFile(){
+        return file;
+    }
+
+    public int getCount(){
+        return count;
+    }
+
 //    public int getCishu(){
 //        return this.cishu;
 //    }

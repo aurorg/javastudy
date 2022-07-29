@@ -19,12 +19,24 @@ import java.util.Map;
 public class ChatNettyClient {
 
     public static final Object waitMessage=new Object();//服务端消息返回时，notify线程去通知
+    public static final Object waitfile=new Object();
 
     public static volatile int waitSuccess=0;//1表示消息成功、0表示消息失败
 
-    public static volatile boolean unRead=false;//默认没有未读消息
+    public static volatile int unRead=0;//默认没有未读消息
     public static volatile boolean is1=false; //用来判断好友发消息的
-    public static volatile Map<String, List<String>> informationMap;//暂时
+    public static volatile int talker=0; //聊天的人（发文件用）
+    public static volatile String check="NO";
+    public static volatile boolean isyes=false;
+    public static volatile String havefile="";
+
+
+
+
+
+
+
+    public static volatile Map<String, List<String>> informationMap;//
 
     public static volatile List<String> friendmsglist;//查询好友历史消息列表
     public static volatile List<String> friendmsglist1;//查询好友未读消息列表

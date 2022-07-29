@@ -4,9 +4,11 @@ import io.netty.channel.ChannelHandlerContext;
 import jdk.swing.interop.SwingInterOpUtils;
 import message.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 import static client.ChatNettyClient.*;
+
 
 public class CFriendViewHandler {
     //用户输入
@@ -25,6 +27,9 @@ public class CFriendViewHandler {
         System.out.println("*         [6]:查看好友申请       *");
         System.out.println("*         [0]:返回主界面         *");
         System.out.println("*******************************");
+        if(unRead>0){
+            System.out.println("有未读的消息");
+        }
 
         //暂时先不处理
 //        String n1 = input.nextLine();
@@ -193,6 +198,28 @@ public class CFriendViewHandler {
 
         System.out.println("请输入你需要发消息的好友id:");
         int friendid1 = input.nextInt();
+        Informationfriendhistorymsg message1 =new Informationfriendhistorymsg(userid1,friendid1);
+        ctx.writeAndFlush(message1);
+
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        if(waitSuccess==1){
+            talker=friendid1;
+            int count=0;
+            for(String s:friendlist){
+                System.out.println(s);
+            }
+            if(havefile.charAt(count)=='1'){
+                CFriendViewHandler.receiverFile(s,input,ctx,friendid1);
+            }
+            count++;
+        }
 //
 //        Informationmsg message1 = new Informationmsg(userid1,friendid1);
 //        ctx.writeAndFlush(message1);
@@ -213,7 +240,8 @@ public class CFriendViewHandler {
          * 让服务端建立一个channel，用map将（用户和对应的channel绑起来），然后开始发消息
          */
         //System.out.println("\n");
-        System.out.println("[输入Q，返回主界面]：");
+        //输入F表示发文件
+        System.out.println("[输入Q，返回主界面(F文件）]：");
         is1=true;
         String chatmessage=input.next(); //输入聊天消息的
 
@@ -221,8 +249,26 @@ public class CFriendViewHandler {
 
     while(!chatmessage.equals("Q")) {
 
-        FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "TEXT");
-        ctx.writeAndFlush(friendChatmsg2);
+        //FriendChatmsg friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "TEXT");
+        //ctx.writeAndFlush(friendChatmsg2);
+        FriendChatmsg friendChatmsg2;
+        //发送文件的情况
+        if(chatmessage.equalsIgnoreCase("F")){
+            File file;
+            System.out.println("请输入需要发送的文件的绝对路径：");
+            file=new File(input.nextLine());
+
+            while(!file.exists()  || !file.isFile()){
+                if(!file.exists()){
+                    System.out.println("文件不存在，请重新输入需要发送的文件的[绝对路径]");
+                }else{
+                    System.out.println("不是文件，请重新输入需要发送的文件的[绝对路径]");
+                }
+                file=new File(input.nextLine());
+
+        }
+            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "FILE");
+            ctx.writeAndFlush(friendChatmsg2);
 
         try {
             synchronized (waitMessage) {
@@ -231,22 +277,54 @@ public class CFriendViewHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//
+//        System.out.println("[输入Q,返回主界面]：");
+//
+//        chatmessage = input.nextLine();
 
-        System.out.println("[输入Q,返回主界面]：");
+       // System.out.println("hahahahah" +chatmessage + "2222222222222");
+        //System.out.println(chatmessage.length());
+    }else if(chatmessage.equalsIgnoreCase("Y") && isyes){
+            check="y";
+            synchronized (waitfile){
+                try{
+                    waitfile.wait();
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
 
-        chatmessage = input.nextLine();
-        System.out.println("hahahahah" +chatmessage + "dayhigfgas");
-        System.out.println(chatmessage.length());
+                check="n";
+            }
+
+        }else{
+
+            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "TEXT");
+            ctx.writeAndFlush(friendChatmsg2);
+            try{
+                synchronized(waitMessage){
+                    waitMessage.wait();
+                }
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            if(waitSuccess==0){
+                new CFriendViewHandler(ctx);
+            }
+
+        }
+        System.out.println("[输入Q，返回主界面(F文件）]：");
+        chatmessage=input.next();
     }
 
     if(chatmessage.equals("Q")) {
-
         is1 = false;
         new CFriendViewHandler(ctx);
+     }
+
     }
 
+    public static void receiverFile(String s,Scanner scanner,ChannelHandlerContext ctx,int friendid){
 
     }
-
 
 }
