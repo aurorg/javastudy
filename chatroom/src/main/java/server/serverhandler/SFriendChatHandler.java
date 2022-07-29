@@ -55,10 +55,11 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         int userid1 = friendChatmsg.getUserid();
         int friendid1 = friendChatmsg.getFriendid();
         String msg1 = friendChatmsg.getMessage();
+        String  messagetype=friendChatmsg.getMessagetype(); //消息的类型FILE 和TEXT
 
 
         ServerToClientmsg message1 = null;
-            ServerToClientmsg message2 = null;
+        ServerToClientmsg message2 = null;
 
 
         //注册JDBC驱动
@@ -167,6 +168,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 //            message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
 //            System.out.println(message1);
 
+
             
             String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
             ps = conn.prepareStatement(sql1);
@@ -174,7 +176,14 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             ps.setInt(2, friendid1);
             ps.setString(3, msg1);
             ps.setInt(4, 1);
-            ps.setString(5,"TEXT");
+
+            //消息类型要分情况（文件FILE和文本TEXT）
+            if(messagetype=="TEXT"){
+                ps.setString(5,"TEXT");
+            }else{
+                ps.setString(5,"FILE");
+            }
+
             ps.setString(6,"FRIEND");
             ps.executeUpdate();
 
@@ -198,7 +207,14 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             ps.setInt(2, friendid1);
             ps.setString(3,msg1 );
             ps.setInt(4, 2);
-            ps.setString(5,"TEXT");
+
+            //消息类型要分情况（文件FILE和文本TEXT）
+            if(messagetype=="TEXT"){
+                ps.setString(5,"TEXT");
+            }else{
+                ps.setString(5,"FILE");
+            }
+
             ps.setString(6,"FRIEND");
             ps.executeUpdate();
 
