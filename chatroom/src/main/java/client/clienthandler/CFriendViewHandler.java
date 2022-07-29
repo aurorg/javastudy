@@ -259,6 +259,7 @@ public class CFriendViewHandler {
         FriendChatmsg friendChatmsg2;
         //发送文件的情况
         if(chatmessage.equalsIgnoreCase("F")){
+
             File file;
             System.out.println("请输入需要发送的文件的绝对路径：");
             file=new File(input.nextLine());
@@ -272,7 +273,7 @@ public class CFriendViewHandler {
                 file=new File(input.nextLine());
 
         }
-            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "FILE");
+            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, file, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
 
         try {
