@@ -58,6 +58,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
 
         ServerToClientmsg message1 = null;
+            ServerToClientmsg message2 = null;
 
 
         //注册JDBC驱动
@@ -158,8 +159,10 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
             Channel channel;
             channel= ChatHandlerMap.getChannel(friendid1);
-
             channel.writeAndFlush(friendChatmsg);
+
+           message2 = new ServerToClientmsg(true, "");
+           ctx.writeAndFlush(message2);
 
 //            message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
 //            System.out.println(message1);

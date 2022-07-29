@@ -126,9 +126,6 @@ public class CInformationViewHandler {
         new CInformationViewHandler(ctx);
 
 
-
-
-
     }
 
 

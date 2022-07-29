@@ -38,15 +38,15 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 //            }
 
             //System.out.println(333);
-            unRead=message.getReadcount();
-            havefile=message.getHavefile();
+//            unRead=message.getReadcount();
+//            havefile=message.getHavefile();
 
             if(message.getMessageType()==Message.Informationfriendhistorymsg){
                 friendmsglist=message.friendmsglist;
             }
             else if(message.getMessageType()==Message.FriendGetFilemsg){
                 System.out.println("接受成功，输入目录保存");
-                receiveFile(message.getFile());
+                receiveFile(message.getFile());//调用将文件保存到本地目录的方法
                 System.out.println("已经保存啦！");
             }
 
@@ -56,8 +56,6 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if(message.getMessageType()==Message.FriendListmsg){
                 friendlist=message.friendlist;
             }
-
-
             else {
                 System.out.print("操作成功 " + reason);
                 waitSuccess = 1;
