@@ -27,6 +27,6 @@ public class CFriendGetMessageHandler extends SimpleChannelInboundHandler<Friend
             waitMessage.notifyAll();
         }
 
-        
+
     }
 }
