@@ -7,6 +7,11 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import message.FriendChatmsg;
 import message.ServerToClientmsg;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.sql.*;
 
 public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatmsg> {
@@ -56,6 +61,8 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         int friendid1 = friendChatmsg.getFriendid();
         String msg1 = friendChatmsg.getMessage();
         String  messagetype=friendChatmsg.getMessagetype(); //消息的类型FILE 和TEXT
+
+        File file=friendChatmsg.getFile();
 
 
         ServerToClientmsg message1 = null;
@@ -162,7 +169,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             channel= ChatHandlerMap.getChannel(friendid1);
             channel.writeAndFlush(friendChatmsg);
 
-           message2 = new ServerToClientmsg(true, "");
+           message2 = new ServerToClientmsg(true, ""); //唤醒线程
            ctx.writeAndFlush(message2);
 
 //            message1 = new ServerToClientmsg(true, "您和您的好友可以开始聊天啦");
@@ -174,14 +181,42 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             ps = conn.prepareStatement(sql1);
             ps.setInt(1, userid1);
             ps.setInt(2, friendid1);
-            ps.setString(3, msg1);
-            ps.setInt(4, 1);
+           // ps.setInt(4, 1);
+
 
             //消息类型要分情况（文件FILE和文本TEXT）
-            if(messagetype=="TEXT"){
+            if(messagetype=="TEXT" || file==null){
+                ps.setString(3, msg1);
+                ps.setInt(4, 1);
                 ps.setString(5,"TEXT");
-            }else{
+            }else {
+                String addFile;
+                addFile="/home/shizhanli/szl/" + file.getName();
+
+                //测试
+                System.out.println("测试"+addFile);
+
+                ps.setString(3,addFile); //获取文件的绝对路径
+
+                //将文件读到程序，然后写入本地存着
+
+                File tempFile=new File(addFile);
+                tempFile.createNewFile();
+                FileChannel readChannel= new FileInputStream(file).getChannel();
+                FileChannel writeChannel= new FileOutputStream(tempFile).getChannel();
+                ByteBuffer buf=ByteBuffer.allocate(1024);
+                while(readChannel.read(buf)!=-1){
+                    buf.flip();
+                    writeChannel.write(buf);
+                    buf.clear();
+                }
+
+                readChannel.close();
+                writeChannel.close();
+
+                ps.setInt(4, 1);
                 ps.setString(5,"FILE");
+
             }
 
             ps.setString(6,"FRIEND");
@@ -205,14 +240,47 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             ps = conn.prepareStatement(sql1);
             ps.setInt(1, userid1);
             ps.setInt(2, friendid1);
-            ps.setString(3,msg1 );
-            ps.setInt(4, 2);
+            //ps.setString(3,msg1 );
+            //ps.setInt(4, 2);
+
+
+            String addFile= file.getAbsolutePath();
 
             //消息类型要分情况（文件FILE和文本TEXT）
-            if(messagetype=="TEXT"){
+            if(messagetype=="TEXT" || file==null){
+                ps.setString(3, msg1);
+                ps.setInt(4, 2);
                 ps.setString(5,"TEXT");
             }else{
+
+
+                addFile="/home/shizhanli/szl/" + file.getName();
+
+                //测试
+                System.out.println("测试"+addFile);
+
+                ps.setString(3,addFile); //获取文件的绝对路径
+
+                //将文件读到程序，然后写入本地存着
+
+                File tempFile=new File(addFile);
+                tempFile.createNewFile();
+                FileChannel readChannel= new FileInputStream(file).getChannel();
+                FileChannel writeChannel= new FileOutputStream(tempFile).getChannel();
+                ByteBuffer buf=ByteBuffer.allocate(1024);
+                while(readChannel.read(buf)!=-1){
+                    buf.flip();
+                    writeChannel.write(buf);
+                    buf.clear();
+                }
+
+                readChannel.close();
+                writeChannel.close();
+
+
+                ps.setInt(4, 2);
                 ps.setString(5,"FILE");
+
             }
 
             ps.setString(6,"FRIEND");
