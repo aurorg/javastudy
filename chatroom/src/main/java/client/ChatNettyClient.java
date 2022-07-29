@@ -26,7 +26,7 @@ public class ChatNettyClient {
     public static volatile int unRead=0;//默认没有未读消息
     public static volatile boolean is1=false; //用来判断好友发消息的
     public static volatile int talker=0; //聊天的人（发文件用）
-    public static volatile String check="NO";
+    public static volatile String check="n";//no
     public static volatile boolean isyes=false;
     public static volatile String havefile="";
 

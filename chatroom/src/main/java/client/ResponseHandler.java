@@ -28,7 +28,11 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 //                informationMap=message.getInformationMap();
 //
 //            }
-//            else if(message.getMessageType()==)
+
+            //System.out.println(333);
+            unRead=message.
+
+
             if(message.getMessageType()==Message.Informationfriendhistorymsg){
                 friendmsglist=message.friendmsglist;
             }

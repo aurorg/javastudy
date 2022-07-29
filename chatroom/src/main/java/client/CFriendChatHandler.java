@@ -49,7 +49,7 @@ public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
                         count--;
                     }
                     if(count >0){
-                        CFriendViewHandler.receiveFile(shu,new Scanner(System.in),ctx,friendChatmsg.getUserid());
+                        CFriendViewHandler.receiverFile(shu,new Scanner(System.in),ctx,friendChatmsg.getUserid());
                         synchronized (waitfile){
                             waitfile.notifyAll();
                         }

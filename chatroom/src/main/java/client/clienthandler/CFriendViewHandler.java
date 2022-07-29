@@ -212,9 +212,11 @@ public class CFriendViewHandler {
         if(waitSuccess==1){
             talker=friendid1;
             int count=0;
+
             for(String s:friendlist){
                 System.out.println(s);
             }
+
             if(havefile.charAt(count)=='1'){
                 CFriendViewHandler.receiverFile(s,input,ctx,friendid1);
             }

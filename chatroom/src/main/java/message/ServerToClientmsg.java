@@ -2,6 +2,7 @@ package message;
 
 import message.Message;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,10 @@ public class ServerToClientmsg extends Message {
     public List<String> friendmsglist;//好友历史消息列表
     public List<String> friendmsglist1;//好友未读消息列表
     public List<String> friendlist;    //好友列表信息
+
+    public String havefile="";
+    public File file; //用来接受file
+    private int readcount=0; //读消息的条数
 
 
     private int ServerToClientmsg;
@@ -44,6 +49,31 @@ public class ServerToClientmsg extends Message {
     public int getMessageType() {
         return this.MessageType;
     }
+
+    public void setHavefile(String havefile){
+        this.havefile=havefile;
+    }
+
+    public String getHavefile(){
+        return havefile;
+    }
+
+    public void setFile(File file){
+        this.file=file;
+    }
+
+    public File getFile(){
+        return file;
+    }
+
+    public void setReadcount(int readcount){
+        this.readcount=readcount;
+    }
+
+    public  int getReadcount(){
+        return readcount;
+    }
+
 
 
     public void setInformationMap(Map<String,List<String>> informationMap){
