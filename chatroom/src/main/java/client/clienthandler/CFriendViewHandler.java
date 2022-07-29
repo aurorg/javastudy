@@ -275,6 +275,7 @@ public class CFriendViewHandler {
         }
             friendChatmsg2 = new FriendChatmsg(userid1, friendid1, file, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
+            ctx.writeAndFlush(friendChatmsg2);
 
         try {
             synchronized (waitMessage) {
@@ -293,20 +294,21 @@ public class CFriendViewHandler {
 
        // System.out.println("hahahahah" +chatmessage + "2222222222222");
         //System.out.println(chatmessage.length());
-    }
-//        else if(chatmessage.equalsIgnoreCase("Y") && isyes){
-//            check="y";
-//            synchronized (waitfile){
-//                try{
-//                    waitfile.wait();
-//                }catch(InterruptedException e){
-//                    e.printStackTrace();
-//                }
-//
-//                check="n";
-//            }
-//
-//        }
+
+    } else if(chatmessage.equalsIgnoreCase("Y") && isyes){ //这是另外一个新线程
+            check="y";
+            receiveFile(ctx,friendid1,userid1);
+            synchronized (waitfile){
+                try{
+                    waitfile.wait();
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+
+                check="n";
+            }
+
+        }
         else{
 
             friendChatmsg2 = new FriendChatmsg(userid1, friendid1, chatmessage, "TEXT");
@@ -334,8 +336,45 @@ public class CFriendViewHandler {
 
     }
 
-//    public static void receiverFile(String s,Scanner scanner,ChannelHandlerContext ctx,int friendid){
-//
-//    }
+    //接收文件的方法
+    public static void receiveFile(ChannelHandlerContext ctx,int friendid,int userid){
+        System.out.println("*********************");
+        System.out.println("*你的好友给你发了一个文件*");
+        System.out.println("*******[T]:接受*******");
+        System.out.println("*******[F]:拒绝*******");
+        System.out.println("*******[P]:不处理******");
+        System.out.println("*********************");
+
+        String choice=input.nextLine();
+        while(!choice.equalsIgnoreCase("T")&&!choice.equalsIgnoreCase("F")&&!choice.equalsIgnoreCase("P")){
+            System.out.println("输入不规范，请重新输入");
+            choice=input.nextLine();
+        }
+        if(choice.equalsIgnoreCase("T")){
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid);
+            ctx.writeAndFlush(friendGetFilemsg);
+            System.out.println("1111111111111111111");
+            try{
+                synchronized(waitMessage){
+                    waitMessage.wait();
+                }
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            System.out.println("222222222222222");
+        }else if(choice.equalsIgnoreCase("F")){
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid);
+            friendGetFilemsg.setRefuse(true);
+            ctx.writeAndFlush(friendGetFilemsg);
+            System.out.println("3333333333333333");
+            try{
+                synchronized(waitMessage){
+                    waitMessage.wait();
+                }
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

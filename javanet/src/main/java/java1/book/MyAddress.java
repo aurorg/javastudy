@@ -10,6 +10,7 @@ public class MyAddress {
         try {
             InetAddress address = InetAddress.getLocalHost();
             System.out.println(address);
+            System.out.println(1);
         } catch (UnknownHostException e) {
             System.out.println("Could not find this computer's address!");
         }
