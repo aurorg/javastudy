@@ -33,49 +33,49 @@ public class CGroupOneViewHandler {
         int n =input.nextInt();
         switch(n){
             case 1:
-                case1(ctx);
+                onecase1(ctx);
                 break;
             case 2:
-                case2(ctx);
+                onecase2(ctx);
                 break;
             case 3:
-                case3(ctx);
+                onecase3(ctx);
                 break;
             case 4:
-                case4(ctx);
+                onecase4(ctx);
                 break;
             case 5:
-                case5(ctx);
+                onecase5(ctx);
                 break;
             case 6:
-                case6(ctx);
+                onecase6(ctx);
                 break;
             case 7:
-                case7(ctx);
+                onecase7(ctx);
                 break;
             case 8:
-                case8(ctx);
+                onecase8(ctx);
                 break;
             case 9:
-                case9(ctx);
+                onecase9(ctx);
                 break;
             case 10:
-                case10(ctx);
+                onecase10(ctx);
                 break;
             case 11:
-                case11(ctx);
+                onecase11(ctx);
                 break;
             case 12:
-                case12(ctx);
+                onecase12(ctx);
                 break;
             case 13:
-                case13(ctx);
+                onecase13(ctx);
                 break;
             case 14:
-                case14(ctx);
+                onecase14(ctx);
                 break;
             case 15:
-                case15(ctx);
+                onecase15(ctx);
                 break;
             case 0:
                 //返回上一个界面
@@ -89,74 +89,74 @@ public class CGroupOneViewHandler {
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void case1(ChannelHandlerContext ctx){
+    public void onecase1(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void case2(ChannelHandlerContext ctx){
+    public void onecase2(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-   public void case3(ChannelHandlerContext ctx){
+   public void onecase3(ChannelHandlerContext ctx){
 
   }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-   public void case4(ChannelHandlerContext ctx){
+   public void onecase4(ChannelHandlerContext ctx){
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-   public void case5(ChannelHandlerContext ctx){
+   public void onecase5(ChannelHandlerContext ctx){
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case6(ChannelHandlerContext ctx){
+    public void onecase6(ChannelHandlerContext ctx){
 
     }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case7(ChannelHandlerContext ctx){
+    public void onecase7(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case8(ChannelHandlerContext ctx){
+    public void onecase8(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case9(ChannelHandlerContext ctx){
+    public void onecase9(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case10(ChannelHandlerContext ctx){
+    public void onecase10(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case11(ChannelHandlerContext ctx){
+    public void onecase11(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case12(ChannelHandlerContext ctx){
+    public void onecase12(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case13(ChannelHandlerContext ctx){
+    public void onecase13(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case14(ChannelHandlerContext ctx){
+    public void onecase14(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-    public void case15(ChannelHandlerContext ctx){
+    public void onecase15(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
