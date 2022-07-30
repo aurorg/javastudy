@@ -85,8 +85,11 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
 
                     message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
 
+
+                    //这里要不要加下面的
 //                    File file=new File();
 //                    message1.setFile(file);
+
                     message1.setMessageType(Message.FriendGetFilemsg);
 
 //                    Channel channel = ChatHandlerMap.getChannel(friendid2);
