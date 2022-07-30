@@ -3,15 +3,17 @@ package server.serverhandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.FriendGetFilemsg;
+import message.Message;
 import message.ServerToClientmsg;
 
+import java.io.File;
 import java.sql.*;
 
 public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGetFilemsg> {
 
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, FriendGetFilemsg friendGetFilemsg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, FriendGetFilemsg friendGetFilemsg) throws Exception {
         // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         final String DB_URL = "jdbc:mysql://localhost:3306/chatroom?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
@@ -68,11 +70,12 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
 
             while(rs.next()){
                 int issuccess1 = rs.getInt("issuccess");
-                if(issuccess1==4) {
-                    message1 = new ServerToClientmsg(false, "嗯哼？！你已经通过好友申请了");
-                }else if(issuccess1==3){
+                String message=rs.getString("message");
+                if(issuccess1==6) {
+                    message1 = new ServerToClientmsg(false, "嗯哼？！你已经保存过该文件啦");
+                }else if(issuccess1==5 && message.equals("接收文件消息")){
                     //先更新消息表中的信息
-                    String sql1 = " update message set issuccess =4  where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
+                    String sql1 = " update message set issuccess =5  where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
                     ps = conn.prepareStatement(sql1);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);
@@ -80,45 +83,21 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
                     ps.setInt(4, friendid2);
                     ps.executeUpdate();
 
-                    //将好友信息添加到friendlist中
-                    String sql2 = "insert into friendlist(userid,friendid,isfriend,isshield) value(?,?,?,?)  ";
-                    ps = conn.prepareStatement(sql2);
-                    ps.setInt(1, userid2);
-                    ps.setInt(2, friendid2);
-                    ps.setInt(3, 1);
-                    ps.setInt(4, 1);
-                    ps.executeUpdate();
+                    message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
 
-
-                    message1=new ServerToClientmsg(true,"申请已经通过,已经添加到您的好友列表中");
+//                    File file=new File();
+//                    message1.setFile(file);
+                    message1.setMessageType(Message.FriendGetFilemsg);
 
 //                    Channel channel = ChatHandlerMap.getChannel(friendid2);
 //                    if(channel==null){
 //                        channel.writeAndFlush(new FriendChatmsg());
+                }else{
+                    message1 = new ServerToClientmsg(false, "好的，拒绝接受文件成功！");
                 }
 
             }
 
-//            String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
-//            ps = conn.prepareStatement(sql1);
-//            ps.setInt(1, userid2);
-//            ps.setInt(2, friendid2);
-//            ps.setString(3,"请求加好友" );
-//            ps.setInt(4, 2);
-//            ps.setString(5,"APPLY");
-//            ps.setString(6,"FRIEND");
-//            int row =ps.executeUpdate();
-//            if(row==1){
-//                message1=new ServerToClientmsg(true,"添加成功");
-//
-//                Channel channel = ChatHandlerMap.getChannel(friendid2);
-//                if(channel==null){
-//                    channel.writeAndFlush(new FriendChatmsg());
-//
-//                }
-//            }else{
-//                message1 =new ServerToClientmsg(false,"申请失败啦");
-//
 
             ctx.writeAndFlush(message1);
             stat.close();
