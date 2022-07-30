@@ -30,10 +30,16 @@ public class CGroupViewHandler {
         int n=input.nextInt();
         switch(n){
             case 1:
+                //群主界面
+                new CGroupOneViewHandler(ctx);
                 break;
             case 2:
+                //群管理员界面
+                new CGroupTwoViewHandler(ctx);
                 break;
             case 3:
+                //普通用户界面
+                new CGroupThreeViewHandler(ctx);
                 break;
             case 0:
                 System.out.println("接下来即将为你返回主界面！");
