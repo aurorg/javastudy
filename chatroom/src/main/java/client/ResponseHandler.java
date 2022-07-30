@@ -56,6 +56,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if(message.getMessageType()==Message.FriendListmsg){
                 friendlist=message.friendlist;
             }
+
             else {
                 System.out.print("操作成功 " + reason);
                 waitSuccess = 1;

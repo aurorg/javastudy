@@ -130,8 +130,6 @@ public class CDengLuViewHandler {
 
                 System.out.println("接下来，您可以根据需求选择功能哦！");
 
-
-
                 //调用主要的功能函数
                 new CMainViewHandler(ctx);
                 //下一步
