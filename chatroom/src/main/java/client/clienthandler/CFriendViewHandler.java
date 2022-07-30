@@ -264,7 +264,7 @@ public class CFriendViewHandler {
 
             File file;
             System.out.println("请输入需要发送的文件的绝对路径：");
-            file=new File(input.nextLine());
+            file=new File(input.next());
 
             while(!file.exists()||!file.isFile()){
                 if(!file.exists()){
@@ -341,7 +341,7 @@ public class CFriendViewHandler {
 
         String choice=input.nextLine();
         while(!choice.equalsIgnoreCase("Y")&&!choice.equalsIgnoreCase("N")&&!choice.equalsIgnoreCase("S")){
-            System.out.println("输入不规范，请重新输入");
+            System.out.println("请输入");
             choice=input.nextLine();
         }
 
@@ -362,17 +362,19 @@ public class CFriendViewHandler {
 
         //不接收文件的情况
         else if(choice.equalsIgnoreCase("N")){
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"拒绝文件接受消息");
-            friendGetFilemsg.setRefuse(true);
-            ctx.writeAndFlush(friendGetFilemsg);
-            System.out.println("3333333333333333");
-            try{
-                synchronized(waitMessage){
-                    waitMessage.wait();
-                }
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
+//            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"拒绝文件接受消息");
+//            friendGetFilemsg.setRefuse(true);
+//            ctx.writeAndFlush(friendGetFilemsg);
+//            System.out.println("3333333333333333");
+//            try{
+//                synchronized(waitMessage){
+//                    waitMessage.wait();
+//                }
+//            }catch (InterruptedException e){
+//                e.printStackTrace();
+//            }
+            System.out.println("已经给您拒绝，接下来返回主界面");
+            new CFriendViewHandler(ctx);
         }
 
         //忽略文件，返回界面

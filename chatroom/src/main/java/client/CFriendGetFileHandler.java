@@ -7,7 +7,7 @@ import message.FriendGetFilemsg;
 import static client.ChatNettyClient.*;
 import static client.ChatNettyClient.unRead;
 
-public class CFriendGetMessageHandler extends SimpleChannelInboundHandler<FriendGetFilemsg> {
+public class CFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGetFilemsg> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, FriendGetFilemsg friendGetFilemsg) throws Exception {
         if(is1){
@@ -20,9 +20,10 @@ public class CFriendGetMessageHandler extends SimpleChannelInboundHandler<Friend
         }
 
         if (!unRead) {
-            System.out.println("您还有未读文件消息");
+            System.out.println("您还有未读消息");
             unRead = true;// 没有未读文件信息啦
         }
+
         synchronized (waitMessage) {
             waitMessage.notifyAll();
         }

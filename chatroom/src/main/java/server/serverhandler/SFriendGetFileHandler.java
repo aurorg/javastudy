@@ -37,7 +37,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
 
         try{
             //打印接受的消息
-            System.out.println("打印消息" + friendGetFilemsg);
+            System.out.println("接收文件打印消息" + friendGetFilemsg);
 
             //接收消息的部分
             int userid2=friendGetFilemsg.getUserid();
@@ -60,7 +60,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
 
             String sql;
-            sql="SELECT issuccess FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
+            sql="SELECT issuccess,message FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
@@ -95,9 +95,11 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
 //                    Channel channel = ChatHandlerMap.getChannel(friendid2);
 //                    if(channel==null){
 //                        channel.writeAndFlush(new FriendChatmsg());
-                }else{
-                    message1 = new ServerToClientmsg(false, "好的，拒绝接受文件成功！");
                 }
+
+//                else{
+//                    message1 = new ServerToClientmsg(false, "好的，拒绝接受文件成功！");
+//                }
 
             }
 

@@ -191,10 +191,11 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
                 ps.setString(5,"TEXT");
             }else {
                 String addFile;
-                addFile="/home/shizhanli/szl/" + file.getName();
+                addFile="/home/shizhanli/" + file.getName();
 
                 //测试
                 System.out.println("测试"+addFile);
+
 
                 ps.setString(3,addFile); //获取文件的绝对路径
 
@@ -216,6 +217,10 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
                 ps.setInt(4, 5);
                 ps.setString(5,"FILE");
+
+                message2 = new ServerToClientmsg(true, ""); //唤醒线程
+                ctx.writeAndFlush(message2);
+
 
             }
 
