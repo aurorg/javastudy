@@ -7,9 +7,10 @@ import java.util.Scanner;
 public class CGroupOneViewHandler {
     //用户输入
     static Scanner input = new Scanner(System.in);
+
     public CGroupOneViewHandler(ChannelHandlerContext ctx){
         System.out.println("*******************************");
-        System.out.println("*        欢迎来到好友界面        *");
+        System.out.println("*        欢迎来到群主界面        *");
         System.out.println("*       根据您的需求进行选择      *");
         System.out.println("*         [1]:创建群           *");
         System.out.println("*         [2]:解散群           *");
@@ -35,32 +36,46 @@ public class CGroupOneViewHandler {
                 case1(ctx);
                 break;
             case 2:
+                case2(ctx);
                 break;
             case 3:
+                case3(ctx);
                 break;
             case 4:
+                case4(ctx);
                 break;
             case 5:
+                case5(ctx);
                 break;
             case 6:
+                case6(ctx);
                 break;
             case 7:
+                case7(ctx);
                 break;
             case 8:
+                case8(ctx);
                 break;
             case 9:
+                case9(ctx);
                 break;
             case 10:
+                case10(ctx);
                 break;
             case 11:
+                case11(ctx);
                 break;
             case 12:
+                case12(ctx);
                 break;
             case 13:
+                case13(ctx);
                 break;
             case 14:
+                case14(ctx);
                 break;
             case 15:
+                case15(ctx);
                 break;
             case 0:
                 //返回上一个界面
@@ -95,24 +110,55 @@ public class CGroupOneViewHandler {
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    public void case6(ChannelHandlerContext ctx){
+
+    }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case7(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case8(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case9(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case10(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case11(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case12(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case13(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    public void case14(ChannelHandlerContext ctx){
+
+    }
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    public void case15(ChannelHandlerContext ctx){
+
+    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
