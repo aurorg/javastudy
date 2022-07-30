@@ -46,7 +46,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             }
             else if(message.getMessageType()==Message.FriendGetFilemsg){
                 System.out.println("接受成功，输入目录保存");
-                receiveFile(message.getFile());//调用将文件保存到本地目录的方法
+                saveFile(message.getFile());//调用将文件保存到本地目录的方法
                 System.out.println("已经保存啦！");
             }
 
@@ -74,7 +74,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
     }
 
     //用来接受文件的时候的输入存到本地的路径
-    public void receiveFile(File file){
+    public void saveFile(File file){
         try{
 
             Scanner scanner=new Scanner(System.in);

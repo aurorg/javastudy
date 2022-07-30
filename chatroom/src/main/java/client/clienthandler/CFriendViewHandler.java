@@ -347,7 +347,7 @@ public class CFriendViewHandler {
 
         //接收文件的情况
         if(choice.equalsIgnoreCase("Y")){
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"【接收文件消息】");
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"接收文件消息");
             ctx.writeAndFlush(friendGetFilemsg);
             System.out.println("1111111111111111111");
             try{
@@ -362,7 +362,7 @@ public class CFriendViewHandler {
 
         //不接收文件的情况
         else if(choice.equalsIgnoreCase("N")){
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"【拒绝文件消息】");
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"拒绝文件接受消息");
             friendGetFilemsg.setRefuse(true);
             ctx.writeAndFlush(friendGetFilemsg);
             System.out.println("3333333333333333");
@@ -375,7 +375,7 @@ public class CFriendViewHandler {
             }
         }
 
-        //忽略，返回界面
+        //忽略文件，返回界面
         else{
             System.out.println("暂不处理就返回好友界面");
             new CFriendViewHandler(ctx);

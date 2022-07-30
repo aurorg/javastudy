@@ -214,7 +214,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
                 readChannel.close();
                 writeChannel.close();
 
-                ps.setInt(4, 1);
+                ps.setInt(4, 5);
                 ps.setString(5,"FILE");
 
             }
@@ -250,7 +250,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             //消息类型要分情况（文件FILE和文本TEXT）
             if(messagetype=="TEXT" || file==null){
                 ps.setString(3, msg1);
-                ps.setInt(4, 2);
+                ps.setInt(4, 5);
                 ps.setString(5,"TEXT");
             }else{
 
