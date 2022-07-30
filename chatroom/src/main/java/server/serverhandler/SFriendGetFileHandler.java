@@ -75,7 +75,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
                     message1 = new ServerToClientmsg(false, "嗯哼？！你已经保存过该文件啦");
                 }else if(issuccess1==5 && message.equals("接收文件消息")){
                     //先更新消息表中的信息
-                    String sql1 = " update message set issuccess =5  where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
+                    String sql1 = " update message set issuccess =6  where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
                     ps = conn.prepareStatement(sql1);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);
