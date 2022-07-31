@@ -234,6 +234,7 @@ public class CFriendViewHandler {
 //        }catch (InterruptedException e){
 //            e.printStackTrace();
 //        }
+
         System.out.println("请输入您的id：");
         int userid1=input.nextInt();
 
@@ -245,7 +246,7 @@ public class CFriendViewHandler {
          */
         //System.out.println("\n");
         //输入F表示发文件
-        System.out.println("[输入Q，返回主界面(F文件）]：");
+        System.out.println("[输入Q，返回主界面(F发文件Y收文件）]：");
         is1=true;
         String chatmessage=input.nextLine(); //输入聊天消息的
 
@@ -319,7 +320,7 @@ public class CFriendViewHandler {
             }
 
         }
-        System.out.println("[输入Q返回主界面(F文件）]：");
+        System.out.println("[输入Q返回主界面(F发文件Y收文件）]：");
         chatmessage=input.next();
     }
 
@@ -347,7 +348,11 @@ public class CFriendViewHandler {
 
         //接收文件的情况
         if(choice.equalsIgnoreCase("Y")){
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"接收文件消息");
+
+            System.out.println("你需要接受哪个文件(输入文件路径)：");
+            String filename=input.next();
+
+            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,filename);
             ctx.writeAndFlush(friendGetFilemsg);
             System.out.println("1111111111111111111");
             try{

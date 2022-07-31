@@ -38,6 +38,6 @@ public class SGroupSetupHandler extends SimpleChannelInboundHandler<GroupSetupMe
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GroupSetupMessage groupSetupMessage) throws Exception {
-        
+
     }
 }

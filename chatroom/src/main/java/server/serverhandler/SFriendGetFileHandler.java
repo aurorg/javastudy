@@ -42,7 +42,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             //接收消息的部分
             int userid2=friendGetFilemsg.getUserid();
             int friendid2=friendGetFilemsg.getFriendid();
-            String message2=friendGetFilemsg.getMessage();
+            String filename=friendGetFilemsg.getMessage();
 
             ServerToClientmsg message1 = null;
 
@@ -60,35 +60,43 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
 
             String sql;
-            sql="SELECT issuccess,message FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
+            sql="SELECT issuccess,messagetype FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?) and messagetype=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
             ps.setInt(3, userid2);
             ps.setInt(4, friendid2);
+            ps.setString(5,"FILE");
             rs = ps.executeQuery();
 
             while(rs.next()){
                 int issuccess1 = rs.getInt("issuccess");
-                String message=rs.getString("message");
-                if(issuccess1==6) {
+               String messagetype=rs.getString("messagetype");
+
+                if(issuccess1==6 && messagetype.equals("FILE")) {
                     message1 = new ServerToClientmsg(false, "嗯哼？！你已经保存过该文件啦");
-                }else if(issuccess1==5 && message.equals("接收文件消息")){
+                    ctx.writeAndFlush(message1);
+                }else if(issuccess1==5 && messagetype.equals("FILE")){
                     //先更新消息表中的信息
-                    String sql1 = " update message set issuccess =6  where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?)";
+                    String sql1 = " update message set issuccess =6  where ((senderid=? and receiverid=?)  or (receiverid=? and senderid=?)) and messagetype=?";
                     ps = conn.prepareStatement(sql1);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);
                     ps.setInt(3, userid2);
                     ps.setInt(4, friendid2);
+                    ps.setString(5,"FILE");
                     ps.executeUpdate();
 
                     message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
+                    ctx.writeAndFlush(message1);
 
-
+                    System.out.println("测试收文件111111111111111111");
                     //这里要不要加下面的
-//                    File file=new File();
-//                    message1.setFile(file);
+
+                    //
+                    File file=new File(filename);
+                    System.out.println("打印一下路径"+filename);
+                    message1.setFile(file);
 
                     message1.setMessageType(Message.FriendGetFilemsg);
 
@@ -104,7 +112,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             }
 
 
-            ctx.writeAndFlush(message1);
+
             stat.close();
             conn.close();
         }catch(
