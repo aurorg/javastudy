@@ -1,10 +1,16 @@
 package client.clienthandler;
 
+import client.ResponseHandler;
 import io.netty.channel.ChannelHandlerContext;
 import jdk.swing.interop.SwingInterOpUtils;
 import message.*;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
 import static client.ChatNettyClient.*;
@@ -347,24 +353,26 @@ public class CFriendViewHandler {
         }
 
         //接收文件的情况
-        if(choice.equalsIgnoreCase("Y")){
+        if(choice.equalsIgnoreCase("Y")) {
 
             System.out.println("你需要接受哪个文件(输入文件路径)：");
-            String filename=input.next();
+            String filename = input.next();
 
-            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,filename);
+            FriendGetFilemsg friendGetFilemsg = new FriendGetFilemsg(userid, friendid, filename);
             ctx.writeAndFlush(friendGetFilemsg);
             System.out.println("1111111111111111111");
-            try{
-                synchronized(waitMessage){
+            try {
+                synchronized (waitMessage) {
                     waitMessage.wait();
                 }
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println("222222222222222");
-        }
+            new ResponseHandler().saveFile(FriendGetFilemsg);
+            System.out.println("333333333333333");
 
+        }
         //不接收文件的情况
         else if(choice.equalsIgnoreCase("N")){
 //            FriendGetFilemsg friendGetFilemsg=new FriendGetFilemsg(userid,friendid,"拒绝文件接受消息");
@@ -388,5 +396,38 @@ public class CFriendViewHandler {
             new CFriendViewHandler(ctx);
         }
     }
+//    public static void saveFile(File file){
+//        try{
+//
+//            Scanner scanner=new Scanner(System.in);
+//            String addFile=scanner.nextLine();
+//
+//            File tempFile1=new File(addFile);
+//
+//            while(!tempFile1.isDirectory()){
+//                System.out.println("不是目录，请重新输入：");
+//                addFile=scanner.nextLine();
+//                tempFile1=new File(addFile);
+//            }
+//            if(addFile.charAt(addFile.length()-1)!='/'){
+//                addFile=addFile.concat("/");
+//            }
+//            addFile=addFile.concat(file.getName());
+//            tempFile1=new File(addFile);
+//
+//            FileChannel readChannel1= new FileInputStream(file).getChannel();
+//            FileChannel writeChannel1= new FileOutputStream(tempFile1).getChannel();
+//
+//            ByteBuffer buf=ByteBuffer.allocate(1024);
+//            while(readChannel1.read(buf)!=-1){
+//                buf.flip();
+//                writeChannel1.write(buf);
+//                buf.clear();
+//            }
+//            tempFile1.createNewFile();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 
 }

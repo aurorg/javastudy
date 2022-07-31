@@ -14,6 +14,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,7 @@ public class ChatNettyClient {
     public static volatile List<String> friendmsglist;//查询好友历史消息列表
     public static volatile List<String> friendmsglist1;//查询好友未读消息列表
     public static volatile List<String> friendlist; //查询好友列表的
+    public static volatile File FriendGetFilemsg; //保存文件到本地的
 
 
     public static void main(String[] args) throws Exception{

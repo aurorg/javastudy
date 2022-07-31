@@ -45,7 +45,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
                 friendmsglist=message.friendmsglist;
             }
             else if(message.getMessageType()==Message.FriendGetFilemsg){
-                System.out.println("接受成功，输入目录保存");
+                System.out.println("接下来输入您的本地目录保存下来：");
                 saveFile(message.getFile());//调用将文件保存到本地目录的方法
                 System.out.println("已经保存啦！");
             }
