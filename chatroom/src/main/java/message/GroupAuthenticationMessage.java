@@ -20,7 +20,7 @@ public class GroupAuthenticationMessage extends Message{
     }
 //——————————————————————————————————————————————————————————————————————
     public void setGroupid(int groupid){
-        this.userid=userid;
+        this.groupid=groupid;
     }
 
     public int getGroupid(){

@@ -1,8 +1,12 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.GroupSetupMessage;
 
 import java.util.Scanner;
+
+import static client.ChatNettyClient.waitMessage;
+import static client.ChatNettyClient.waitSuccess;
 
 public class CGroupOneViewHandler {
     //用户输入
@@ -91,28 +95,38 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //创建群
     public void onecase1(ChannelHandlerContext ctx){
-        
 
+        System.out.println("请输入您的id号：");
+        int userid=input.nextInt();
 
+        System.out.println("请输入您需要建群的群名称：");
+        String groupname=input.next();
 
+        GroupSetupMessage groupSetupMessage = new GroupSetupMessage(userid,groupname);
+        ctx.writeAndFlush(groupSetupMessage);
+        //这里需要加锁，服务端返回消息后，客户端继续
+        try {
+            synchronized (waitMessage){
+                waitMessage.wait();
+            }
 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //System.out.println("111111");
 
-
-
-
-
-
-
-
-
-
-
-
-
+        if(waitSuccess==1){
+            System.out.println("\n");
+            System.out.println("建群成功，请选择接下来的操作\n");
+            new CGroupOneViewHandler(ctx);
+        }
 
 
 
     }
+
+
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     public void onecase2(ChannelHandlerContext ctx){
 
