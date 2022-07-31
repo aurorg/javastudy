@@ -91,6 +91,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             if(addFile.charAt(addFile.length()-1)!='/'){
                 addFile=addFile.concat("/");
             }
+
             addFile=addFile.concat(file.getName());
             tempFile1=new File(addFile);
 

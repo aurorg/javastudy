@@ -43,6 +43,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             int userid2=friendGetFilemsg.getUserid();
             int friendid2=friendGetFilemsg.getFriendid();
             String filename=friendGetFilemsg.getMessage();
+            System.out.println("打印文件名称：" + filename);
 
             ServerToClientmsg message1 = null;
 
@@ -72,12 +73,24 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             while(rs.next()){
                 int issuccess1 = rs.getInt("issuccess");
                String messagetype=rs.getString("messagetype");
+               String msg=rs.getString("message");
 
-                if(issuccess1==6 && messagetype.equals("FILE")) {
+                if(issuccess1==6 && messagetype.equals("FILE")  && msg.equals(filename)) {
                     message1 = new ServerToClientmsg(false, "嗯哼？！你已经保存过该文件啦");
                     ctx.writeAndFlush(message1);
-                }else if(issuccess1==5 && messagetype.equals("FILE")){
-                    //先更新消息表中的信息
+                }else if(issuccess1==5 && messagetype.equals("FILE") && msg.equals(filename)){
+
+                    message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
+                    ctx.writeAndFlush(message1);
+
+
+                    File file=new File(filename);
+                    System.out.println("打印一下路径"+filename);
+                    message1.setFile(file);
+
+                    message1.setMessageType(Message.FriendGetFilemsg);
+
+                    //更新消息表中的信息
                     String sql1 = " update message set issuccess =6  where ((senderid=? and receiverid=?)  or (receiverid=? and senderid=?)) and messagetype=?";
                     ps = conn.prepareStatement(sql1);
                     ps.setInt(1, userid2);
@@ -86,19 +99,20 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
                     ps.setInt(4, friendid2);
                     ps.setString(5,"FILE");
                     ps.executeUpdate();
-
-                    message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
-                    ctx.writeAndFlush(message1);
+//
+//                    message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
+//                    ctx.writeAndFlush(message1);
 
                     System.out.println("测试收文件111111111111111111");
                     //这里要不要加下面的
 
                     //应该加在前面（逻辑有问题）
-                    File file=new File(filename);
-                    System.out.println("打印一下路径"+filename);
-                    message1.setFile(file);
 
-                    message1.setMessageType(Message.FriendGetFilemsg);
+//                    File file=new File(filename);
+//                    System.out.println("打印一下路径"+filename);
+//                    message1.setFile(file);
+//
+//                    message1.setMessageType(Message.FriendGetFilemsg);
 
 //                    Channel channel = ChatHandlerMap.getChannel(friendid2);
 //                    if(channel==null){
