@@ -48,7 +48,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             } else if (message.getMessageType() == Message.FriendGetFilemsg) {
                 System.out.println("接下来输入您的本地目录保存下来：");
                 saveFile(message.getFile());//调用将文件保存到本地目录的方法
-                System.out.println("message.file的路径"+message.getFile());
+                System.out.println("message.file的路径【测试路径1】"+message.getFile());
                 System.out.println("已经保存啦！");
             } else if (message.getMessageType() == Message.Informationfriendunreadmsg) {
                 friendmsglist1 = message.friendmsglist1;
@@ -109,7 +109,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             String addFile = input.next();
             File tempFile1 = new File(addFile);
             tempFile1.createNewFile();
-            System.out.println("查看路径"+file.getAbsolutePath());
+            System.out.println("查看路径【测试路径2】"+file.getAbsolutePath());
             FileChannel readChannel = new FileInputStream(file).getChannel();
             FileChannel writeChannel = new FileOutputStream(tempFile1).getChannel();
             ByteBuffer buf = ByteBuffer.allocate(1024);
