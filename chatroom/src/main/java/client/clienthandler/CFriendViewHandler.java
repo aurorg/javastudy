@@ -369,7 +369,7 @@ public class CFriendViewHandler {
                 e.printStackTrace();
             }
             System.out.println("222222222222222");
-            new ResponseHandler().saveFile(FriendGetFilemsg);
+            //new ResponseHandler().saveFile(FriendGetFilemsg);
             System.out.println("333333333333333");
 
         }

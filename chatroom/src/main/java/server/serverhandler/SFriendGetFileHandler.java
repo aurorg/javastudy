@@ -61,7 +61,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
             stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
 
             String sql;
-            sql="SELECT issuccess,messagetype FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?) and messagetype=?";
+            sql="SELECT issuccess,messagetype,message FROM message where(senderid=? and receiverid=?)  or (receiverid=? and senderid=?) and messagetype=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid2);
             ps.setInt(2, friendid2);
@@ -81,7 +81,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
                 }else if(issuccess1==5 && messagetype.equals("FILE") && msg.equals(filename)){
 
                     message1=new ServerToClientmsg(true,"收到你要保存文件的信息啦！");
-                    ctx.writeAndFlush(message1);
+
 
 
                     File file=new File(filename);
@@ -89,6 +89,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
                     message1.setFile(file);
 
                     message1.setMessageType(Message.FriendGetFilemsg);
+                    ctx.writeAndFlush(message1);
 
                     //更新消息表中的信息
                     String sql1 = " update message set issuccess =6  where ((senderid=? and receiverid=?)  or (receiverid=? and senderid=?)) and messagetype=?";
