@@ -53,6 +53,7 @@ public class CGroupViewHandler {
         }
     }
 
+    //身份验证的函数
     public void authentication(ChannelHandlerContext ctx){
         System.out.println("请输入你的账号：");
         int userid = input.nextInt();

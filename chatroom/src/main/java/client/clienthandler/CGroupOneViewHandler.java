@@ -122,13 +122,17 @@ public class CGroupOneViewHandler {
         }
 
 
-
     }
 
-
-
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //解散群
     public void onecase2(ChannelHandlerContext ctx){
+
+        System.out.println("请输入您的id号：");
+        int userid=input.nextInt();
+
+        System.out.println("请输入您需要解散群的群账号id：");
+        int groupid=input.nextInt();
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
