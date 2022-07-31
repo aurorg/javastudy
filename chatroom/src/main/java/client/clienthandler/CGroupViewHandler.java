@@ -47,7 +47,7 @@ public class CGroupViewHandler {
                 new CMainViewHandler(ctx);
                 break;
             default:
-                System.out.println("请按照要求输入哦，再 给你一次机会");
+                System.out.println("请按照要求输入哦，再给你一次机会");
                 new CGroupViewHandler(ctx);
 
         }
@@ -65,7 +65,7 @@ public class CGroupViewHandler {
 
         //给服务器发消息，服务器从数据库查看数据，确认你的身份是否正确
 
-        GroupAuthenticationMessage groupAuthenticationMessage = new GroupAuthenticationMessage(userid, groupid);
+        GroupAuthenticationMessage groupAuthenticationMessage = new GroupAuthenticationMessage(userid, groupid,identity);
         ctx.writeAndFlush(groupAuthenticationMessage);
 
         //这里需要加锁，服务端返回消息后，客户端继续

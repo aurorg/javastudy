@@ -92,6 +92,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SShieldFriendHandler()); //屏蔽好友的
                             ch.pipeline().addLast(new SFriendListHandler()); //查看好友列表的
                             ch.pipeline().addLast(new SFriendGetFileHandler()); //接收文件的
+                            ch.pipeline().addLast(new SGroupAuthenticationMessage()); //群成员身份确认的
                             //.addLast()
                         }
 

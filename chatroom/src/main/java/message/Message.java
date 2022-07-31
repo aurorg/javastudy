@@ -37,7 +37,7 @@ public abstract  class Message  implements Serializable {
 
 
     public static final int GroupAuthenticationMessage=13; //数据库验证群聊身份的
-    
+
 
 
 

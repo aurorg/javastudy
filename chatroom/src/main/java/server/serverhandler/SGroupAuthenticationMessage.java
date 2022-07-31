@@ -63,9 +63,9 @@ public class SGroupAuthenticationMessage extends SimpleChannelInboundHandler<Gro
 
             String sql;
             sql = "SELECT memberidentity FROM grouplist where(groupid=? and groupmemberid=?)";
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, groupid1);
             ps.setInt(2, userid1);
-            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             boolean isexit = false;

@@ -1,6 +1,7 @@
 package client;
 
 import client.clienthandler.CDengLuViewHandler;
+import client.clienthandler.CGroupViewHandler;
 import common.MessageCodec;
 import common.ProtocolFrameDecoder;
 import io.netty.bootstrap.Bootstrap;
