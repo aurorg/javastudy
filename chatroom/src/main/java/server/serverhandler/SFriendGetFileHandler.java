@@ -93,7 +93,7 @@ public class SFriendGetFileHandler extends SimpleChannelInboundHandler<FriendGet
                     System.out.println("测试收文件111111111111111111");
                     //这里要不要加下面的
 
-                    //
+                    //应该加在前面（逻辑有问题）
                     File file=new File(filename);
                     System.out.println("打印一下路径"+filename);
                     message1.setFile(file);
