@@ -1,4 +1,4 @@
 package message;
 
-public class GroupChatMessage {
+public class GroupChatMessage extends Message{
 }

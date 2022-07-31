@@ -1,4 +1,4 @@
 package message;
 
-public class GroupHistoryMessage {
+public class GroupHistoryMessage extends Message{
 }

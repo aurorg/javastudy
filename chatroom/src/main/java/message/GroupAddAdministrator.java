@@ -1,4 +1,4 @@
 package message;
 
-public class GroupAddAdministrator {
+public class GroupAddAdministrator extends Message{
 }

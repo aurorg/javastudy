@@ -1,4 +1,4 @@
 package message;
 
-public class GroupUnreadMessage {
+public class GroupUnreadMessage extends Message{
 }

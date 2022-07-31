@@ -1,4 +1,4 @@
 package message;
 
-public class GroupQuitMessage {
+public class GroupQuitMessage extends Message{
 }

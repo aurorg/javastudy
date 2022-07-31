@@ -1,4 +1,4 @@
 package message;
 
-public class GroupJoinMessage {
+public class GroupJoinMessage extends Message{
 }

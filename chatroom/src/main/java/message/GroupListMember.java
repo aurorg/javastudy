@@ -1,4 +1,4 @@
 package message;
 
-public class GroupListMember {
+public class GroupListMember extends Message{
 }
