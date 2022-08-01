@@ -145,8 +145,8 @@ public class CGroupOneViewHandler {
 
         switch(n){
             case 1:
-                GroupDeleteMessage groupDeleteMessage=new GroupDeleteMessage(userid,groupid);
-               ctx.writeAndFlush(groupDeleteMessage);
+                 GroupDeleteMessage groupDeleteMessage=new GroupDeleteMessage(userid,groupid);
+                 ctx.writeAndFlush(groupDeleteMessage);
 
                 //这里需要加锁，服务端返回消息后，客户端继续【线程通知！！！！！】
                 try {
@@ -162,12 +162,13 @@ public class CGroupOneViewHandler {
                 if(waitSuccess==1){
                     System.out.println("\n");
                     System.out.println("解散群成功\n");
-                    //new CLoginViewHandler(ctx);
+                    System.out.println("接下来你可以根据您的需求选择其他功能：");
+                    new CGroupOneViewHandler(ctx);
                 }
                 break;
 
             case 2:
-                
+
                 new CGroupOneViewHandler(ctx);
                 break;
 

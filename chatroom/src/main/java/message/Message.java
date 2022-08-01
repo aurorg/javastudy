@@ -39,6 +39,7 @@ public abstract  class Message  implements Serializable {
     public static final int GroupAuthenticationMessage=13; //数据库验证群聊身份的
 
     public static final int GroupSetupMessage=14; //建群的
+    public static final int GroupDeleteMessage=15; //解散群的
 
 
 
