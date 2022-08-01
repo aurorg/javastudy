@@ -1,6 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.GroupDeleteMessage;
 import message.GroupSetupMessage;
 
 import java.util.Scanner;
@@ -133,6 +134,47 @@ public class CGroupOneViewHandler {
 
         System.out.println("请输入您需要解散群的群账号id：");
         int groupid=input.nextInt();
+
+        System.out.println("***请问您确定解散群了吗***");
+        System.out.println("**********************");
+        System.out.println("******[1]确定解散*******");
+        System.out.println("******[2]不解散了*******");
+        System.out.println("**不解散了就进行后续操作***");
+        System.out.println("***********************");
+        int n = input.nextInt();
+
+        switch(n){
+            case 1:
+                GroupDeleteMessage groupDeleteMessage=new GroupDeleteMessage(userid,groupid);
+               ctx.writeAndFlush(groupDeleteMessage);
+
+                //这里需要加锁，服务端返回消息后，客户端继续【线程通知！！！！！】
+                try {
+                    synchronized (waitMessage){
+                        waitMessage.wait();
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                //System.out.println("111111");
+                if(waitSuccess==1){
+                    System.out.println("\n");
+                    System.out.println("解散群成功\n");
+                    //new CLoginViewHandler(ctx);
+                }
+                break;
+
+            case 2:
+                
+                new CGroupOneViewHandler(ctx);
+                break;
+
+            default:
+                System.out.println("请按照要求输入哦！");
+                new CGroupOneViewHandler(ctx);
+        }
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

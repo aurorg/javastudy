@@ -72,10 +72,6 @@ public class SGroupSetupHandler extends SimpleChannelInboundHandler<GroupSetupMe
                 ps.executeUpdate();
                 // ResultSet rs2 = stat.executeQuery(sql1);
 
-
-
-
-
                 String sql2 ="SELECT groupid FROM groupmsg where groupname = ? and userid=?";
                 ps=conn.prepareStatement(sql2);
                 ps.setString(1,groupname1);

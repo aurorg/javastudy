@@ -204,7 +204,7 @@ public class CDengLuViewHandler {
 
             default:
                 System.out.println("请按照要求输入哦！");
-                System.exit(0);
+                new CDengLuViewHandler(ctx);
         }
     }
 
