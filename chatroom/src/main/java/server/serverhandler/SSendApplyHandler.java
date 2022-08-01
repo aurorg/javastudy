@@ -76,7 +76,7 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
 //                if(isfriend1==1) {
 //                    message1 = new ServerToClientmsg(false, "嗯哼？！你俩已经是好友了");
 //                }else{
-                    String sql1 = " message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
+                    String sql1 = "insert into message(senderid,receiverid,message,issuccess,messagetype,chattype) values(?,?,?,?,?,?) ";
                     ps = conn.prepareStatement(sql1);
                     ps.setInt(1, userid2);
                     ps.setInt(2, friendid2);

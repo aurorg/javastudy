@@ -2,7 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.GroupDeleteMessage;
-import message.GroupPassApplyMessage;
+import message.GroupSendApplyMessage;
 import message.GroupSetupMessage;
 
 import java.util.Scanner;
@@ -190,8 +190,8 @@ public class CGroupOneViewHandler {
        System.out.println("请输入您需要加群的id号：");
        int groupid=input.nextInt();
 
-       GroupPassApplyMessage groupPassApplyMessage=new GroupPassApplyMessage(userid,groupid,"请求加群");
-       ctx.writeAndFlush(groupPassApplyMessage);
+       GroupSendApplyMessage groupSendApplyMessage=new GroupSendApplyMessage(userid,groupid,"请求加群");
+       ctx.writeAndFlush(groupSendApplyMessage);
        try{
            synchronized(waitMessage){
                waitMessage.wait();
@@ -199,7 +199,7 @@ public class CGroupOneViewHandler {
        }catch (InterruptedException e){
            e.printStackTrace();
        }
-       System.out.println("接下来为你返回主界面,您根据需求选择");
+       System.out.println("接下来为你返回主界面,您根据需求选择:");
        new CGroupOneViewHandler(ctx);
 
 

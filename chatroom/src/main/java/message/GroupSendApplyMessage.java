@@ -1,12 +1,12 @@
 package message;
 
-public class GroupPassApplyMessage extends Message{
+public class GroupSendApplyMessage extends Message{
 
     int userid;
     int groupid;
     String message;
 
-    public GroupPassApplyMessage(int userid,int groupid,String message){
+    public GroupSendApplyMessage(int userid, int groupid, String message){
         this.userid=userid;
         this.groupid=groupid;
         this.message=message;
