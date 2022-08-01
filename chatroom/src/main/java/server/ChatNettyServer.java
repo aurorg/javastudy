@@ -95,6 +95,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SGroupAuthenticationMessage()); //群成员身份确认的
                             ch.pipeline().addLast(new SGroupSetupHandler());//建群的
                             ch.pipeline().addLast(new SGroupDeleteHandler());//解散群的
+                            ch.pipeline().addLast(new SGroupSendApplyHandler());//申请加群的
                             //.addLast()
                         }
 

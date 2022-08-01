@@ -187,7 +187,7 @@ public class CGroupOneViewHandler {
        System.out.println("请输入您的id号：");
        int userid=input.nextInt();
 
-       System.out.println("请输入您需要加群的id号：");
+       System.out.println("请输入您需要加群的id号(确保该群存在)：");
        int groupid=input.nextInt();
 
        GroupSendApplyMessage groupSendApplyMessage=new GroupSendApplyMessage(userid,groupid,"请求加群");
@@ -204,9 +204,6 @@ public class CGroupOneViewHandler {
 
 
   }
-
-
-
 
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
