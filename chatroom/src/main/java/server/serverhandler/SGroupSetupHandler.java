@@ -81,11 +81,10 @@ public class SGroupSetupHandler extends SimpleChannelInboundHandler<GroupSetupMe
                     // 通过字段检索
                     int groupid =rs.getInt("groupid");
                     System.out.println("您的账号是：" + groupid);
-                    message1 = new ServerToClientmsg(true,"您的群Id号是（以后查看群的账号）" + groupid);
+                    message1 = new ServerToClientmsg(true,"建群成功！！您的群Id号是（以后查看群的账号）" + groupid);
 //                    System.out.println(message1);
 //                    ctx.writeAndFlush(message1);
                 }
-
 
             message1.setMessageType(Message.GroupSetupMessage);
             ctx.writeAndFlush(message1);
