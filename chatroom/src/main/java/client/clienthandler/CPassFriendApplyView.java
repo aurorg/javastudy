@@ -13,7 +13,7 @@ public class CPassFriendApplyView {
 
     public CPassFriendApplyView(ChannelHandlerContext ctx) {
         System.out.println("*******************************");
-        System.out.println("*       欢迎来到添加好友界        *");
+        System.out.println("*       欢迎来到添加好友界面       *");
         System.out.println("*      根据您的需求进行选择        *");
         System.out.println("*       [1]:同意好友请求         *");
         System.out.println("*       [2]:拒绝好友请求         *");

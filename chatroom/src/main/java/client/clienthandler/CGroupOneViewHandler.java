@@ -2,6 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.GroupDeleteMessage;
+import message.GroupPassApplyMessage;
 import message.GroupSetupMessage;
 
 import java.util.Scanner;
@@ -31,7 +32,7 @@ public class CGroupOneViewHandler {
         System.out.println("*         [12]:将用户踢出群     *");
         System.out.println("*         [13]:开启禁言模式     *");
         System.out.println("*         [14]:解除禁言模式     *");
-        System.out.println("*         [15]:群通知处理       *");
+        System.out.println("*         [15]:群通知申请处理    *");
         System.out.println("*         [0]:返回上一个界面     *");
         System.out.println("*******************************");
 
@@ -80,7 +81,9 @@ public class CGroupOneViewHandler {
                 onecase14(ctx);
                 break;
             case 15:
-                onecase15(ctx);
+               // onecase15(ctx);
+                //查看群通知、申请加群的处理
+                new CPassAddGroupApplyView(ctx);
                 break;
             case 0:
                 //返回上一个界面
@@ -124,7 +127,6 @@ public class CGroupOneViewHandler {
 
 
     }
-
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //解散群
     public void onecase2(ChannelHandlerContext ctx){
@@ -179,9 +181,34 @@ public class CGroupOneViewHandler {
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //申请加群
+
    public void onecase3(ChannelHandlerContext ctx){
+       System.out.println("请输入您的id号：");
+       int userid=input.nextInt();
+
+       System.out.println("请输入您需要加群的id号：");
+       int groupid=input.nextInt();
+
+       GroupPassApplyMessage groupPassApplyMessage=new GroupPassApplyMessage(userid,groupid,"请求加群");
+       ctx.writeAndFlush(groupPassApplyMessage);
+       try{
+           synchronized(waitMessage){
+               waitMessage.wait();
+           }
+       }catch (InterruptedException e){
+           e.printStackTrace();
+       }
+       System.out.println("接下来为你返回主界面,您根据需求选择");
+       new CGroupOneViewHandler(ctx);
+
 
   }
+
+
+
+
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
    public void onecase4(ChannelHandlerContext ctx){
 
