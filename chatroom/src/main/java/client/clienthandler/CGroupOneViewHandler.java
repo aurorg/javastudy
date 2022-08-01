@@ -205,7 +205,6 @@ public class CGroupOneViewHandler {
 
   }
 
-
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
    public void onecase4(ChannelHandlerContext ctx){
 

@@ -1,8 +1,11 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import message.GroupJoinMessage;
 
 import java.util.Scanner;
+
+import static client.ChatNettyClient.waitMessage;
 
 public class CPassAddGroupApplyView {
 
@@ -16,7 +19,7 @@ public class CPassAddGroupApplyView {
         System.out.println("*       [1]:同意加群请求         *");
         System.out.println("*       [2]:拒绝加群请求         *");
         System.out.println("*       [3]:暂时不处理           *");
-        System.out.println("*       [0]:返回好友界面         *");
+        System.out.println("*       [0]:返回群界面           *");
         System.out.println("*******************************");
 
         int n=input.nextInt();
@@ -43,6 +46,26 @@ public class CPassAddGroupApplyView {
 //-——————————————————————————————————————————————————————————————————————————————
 
     public void passgroupapply(ChannelHandlerContext ctx){
+        System.out.println("请输入您的id号：");
+        int userid1=input.nextInt();
+        System.out.println("请输入你需要处理群通知的该群的id号：");
+        int groupid1=input.nextInt();
+        System.out.println("请输入需要加您的群的用户的id号：");
+        int peopleid1=input.nextInt();
 
+        GroupJoinMessage groupJoinMessage=new GroupJoinMessage(userid1,groupid1,peopleid1);
+        ctx.writeAndFlush(groupJoinMessage);
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("\n");
+        System.out.println("申请已经通过，用户已经进群啦！");
+        System.out.println("接下来为你返回群主界面：");
+        new CGroupOneViewHandler(ctx);
     }
+
 }
