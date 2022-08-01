@@ -63,7 +63,7 @@ public class SGroupSetupHandler extends SimpleChannelInboundHandler<GroupSetupMe
             stat = conn.createStatement(); //createStatement()：创建向数据库发送sql的statement对象。
 
 
-
+                //先存到群信息表
                 String sql1 ="insert into groupmsg(userid,groupname,groupnumber) values(?,?,?) ";
                 ps=conn.prepareStatement(sql1);
                 ps.setInt(1,userid1);
@@ -72,9 +72,14 @@ public class SGroupSetupHandler extends SimpleChannelInboundHandler<GroupSetupMe
                 ps.executeUpdate();
                 // ResultSet rs2 = stat.executeQuery(sql1);
 
-                String sql2 ="SELECT groupid FROM groupmsg where groupname = ? ";
+
+
+
+
+                String sql2 ="SELECT groupid FROM groupmsg where groupname = ? and userid=?";
                 ps=conn.prepareStatement(sql2);
                 ps.setString(1,groupname1);
+                ps.setInt(2,userid1);
                 rs = ps.executeQuery();
                 while (rs.next()) {
 
@@ -84,6 +89,15 @@ public class SGroupSetupHandler extends SimpleChannelInboundHandler<GroupSetupMe
                     message1 = new ServerToClientmsg(true,"建群成功！！您的群Id号是（以后查看群的账号）" + groupid);
 //                    System.out.println(message1);
 //                    ctx.writeAndFlush(message1);
+
+                    //再存到群列表
+                    String sql3="insert into grouplist(groupid,groupmemberid,memberidentity) values(?,?,?)";
+                    ps=conn.prepareStatement(sql3);
+                    ps.setInt(1,groupid);
+                    ps.setInt(2,userid1);
+                    ps.setInt(3,1);
+                    ps.executeUpdate();
+
                 }
 
             message1.setMessageType(Message.GroupSetupMessage);

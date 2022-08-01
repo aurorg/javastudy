@@ -99,7 +99,7 @@ public class CGroupOneViewHandler {
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
 
-        System.out.println("请输入您需要建群的群名称：");
+        System.out.println("请输入您需要建群的群名称(和您之间建过的群的名称不能重复)：");
         String groupname=input.next();
 
         GroupSetupMessage groupSetupMessage = new GroupSetupMessage(userid,groupname);
