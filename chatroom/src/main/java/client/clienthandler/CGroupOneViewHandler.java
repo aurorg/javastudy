@@ -14,6 +14,7 @@ public class CGroupOneViewHandler {
     //用户输入
     static Scanner input = new Scanner(System.in);
 
+
     public CGroupOneViewHandler(ChannelHandlerContext ctx){
         System.out.println("*******************************");
         System.out.println("*        欢迎来到群主界面        *");

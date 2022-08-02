@@ -87,6 +87,7 @@ public class CFriendViewHandler {
      * @param ctx
      */
 
+    
     public void addfriend(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
         int userid1 = input.nextInt();
