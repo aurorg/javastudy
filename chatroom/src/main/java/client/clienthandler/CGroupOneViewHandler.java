@@ -380,8 +380,10 @@ public class CGroupOneViewHandler {
             e.printStackTrace();
         }
 
+
         System.out.println("\n");
         System.out.println("管理员已经被您删除！！");
+        
         System.out.println("接下来为你返回群的主界面：");
         new CGroupOneViewHandler(ctx);
 
