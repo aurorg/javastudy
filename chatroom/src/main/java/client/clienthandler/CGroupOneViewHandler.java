@@ -362,6 +362,12 @@ public class CGroupOneViewHandler {
 
     //删除管理员（其实就是将管理员的身份改为普通用户）
     public void onecase10(ChannelHandlerContext ctx){
+        System.out.println("请输入您的id号：");
+        int userid=input.nextInt();
+        System.out.println("请输入你需要删除管理员的群id号：");
+        int groupid=input.nextInt();
+        System.out.println("请输入你将哪位用户删除管理员身份的id号：");
+        int peopleid=input.nextInt();
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
