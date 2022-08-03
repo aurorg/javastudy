@@ -52,6 +52,14 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
                 System.out.println("message.file的路径【测试路径1】"+message.getFile());
                 System.out.println("已经保存啦！");
             }
+            else if(message.getMessageType()==Message.GroupGetFilemsg){
+                System.out.println("接下来输入您的本地路径保存下来：");
+                saveFile(message.getFile());
+
+                System.out.println("message.file的路径【测试路径2】"+message.getFile());
+                System.out.println("已经保存啦");
+
+            }
             else if (message.getMessageType() == Message.Informationfriendunreadmsg) {
                 friendmsglist1 = message.friendmsglist1;
             }

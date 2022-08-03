@@ -25,9 +25,9 @@ public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             return;
         }
 
-        if (!unRead) {
-            System.out.println("您还有未读消息");
-            unRead = true;// 没有未读信息啦
+        if (!unRead1) {
+            System.out.println("您有未读好友消息");
+            unRead1 = true;// 没有未读信息啦
         }
         synchronized (waitMessage) {
             waitMessage.notifyAll();

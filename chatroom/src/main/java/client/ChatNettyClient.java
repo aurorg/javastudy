@@ -25,8 +25,12 @@ public class ChatNettyClient {
 
     public static volatile int waitSuccess=0;//1表示消息成功、0表示消息失败
 
-    public static volatile boolean unRead=false;//默认没有未读消息
+    public static volatile boolean unRead1=false;//默认没有未读好友消息
+    public static volatile boolean unRead2=false;//默认没有未读群消息
+
     public static volatile boolean is1=false; //用来判断好友发消息的
+    public static volatile boolean is2=false; //用来判断群发消息的
+
     public static volatile int talker=0; //聊天的人（发文件用）
     public static volatile String check="n";//no
     public static volatile boolean isyes=false;
@@ -40,7 +44,8 @@ public class ChatNettyClient {
     public static volatile List<String> friendmsglist;//查询好友历史消息列表
     public static volatile List<String> friendmsglist1;//查询好友未读消息列表
     public static volatile List<String> friendlist; //查询好友列表的
-    public static volatile File FriendGetFilemsg; //保存文件到本地的
+    public static volatile File FriendGetFilemsg; //好友保存文件到本地的
+    public static volatile File GroupGetFilemsg;  //群聊保存文件到本地的
 
     public static volatile List<String> grouplist; //查询好友列表的
     public static volatile List<String> grouphistorymsg; //查询群历史消息

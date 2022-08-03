@@ -33,7 +33,7 @@ public abstract  class Message  implements Serializable {
     public static final int Informationfriendunreadmsg=10; //查看好友未读消息的
     public static final int FriendListmsg=11; //查看好友列表的
 
-    public static final int FriendGetFilemsg=12; //接收文件的
+    public static final int FriendGetFilemsg=12; //好友接收文件的
 
 
     public static final int GroupAuthenticationMessage=13; //数据库验证群聊身份的
@@ -44,6 +44,8 @@ public abstract  class Message  implements Serializable {
     public static final int GroupListMember=16; //群成员列表的
     public static final int GroupHistorymsg=17; //群历史消息
     public static final int GroupUnreadmsg=18; //群未读消息
+
+    public static final int GroupGetFilemsg=19; //群接收文件
 
 
 

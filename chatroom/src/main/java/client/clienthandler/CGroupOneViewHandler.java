@@ -3,6 +3,7 @@ package client.clienthandler;
 import io.netty.channel.ChannelHandlerContext;
 import message.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 import static client.ChatNettyClient.*;
@@ -329,10 +330,140 @@ public class CGroupOneViewHandler {
 
     //群聊(发消息、发文件)
     public void onecase8(ChannelHandlerContext ctx){
+        System.out.println("请输入您的id：");
+        int userid=input.nextInt();
+        System.out.println("请输入你需要发消息的群：");
+        int groupid=input.nextInt();
+
+        System.out.println("[输入Q，返回主界面(F发文件Y收文件）]：");
+
+        is2=true; //判断输出消息的
+
+        String chatmessage=input.nextLine(); //输入聊天消息的
+
+        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了
+
+        while(!chatmessage.equals("Q")) {
+
+            GroupChatMessage groupChatMessage2;
+
+
+            //发送文件的情况
+            if(chatmessage.equalsIgnoreCase("F")){
+
+                File file;
+                System.out.println("请输入需要发送的文件的绝对路径：");
+                file=new File(input.next());
+
+                while(!file.exists()||!file.isFile()){
+                    if(!file.exists()){
+                        System.out.println("文件不存在，请重新输入需要发送的文件的绝对路径");
+                    }else{
+                        System.out.println("不是文件，请重新输入需要发送的文件的绝对路径");
+                    }
+                    file=new File(input.nextLine());
+
+                }
+                groupChatMessage2 = new GroupChatMessage(userid,groupid, file, "FILE");
+                ctx.writeAndFlush(groupChatMessage2);
+
+                try {
+                    synchronized (waitMessage) {
+                        waitMessage.wait();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(waitSuccess==0){
+                    new CGroupOneViewHandler(ctx);
+                }
+
+
+            }
+            //接收文件的情况
+            else if(chatmessage.equalsIgnoreCase("Y")){
+                receiveFile(ctx,groupid,userid);
+            }
+
+            //发送文本消息
+            else{
+                groupChatMessage2 = new GroupChatMessage(userid,groupid, chatmessage, "TEXT");
+                ctx.writeAndFlush(groupChatMessage2);
+                try{
+                    synchronized(waitMessage){
+                        waitMessage.wait();
+                    }
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                if(waitSuccess==0){
+                    new CGroupOneViewHandler(ctx);
+                }
+
+            }
+            System.out.println("[输入Q返回主界面(F发文件Y收文件）]：");
+            chatmessage=input.next();
+        }
+
+        if(chatmessage.equals("Q")) {
+            is2 = false;
+            new CGroupOneViewHandler(ctx);
+        }
 
 
 
     }
+
+    //接收文件的方法
+    public static void receiveFile(ChannelHandlerContext ctx,int groupid,int userid){
+        System.out.println("*********************");
+        System.out.println("****群里发了一个文件*****");
+        System.out.println("*******[Y]:接受*******");
+        System.out.println("*******[N]:拒绝*******");
+        System.out.println("*******[S]:不处理******");
+        System.out.println("*********************");
+
+        String choice=input.nextLine();
+        while(!choice.equalsIgnoreCase("Y")&&!choice.equalsIgnoreCase("N")&&!choice.equalsIgnoreCase("S")){
+            System.out.println("请输入");
+            choice=input.nextLine();
+        }
+
+        //接收文件的情况
+        if(choice.equalsIgnoreCase("Y")) {
+
+            System.out.println("你需要接受哪个文件(输入文件路径)：");
+            String filename = input.next();
+
+            GroupGetFilemsg groupGetFilemsg= new GroupGetFilemsg(userid,groupid,filename);
+            ctx.writeAndFlush(groupGetFilemsg);
+            System.out.println("1111111111111111111");
+            try {
+                synchronized (waitMessage) {
+                    waitMessage.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("222222222222222");
+            //new ResponseHandler().saveFile(FriendGetFilemsg);
+            System.out.println("333333333333333");
+
+        }
+        //不接收文件的情况
+        else if(choice.equalsIgnoreCase("N")){
+            System.out.println("已经给您拒绝，接下来返回群的主界面");
+            new CGroupOneViewHandler(ctx);
+        }
+
+        //忽略文件，返回界面
+        else{
+            System.out.println("暂不处理就返回群界面");
+            new CGroupOneViewHandler(ctx);
+        }
+    }
+
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //添加管理员

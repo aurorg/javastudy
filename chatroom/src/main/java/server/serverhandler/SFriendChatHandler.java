@@ -168,6 +168,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
             Channel channel;
             channel= ChatHandlerMap.getChannel(friendid1);
 
+            //输出消息的时候前面加一些补充性的
             friendChatmsg.setA(userid1 + "说：");
 
             channel.writeAndFlush(friendChatmsg);
