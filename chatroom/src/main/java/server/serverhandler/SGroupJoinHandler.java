@@ -125,11 +125,6 @@ public class SGroupJoinHandler extends SimpleChannelInboundHandler<GroupJoinMess
 
         }
 
-
-
-
-
-
     }
 }
 

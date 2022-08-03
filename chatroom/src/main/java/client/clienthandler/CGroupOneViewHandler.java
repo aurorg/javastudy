@@ -2,6 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.GroupDeleteMessage;
+import message.GroupQuitMessage;
 import message.GroupSendApplyMessage;
 import message.GroupSetupMessage;
 
@@ -207,7 +208,29 @@ public class CGroupOneViewHandler {
   }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    //申请退群
    public void onecase4(ChannelHandlerContext ctx){
+
+       System.out.println("请输入您的id号：");
+       int userid=input.nextInt();
+
+       System.out.println("请输入您需要退出群的群账号id(确保该群存在)：");
+       int groupid=input.nextInt();
+
+       GroupQuitMessage groupQuitMessage= new GroupQuitMessage(userid,groupid,"退群的消息");
+       ctx.writeAndFlush(groupQuitMessage);
+       
+       try{
+           synchronized(waitMessage){
+               waitMessage.wait();
+           }
+       }catch (InterruptedException e){
+           e.printStackTrace();
+       }
+       System.out.println("接下来为你返回主界面,您根据需求选择:");
+       new CGroupOneViewHandler(ctx);
+
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
