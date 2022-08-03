@@ -115,7 +115,7 @@ public class SGroupUnreadmsgHandler extends SimpleChannelInboundHandler<GroupUnr
             ctx.writeAndFlush(message1);
 
 
-            //下午处理
+
 
             String sql1;
             sql1 = "update message set issuccess =12 where groupid=? and messagetype=? and chattype=?";
@@ -125,7 +125,7 @@ public class SGroupUnreadmsgHandler extends SimpleChannelInboundHandler<GroupUnr
             ps.setString(3,"GROUP");
 
             ps.executeUpdate();
-            System.out.println("因为你浏览历史消息的时候将所有消息看过了，所以将你的未读消息改为已读消息");
+            System.out.println("服务端将你的未读消息改为已读消息"); //只更新文本消息，其他的都在专门的类里面修改了（不用管）
 
             // 完成后关闭
             rs.close();

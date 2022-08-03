@@ -64,6 +64,9 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if(message.getMessageType()==Message.GroupHistorymsg){
                 grouphistorymsg=message.grouphistorymsg;
             }
+            else if(message.getMessageType()==Message.GroupUnreadmsg){
+                groupunreadmsg=message.groupunreadmsg;
+            }
 
             else {
                 System.out.print("操作成功 " + reason);

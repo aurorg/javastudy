@@ -100,6 +100,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SGroupQuitHandler()); //退群的
                             ch.pipeline().addLast(new SGroupListMemberHandler()); //群成员列表
                             ch.pipeline().addLast(new SGroupHistorymsgHandler()); //群历史消息
+                            ch.pipeline().addLast(new SGroupUnreadmsgHandler()) ; //群未读消息的
                             //.addLast()
                         }
 
