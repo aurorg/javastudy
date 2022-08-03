@@ -19,6 +19,7 @@ public class ServerToClientmsg extends Message {
 
     public List<String> grouplist; //群成员列表
     public List<String> grouphistorymsg; //群历史消息
+    public List<String> groupunreadmsg; //群的未读消息
 
 
     public String havefile="";
@@ -132,6 +133,15 @@ public class ServerToClientmsg extends Message {
         return grouphistorymsg;
     }
 
+    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    public void setGroupunreadmsg(List<String> groupunreadmsg) {
+        this.groupunreadmsg = groupunreadmsg;
+    }
+
+    public List<String> getGroupunreadmsg() {
+        return groupunreadmsg;
+    }
     //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 

@@ -61,12 +61,13 @@ public class SGroupUnreadmsgHandler extends SimpleChannelInboundHandler<GroupUnr
 
 
             String sql;
-            sql = "SELECT groupid,senderid,receiverid,message,messagetype,chattype FROM message where groupid=? and (issuccess =? or issuccess=? or issuccess=?";
+            sql = "SELECT groupid,senderid,receiverid,message,messagetype,chattype FROM message where groupid=? and (issuccess =? or issuccess=? or issuccess=? or issuccess=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, groupid1);
             ps.setInt(2,11);
             ps.setInt(3,7);
             ps.setInt(4,9);
+            ps.setInt(5,13);
 
             rs = ps.executeQuery();
 
@@ -105,13 +106,16 @@ public class SGroupUnreadmsgHandler extends SimpleChannelInboundHandler<GroupUnr
             }
             //判断之后进行后续选择
             // System.out.println("11111111");
-            ServerToClientmsg message1 = new ServerToClientmsg(true,"群未读消息如下：");
+            ServerToClientmsg message1 = new ServerToClientmsg(true,"你在该群的未读消息如下：");
             // System.out.println("111111112222");
-            message1.setGrouphistorymsg(grouphistorymsg);
+            message1.setGroupunreadmsg(groupunreadmsg);
             // System.out.println("11111111333333333");
-            message1.setMessageType(Message.GroupHistorymsg);
+            message1.setMessageType(Message.GroupUnreadmsg);
             // System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
+
+
+            //下午处理
 
             String sql1;
             sql1 = "update message set issuccess =12 where groupid=? and messagetype=? and chattype=?";
