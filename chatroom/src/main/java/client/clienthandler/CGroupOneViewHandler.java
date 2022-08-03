@@ -264,7 +264,7 @@ public class CGroupOneViewHandler {
     public void onecase6(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
         int userid= input.nextInt();
-        System.out.println("请输入您需要查看群列表的该群的id号：");
+        System.out.println("请输入您需要查看群历史消息的该群的id号：");
         int groupid= input.nextInt();
 
         GroupHistoryMessage groupHistoryMessage = new GroupHistoryMessage(userid,groupid);
@@ -292,7 +292,34 @@ public class CGroupOneViewHandler {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //查看群未读消息
     public void onecase7(ChannelHandlerContext ctx){
+
+        System.out.println("请输入您的id号：");
+        int userid= input.nextInt();
+        System.out.println("请输入您需要查看群未读消息的该群的id号：");
+        int groupid= input.nextInt();
+
+        GroupUnreadMessage groupUnreadMessage = new GroupUnreadMessage(userid,groupid);
+        ctx.writeAndFlush(groupUnreadMessage);
+
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //输出消息列表
+        for(String s1 :groupunreadmsg){
+            System.out.println(s1);
+        }
+
+        System.out.println("\n");
+        System.out.println("群未读列表上文所示!");
+        System.out.println("接下来为你返回群的主界面：");
+        new CGroupOneViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
