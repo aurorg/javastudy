@@ -388,6 +388,7 @@ public class CGroupOneViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //将用户踢出群
     public void onecase11(ChannelHandlerContext ctx){
 
             System.out.println("请输入您的id号：");
@@ -416,12 +417,56 @@ public class CGroupOneViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //开启禁言模式
     public void onecase12(ChannelHandlerContext ctx){
+        System.out.println("请输入您的id号：");
+        int userid=input.nextInt();
+        System.out.println("请输入你需要开启禁言模式的群id号：");
+        int groupid=input.nextInt();
+
+        GroupOpenBanSpeakMessage groupOpenBanSpeakMessage = new GroupOpenBanSpeakMessage(userid,groupid);
+        ctx.writeAndFlush(groupOpenBanSpeakMessage);
+
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+
+        System.out.println("\n");
+        System.out.println("该群已经开启禁言模式啦！！");
+        System.out.println("接下来为你返回群的主界面：");
+        new CGroupOneViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //关闭禁言模式
     public void onecase13(ChannelHandlerContext ctx){
+
+        System.out.println("请输入您的id号：");
+        int userid=input.nextInt();
+        System.out.println("请输入你需要解除禁言模式的群id号：");
+        int groupid=input.nextInt();
+
+        GroupCloseBanSpeakMessage groupCloseBanSpeakMessage = new GroupCloseBanSpeakMessage(userid,groupid);
+        ctx.writeAndFlush(groupCloseBanSpeakMessage);
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+
+        System.out.println("\n");
+        System.out.println("该群已经关闭禁言模式啦！！");
+        System.out.println("接下来为你返回群的主界面：");
+        new CGroupOneViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
