@@ -106,6 +106,8 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SGroupAddAdministratorHandler()); //添加管理员身份
                             ch.pipeline().addLast(new SGroupDeleteAdministratorHandler()); //删除管理员身份
                             ch.pipeline().addLast(new SGroupDeleteMemberHandler()) ; //将用户移出群
+                            ch.pipeline().addLast(new SGroupOpenBanSpeakHandler()) ; //群开启禁言模式
+                            ch.pipeline().addLast(new SGroupCloseBanSpeakHandler()); //群关闭禁言模式
                         }
 
                     }); //给workerGroup的EventLoop对应的管道设置处理器
