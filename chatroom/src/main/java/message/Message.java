@@ -42,6 +42,7 @@ public abstract  class Message  implements Serializable {
     public static final int GroupDeleteMessage=15; //解散群的
 
     public static final int GroupListMember=16; //群成员列表的
+    public static final int GroupHistorymsg=17; //群历史消息
 
 
 

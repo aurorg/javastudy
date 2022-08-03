@@ -120,15 +120,52 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
            // System.out.println("4444444444444444");
             ctx.writeAndFlush(message1);
 
+            //第一种将2更新为1（文本消息）
             String sql1;
-            sql1 = "update message set issuccess =1 where (senderid =? and receiverid=?) or (receiverid=? and senderid =?)";
+            sql1 = "update message set issuccess =1 where (senderid =? and receiverid=? and chattype=? and messagetype=?) or (receiverid=? and senderid =? and chattype=? and messagetype=?)";
             ps=conn.prepareStatement(sql1);
             ps.setInt(1,userid2);
             ps.setInt(2, friendid2);
-            ps.setInt(3,userid2);
-            ps.setInt(4, friendid2);
+            ps.setString(3,"FRIEND");
+            ps.setString(4,"TEXT");
+            ps.setInt(5,userid2);
+            ps.setInt(6, friendid2);
+            ps.setString(7,"FRIEND");
+            ps.setString(8,"TEXT");
             ps.executeUpdate();
-            System.out.println("因为你浏览历史消息的时候将所有消息看过了，所以将你的未读消息改为已读消息");
+            System.out.println("111因为你浏览历史消息的时候将所有消息看过了，所以将你的未读消息改为已读消息");
+
+//            //第二种将3更新为4（申请消息）
+//            String sql2;
+//            sql2 = "update message set issuccess =1 where (senderid =? and receiverid=? and chattype=? and messagetype=?) or (receiverid=? and senderid =? and chattype=? and messagetype=?)";
+//            ps=conn.prepareStatement(sql2);
+//            ps.setInt(1,userid2);
+//            ps.setInt(2, friendid2);
+//            ps.setString(3,"FRIEND");
+//            ps.setString(4,"APPLY");
+//            ps.setInt(5,userid2);
+//            ps.setInt(6, friendid2);
+//            ps.setString(7,"FRIEND");
+//            ps.setString(8,"APPLY");
+//            ps.executeUpdate();
+//            System.out.println("111因为你浏览历史消息的时候将所有消息看过了，所以将你的未读消息改为已读消息");
+//
+//            //将
+//            String sql1;
+//            sql1 = "update message set issuccess =1 where (senderid =? and receiverid=? and chattype=? and messagetype=?) or (receiverid=? and senderid =? and chattype=? and messagetype=?)";
+//            ps=conn.prepareStatement(sql1);
+//            ps.setInt(1,userid2);
+//            ps.setInt(2, friendid2);
+//            ps.setString(3,"FRIEND");
+//            ps.setString(4,"TEXT");
+//            ps.setInt(5,userid2);
+//            ps.setInt(6, friendid2);
+//            ps.setString(7,"FRIEND");
+//            ps.setString(8,"TEXT");
+//            ps.executeUpdate();
+//            System.out.println("111因为你浏览历史消息的时候将所有消息看过了，所以将你的未读消息改为已读消息");
+//
+//
 
             // 完成后关闭
             rs.close();

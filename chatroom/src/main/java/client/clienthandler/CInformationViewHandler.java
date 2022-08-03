@@ -18,8 +18,8 @@ public class CInformationViewHandler {
         System.out.println("*      根据您的需求进行选择！      *");
         System.out.println("*     [1]:查看好友历史消息        *");
         System.out.println("*     [2]:查看好友未读消息        *");
-        System.out.println("*     [3]:查看群聊历史消息        *");
-        System.out.println("*     [4]:查看群聊未读消息        *");
+//        System.out.println("*     [3]:查看群聊历史消息        *");
+//        System.out.println("*     [4]:查看群聊未读消息        *");
         System.out.println("*     [0]:返回主界面             *");
         System.out.println("*******************************");
 
@@ -34,14 +34,14 @@ public class CInformationViewHandler {
                 //查看好友未读消息函数（这里查的是客户没有上线的时候的消息）
                 unreadfriendmsg(ctx);
                 break;
-            case 3:
-                //查看群聊历史消息
-                historygroupmsg(ctx);
-                break;
-            case 4:
-                //查看群聊未读消息
-                unreadgroupmsg(ctx);
-                break;
+//            case 3:
+//                //查看群聊历史消息
+//                historygroupmsg(ctx);
+//                break;
+//            case 4:
+//                //查看群聊未读消息
+//                unreadgroupmsg(ctx);
+//                break;
 
             case 0:
                 //不看了，返回到主界面
@@ -72,8 +72,7 @@ public class CInformationViewHandler {
             e.printStackTrace();
         }
 
-//        List<String> friend=friendlist.get();
-//        List<String> group=friendlist.get();
+
         for (String s1 : friendmsglist) {
             System.out.println(s1);
         }
@@ -130,16 +129,16 @@ public class CInformationViewHandler {
 
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    //查看群聊历史消息
-    public void historygroupmsg(ChannelHandlerContext ctx){
-
-    }
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    //查看群聊未读消息
-    public void unreadgroupmsg(ChannelHandlerContext ctx){
-
-    }
-
+//    //查看群聊历史消息
+//    public void historygroupmsg(ChannelHandlerContext ctx){
+//
+//    }
+////——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//    //查看群聊未读消息
+//    public void unreadgroupmsg(ChannelHandlerContext ctx){
+//
+//    }
+//
 
 
 }

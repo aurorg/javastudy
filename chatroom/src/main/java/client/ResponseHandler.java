@@ -61,6 +61,9 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if(message.getMessageType()==Message.GroupListMember){
                 grouplist=message.grouplist;
             }
+            else if(message.getMessageType()==Message.GroupHistorymsg){
+                grouphistorymsg=message.grouphistorymsg;
+            }
 
             else {
                 System.out.print("操作成功 " + reason);

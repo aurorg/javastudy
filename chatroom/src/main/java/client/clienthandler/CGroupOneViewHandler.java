@@ -253,14 +253,40 @@ public class CGroupOneViewHandler {
        }
 
        System.out.println("\n");
-       System.out.println("群成员列表入上文所示!");
+       System.out.println("群成员列表如上文所示!");
        System.out.println("接下来为你返回群的主界面：");
        new CGroupOneViewHandler(ctx);
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //群历史消息
     public void onecase6(ChannelHandlerContext ctx){
+        System.out.println("请输入您的id号：");
+        int userid= input.nextInt();
+        System.out.println("请输入您需要查看群列表的该群的id号：");
+        int groupid= input.nextInt();
+
+        GroupHistoryMessage groupHistoryMessage = new GroupHistoryMessage(userid,groupid);
+        ctx.writeAndFlush(groupHistoryMessage);
+
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //输出消息列表
+        for(String s1 :grouphistorymsg){
+            System.out.println(s1);
+        }
+
+        System.out.println("\n");
+        System.out.println("群历史列表上文所示!");
+        System.out.println("接下来为你返回群的主界面：");
+        new CGroupOneViewHandler(ctx);
 
     }
 

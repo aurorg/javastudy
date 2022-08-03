@@ -65,7 +65,7 @@ public class SGroupQuitHandler extends SimpleChannelInboundHandler<GroupQuitMess
             ps.setInt(2, userid2);
             ps.setString(3, "退群消息");
             ps.setInt(4, 9);
-            ps.setString(5, "APPLYGROUP");
+            ps.setString(5, "QUITGROUP");
             ps.setString(6, "GROUP");
             ps.executeUpdate();
 

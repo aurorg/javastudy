@@ -18,6 +18,8 @@ public class ServerToClientmsg extends Message {
 
 
     public List<String> grouplist; //群成员列表
+    public List<String> grouphistorymsg; //群历史消息
+
 
     public String havefile="";
     public File file; //用来接受file
@@ -118,6 +120,16 @@ public class ServerToClientmsg extends Message {
 
     public List<String> getGrouplist() {
         return grouplist;
+    }
+
+    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    public void setGrouphistorymsg(List<String> grouphistorymsg) {
+        this.grouphistorymsg = grouphistorymsg;
+    }
+
+    public List<String> getGrouphistorymsg() {
+        return grouphistorymsg;
     }
 
     //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
