@@ -26,11 +26,11 @@ public class CGroupOneViewHandler {
         System.out.println("*         [8]:群聊天           *");
         System.out.println("*         [9]:添加管理员        *");
         System.out.println("*         [10]:删除管理员       *");
-        System.out.println("*         [11]:批准用户加群     *");
-        System.out.println("*         [12]:将用户踢出群     *");
-        System.out.println("*         [13]:开启禁言模式     *");
-        System.out.println("*         [14]:解除禁言模式     *");
-        System.out.println("*         [15]:群通知申请处理    *");
+//        System.out.println("*         [11]:批准用户加群     *");
+        System.out.println("*         [11]:将用户踢出群     *");
+        System.out.println("*         [12]:开启禁言模式     *");
+        System.out.println("*         [13]:解除禁言模式     *");
+        System.out.println("*         [14]:群通知申请处理    *");
         System.out.println("*         [0]:返回上一个界面     *");
         System.out.println("*******************************");
 
@@ -76,13 +76,16 @@ public class CGroupOneViewHandler {
                 onecase13(ctx);
                 break;
             case 14:
-                onecase14(ctx);
-                break;
-            case 15:
-               // onecase15(ctx);
+//                onecase14(ctx);
+//                break;
                 //查看群通知、申请加群的处理
                 new CPassAddGroupApplyView(ctx);
                 break;
+//            case 15:
+//               // onecase15(ctx);
+//                //查看群通知、申请加群的处理
+//                new CPassAddGroupApplyView(ctx);
+//                break;
             case 0:
                 //返回上一个界面
                 new CGroupViewHandler(ctx);
@@ -324,16 +327,40 @@ public class CGroupOneViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //群聊
     public void onecase8(ChannelHandlerContext ctx){
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //添加管理员
     public void onecase9(ChannelHandlerContext ctx){
+        System.out.println("请输入您的id号：");
+        int userid=input.nextInt();
+        System.out.println("请输入你需要添加管理员的群id号：");
+        int groupid=input.nextInt();
+        System.out.println("请输入你将哪位用户添加为管理员的id号：");
+        int peopleid=input.nextInt();
+
+        GroupAddAdministratorMessage groupAddAdministratorMessage=new GroupAddAdministratorMessage(userid,groupid,peopleid);
+        ctx.writeAndFlush(groupAddAdministratorMessage);
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("\n");
+        System.out.println("管理员已经被您添加！！");
+        System.out.println("接下来为你返回群主界面：");
+        new CGroupOneViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+    //删除管理员（其实就是将管理员的身份改为普通用户）
     public void onecase10(ChannelHandlerContext ctx){
 
     }
@@ -353,11 +380,11 @@ public class CGroupOneViewHandler {
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-    public void onecase14(ChannelHandlerContext ctx){
-
-    }
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//
+//    public void onecase14(ChannelHandlerContext ctx){
+//
+//    }
+////——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 //    public void onecase15(ChannelHandlerContext ctx){
 //
