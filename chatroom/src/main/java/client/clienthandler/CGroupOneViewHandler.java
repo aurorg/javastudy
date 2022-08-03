@@ -220,7 +220,7 @@ public class CGroupOneViewHandler {
 
        GroupQuitMessage groupQuitMessage= new GroupQuitMessage(userid,groupid,"退群的消息");
        ctx.writeAndFlush(groupQuitMessage);
-       
+
        try{
            synchronized(waitMessage){
                waitMessage.wait();
