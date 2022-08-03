@@ -65,7 +65,7 @@ public class SDeleteFriendHandler extends SimpleChannelInboundHandler<DeleteFrie
             if(count>0){
                 message1=new ServerToClientmsg(true,"删除好友成功。");
             }else{
-                message1=new ServerToClientmsg(false,"没有这个朋友问什么要删除呢？？！");
+                message1=new ServerToClientmsg(false,"没有这个朋友为什么要删除呢？？！");
             }
 
             ctx.writeAndFlush(message1);

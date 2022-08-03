@@ -71,9 +71,18 @@ public class SGroupQuitHandler extends SimpleChannelInboundHandler<GroupQuitMess
 
 
             //将信息从表中删除
+            String sql2;
+            sql2="DELETE FROM grouplist where groupid=? and groupmemberid=?";
+            ps = conn.prepareStatement(sql2);
+            ps.setInt(1, groupid2);
+            ps.setInt(2, userid2);
 
-
-            message1 = new ServerToClientmsg(true, "已经帮你退出了该群！！");
+            int count = ps.executeUpdate();
+            if(count>0){
+                message1=new ServerToClientmsg(true,"已经帮你退出了该群！！");
+            }else{
+                message1=new ServerToClientmsg(false,"没有这个群为什么要退出呢？？！");
+            }
 
 
             ctx.writeAndFlush(message1);

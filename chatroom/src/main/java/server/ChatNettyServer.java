@@ -97,6 +97,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SGroupDeleteHandler());//解散群的
                             ch.pipeline().addLast(new SGroupSendApplyHandler());//申请加群的
                             ch.pipeline().addLast(new SGroupJoinHandler()); //处理加群通知的
+                            ch.pipeline().addLast(new SGroupQuitHandler()); //退群的
                             //.addLast()
                         }
 
