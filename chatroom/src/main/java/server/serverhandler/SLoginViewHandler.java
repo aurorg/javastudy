@@ -95,6 +95,14 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
                 System.out.println("111111111111ceshi");
                 System.out.println("已将您的状态改为上线");
 
+                //群聊表的状态
+                String sql3="update groupList set memberstate =1 where userid =?";
+                ps=conn.prepareStatement(sql3);
+                ps.setInt(1,userid1);
+                ps.executeUpdate();
+                System.out.println("111111111111ceshi");
+                System.out.println("已将您群聊表中的状态改为上线");
+
                 message1 = new ServerToClientmsg(true,"数据库核对成功（该账号存在，密码输入正确）");
                 System.out.println(message1);
 

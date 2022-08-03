@@ -410,8 +410,6 @@ public class CGroupOneViewHandler {
             new CGroupOneViewHandler(ctx);
         }
 
-
-
     }
 
     //接收文件的方法
