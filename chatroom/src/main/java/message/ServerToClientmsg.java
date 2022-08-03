@@ -16,6 +16,9 @@ public class ServerToClientmsg extends Message {
     public List<String> friendmsglist1;//好友未读消息列表
     public List<String> friendlist;    //好友列表信息
 
+
+    public List<String> grouplist; //群成员列表
+
     public String havefile="";
     public File file; //用来接受file
     private int readcount=0; //读消息的条数
@@ -108,6 +111,20 @@ public class ServerToClientmsg extends Message {
     }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    public void setGrouplist(List<String> grouplist) {
+        this.grouplist = grouplist;
+    }
+
+    public List<String> getGrouplist() {
+        return grouplist;
+    }
+
+    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
     public String toString(){
         return "是否成功 = "+success+", 原因 = "+reason;
     }

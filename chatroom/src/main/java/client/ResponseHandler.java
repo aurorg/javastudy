@@ -45,16 +45,24 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 
             if (message.getMessageType() == Message.Informationfriendhistorymsg) {
                 friendmsglist = message.friendmsglist;
-            } else if (message.getMessageType() == Message.FriendGetFilemsg) {
+            }
+            else if (message.getMessageType() == Message.FriendGetFilemsg) {
                 System.out.println("接下来输入您的本地目录保存下来：");
                 saveFile(message.getFile());//调用将文件保存到本地目录的方法
                 System.out.println("message.file的路径【测试路径1】"+message.getFile());
                 System.out.println("已经保存啦！");
-            } else if (message.getMessageType() == Message.Informationfriendunreadmsg) {
+            }
+            else if (message.getMessageType() == Message.Informationfriendunreadmsg) {
                 friendmsglist1 = message.friendmsglist1;
-            } else if (message.getMessageType() == Message.FriendListmsg) {
+            }
+            else if (message.getMessageType() == Message.FriendListmsg) {
                 friendlist = message.friendlist;
-            } else {
+            }
+            else if(message.getMessageType()==Message.GroupListMember){
+                grouplist=message.grouplist;
+            }
+
+            else {
                 System.out.print("操作成功 " + reason);
                 waitSuccess = 1;
 

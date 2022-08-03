@@ -248,10 +248,14 @@ public class CGroupOneViewHandler {
            e.printStackTrace();
        }
 
-//       for (String s1 : friendlist) {
-//           System.out.println(s1);
-//       }
+       for (String s1 : grouplist) {
+           System.out.println(s1);
+       }
 
+       System.out.println("\n");
+       System.out.println("群成员列表入上文所示!");
+       System.out.println("接下来为你返回群的主界面：");
+       new CGroupOneViewHandler(ctx);
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
