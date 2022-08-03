@@ -1,15 +1,11 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
-import message.GroupDeleteMessage;
-import message.GroupQuitMessage;
-import message.GroupSendApplyMessage;
-import message.GroupSetupMessage;
+import message.*;
 
 import java.util.Scanner;
 
-import static client.ChatNettyClient.waitMessage;
-import static client.ChatNettyClient.waitSuccess;
+import static client.ChatNettyClient.*;
 
 public class CGroupOneViewHandler {
     //用户输入
@@ -234,7 +230,28 @@ public class CGroupOneViewHandler {
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+   //查看群列表成员
+
    public void onecase5(ChannelHandlerContext ctx){
+       System.out.println("请输入您的id号：");
+       int userid= input.nextInt();
+       System.out.println("请输入您需要查看群列表的该群的id号：");
+       int groupid= input.nextInt();
+
+       GroupListMemberMessage groupListMemberMessage = new GroupListMemberMessage(userid,groupid);
+       ctx.writeAndFlush(groupListMemberMessage);
+       try{
+           synchronized(waitMessage){
+               waitMessage.wait();
+           }
+       }catch (InterruptedException e){
+           e.printStackTrace();
+       }
+
+//       for (String s1 : friendlist) {
+//           System.out.println(s1);
+//       }
+
 
    }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

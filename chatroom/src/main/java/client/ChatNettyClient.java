@@ -42,6 +42,9 @@ public class ChatNettyClient {
     public static volatile List<String> friendlist; //查询好友列表的
     public static volatile File FriendGetFilemsg; //保存文件到本地的
 
+    public static volatile List<String> grouplist; //查询好友列表的
+    public static volatile List<String> grouphistorymsg; //查询群历史消息
+    public static volatile List<String> groupunreadmsg;//查询群未读消息的
 
     public static void main(String[] args) throws Exception{
 
