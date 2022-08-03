@@ -167,6 +167,9 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
             Channel channel;
             channel= ChatHandlerMap.getChannel(friendid1);
+
+            friendChatmsg.setA(userid1 + "说：");
+
             channel.writeAndFlush(friendChatmsg);
 
            message2 = new ServerToClientmsg(true, ""); //唤醒线程

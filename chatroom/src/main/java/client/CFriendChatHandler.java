@@ -17,7 +17,7 @@ public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
         if (is1) {
 
-            System.out.println(friendChatmsg.getMessage());
+            System.out.println(friendChatmsg.getA() + friendChatmsg.getMessage());
 
             synchronized (waitMessage) {
                 waitMessage.notifyAll();

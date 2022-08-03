@@ -254,7 +254,9 @@ public class CFriendViewHandler {
         //System.out.println("\n");
         //输入F表示发文件
         System.out.println("[输入Q，返回主界面(F发文件Y收文件）]：");
-        is1=true;
+
+        is1=true; //判断输出消息的
+
         String chatmessage=input.nextLine(); //输入聊天消息的
 
         // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了

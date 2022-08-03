@@ -82,6 +82,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SEnrollViewHandle()); //注册
                             ch.pipeline().addLast(new SLoginViewHandler());//登录
                             ch.pipeline().addLast(new SLogoutmsgViewHandler());//注销
+                            ch.pipeline().addLast(new SOffLineHandler()); //下线处理
 
                             ch.pipeline().addLast(new SFriendChatHandler()); //好友聊天
                             ch.pipeline().addLast(new SInformationfriendhistoryHandler()); //查看好友历史消息

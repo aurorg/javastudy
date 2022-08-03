@@ -22,6 +22,7 @@ public class FriendChatmsg  extends Message{
     private int count =1;//未读消息的条数
 
 
+    private String a; //加信息的
 
     private int Group=0;
     private int cishu;//记录发消息是第几次
@@ -97,7 +98,15 @@ public class FriendChatmsg  extends Message{
         return count;
     }
 
-//    public int getCishu(){
+    public String getA() {
+        return a;
+    }
+
+    public void setA(String a) {
+        this.a = a;
+    }
+
+    //    public int getCishu(){
 //        return this.cishu;
 //    }
 

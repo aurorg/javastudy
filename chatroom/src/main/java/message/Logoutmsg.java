@@ -17,6 +17,10 @@ public class Logoutmsg extends Message {
 
     }
 
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
     public int getUserid(){
         return this.userid;
     }

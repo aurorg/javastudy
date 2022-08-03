@@ -5,6 +5,7 @@ import message.Enrollmsg;
 
 import message.Loginmsg;
 import message.Logoutmsg;
+import message.OffLinemsg;
 
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class CDengLuViewHandler {
         System.out.println("*         [1]:用户注册          *");
         System.out.println("*         [2]:用户登录          *");
         System.out.println("*         [3]:用户注销          *");
-        System.out.println("*         [0]:退出系统          *");
+        System.out.println("*         [4]:退出系统(下线）    *");
         System.out.println("*******************************");
 
         int n = input.nextInt();
@@ -44,9 +45,12 @@ public class CDengLuViewHandler {
             case 3:
                 logout(ctx);
                 break;
-            case 0:
-                System.out.println("退出啦！");
-                ctx.channel().close();
+            case 4:
+//                System.out.println("退出啦！");
+//                ctx.channel().close();
+                offline(ctx);
+                break;
+
             default:
                 System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
                 new CDengLuViewHandler(ctx);
@@ -207,8 +211,29 @@ public class CDengLuViewHandler {
                 new CDengLuViewHandler(ctx);
         }
     }
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //下线处理
+   public void offline(ChannelHandlerContext ctx){
+       System.out.println("请输入您的账号【id】:");
+       int userid1 = input.nextInt();
 
+       OffLinemsg offLinemsg = new OffLinemsg(userid1);
+       ctx.writeAndFlush(offLinemsg);
 
+       try {
+           synchronized (waitMessage) {
+               waitMessage.wait();
+           }
+
+       } catch (InterruptedException e) {
+           e.printStackTrace();
+       }
+
+       System.out.println("正在为你关闭管道，即将下线");
+
+      // ctx.channel().close();
+
+   }
 
 
 }
