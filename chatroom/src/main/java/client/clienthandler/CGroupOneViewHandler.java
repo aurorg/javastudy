@@ -354,7 +354,7 @@ public class CGroupOneViewHandler {
 
         System.out.println("\n");
         System.out.println("管理员已经被您添加！！");
-        System.out.println("接下来为你返回群主界面：");
+        System.out.println("接下来为你返回群的主界面：");
         new CGroupOneViewHandler(ctx);
 
     }
@@ -368,6 +368,22 @@ public class CGroupOneViewHandler {
         int groupid=input.nextInt();
         System.out.println("请输入你将哪位用户删除管理员身份的id号：");
         int peopleid=input.nextInt();
+
+        GroupDeleteAdministratorMessage groupDeleteAdministratorMessage = new GroupDeleteAdministratorMessage(userid,groupid,peopleid);
+        ctx.writeAndFlush(groupDeleteAdministratorMessage);
+
+        try{
+            synchronized(waitMessage){
+                waitMessage.wait();
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("\n");
+        System.out.println("管理员已经被您删除！！");
+        System.out.println("接下来为你返回群的主界面：");
+        new CGroupOneViewHandler(ctx);
 
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

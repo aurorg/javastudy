@@ -102,7 +102,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SGroupHistorymsgHandler()); //群历史消息
                             ch.pipeline().addLast(new SGroupUnreadmsgHandler()) ; //群未读消息的
                             ch.pipeline().addLast(new SGroupAddAdministratorHandler()); //添加管理员身份
-                            //.addLast()
+                            ch.pipeline().addLast(new SGroupDeleteAdministratorHandler()); //删除管理员身份
                         }
 
                     }); //给workerGroup的EventLoop对应的管道设置处理器
