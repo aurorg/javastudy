@@ -1,11 +1,7 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
-import message.Enrollmsg;
-
-import message.Loginmsg;
-import message.Logoutmsg;
-import message.OffLinemsg;
+import message.*;
 
 import java.util.Scanner;
 
@@ -247,11 +243,34 @@ public class CDengLuViewHandler {
     //找回密码
     public void findpassword(ChannelHandlerContext ctx){
 
+        System.out.println("请输入你的id号：");
+        int userid=input.nextInt();
+        System.out.println("请输入您的电话号码：");
+        int phonenumber=input.nextInt();
+
+        FindPasswordmsg findPasswordmsg =new FindPasswordmsg(userid,phonenumber);
+        ctx.writeAndFlush(findPasswordmsg);
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\n");
+        System.out.println("找回成功");
+        System.out.println("接下来为你返回主界面");
+        new CDengLuViewHandler(ctx);
+
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //修改密码
     public void updatepassword(ChannelHandlerContext ctx){
-
+        System.out.println("请输入你的id号：");
+        int userid=input.nextInt();
+        System.out.println("请输入您的电话号码：");
+        int phonenumber=input.nextInt();
     }
 
 }
