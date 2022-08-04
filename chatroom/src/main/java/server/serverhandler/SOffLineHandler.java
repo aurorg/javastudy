@@ -61,7 +61,7 @@ public class SOffLineHandler extends SimpleChannelInboundHandler<OffLinemsg> {
             ps.executeUpdate();
 
             //群聊
-            String sql3 ="update grouplist set userstate =2 where userid =?";
+            String sql3 ="update grouplist set memberstate =2 where groupmemberid =?";
             ps=conn.prepareStatement(sql3);
             ps.setInt(1,userid2);
             ps.executeUpdate();

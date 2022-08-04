@@ -49,6 +49,7 @@ public class CDengLuViewHandler {
 //                System.out.println("退出啦！");
 //                ctx.channel().close();
                 offline(ctx);
+                System.exit(0);
                 break;
 
             default:
@@ -107,6 +108,7 @@ public class CDengLuViewHandler {
         /**
          * 将id号发给服务端，让服务端去数据库查找有没有这个账号，核对密码对不对
          */
+        
         //向客户端将账号和id发过去
         Loginmsg loginmsg = new Loginmsg(userid1, psw1);
         ctx.writeAndFlush(loginmsg);
@@ -231,7 +233,7 @@ public class CDengLuViewHandler {
 
        System.out.println("正在为你关闭管道，即将下线");
 
-      // ctx.channel().close();
+       ctx.channel().close();
 
    }
 
