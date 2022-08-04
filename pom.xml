@@ -35,6 +35,7 @@
             <artifactId>netty-transport</artifactId>
             <version>5.0.0.Alpha2</version>
         </dependency>
+
     </dependencies>
 
 </project>

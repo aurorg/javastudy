@@ -2,6 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.Addfriendmsg;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
 
@@ -21,8 +22,13 @@ public class CPassFriendApplyView {
         System.out.println("*       [0]:返回好友界面         *");
         System.out.println("*******************************");
 
-        int n = input.nextInt();
-        switch (n) {
+        //int n = input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不合法输入，重新输入哦！");
+            n =input.next();
+        }
+        switch (Integer.parseInt(n)) {
             case 1:
                 passfriend(ctx);
                 break;

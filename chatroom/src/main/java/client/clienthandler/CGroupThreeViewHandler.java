@@ -1,8 +1,11 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
+
+import static client.clienthandler.CGroupOneViewHandler.*;
 
 public class CGroupThreeViewHandler {
     //用户输入
@@ -24,31 +27,36 @@ public class CGroupThreeViewHandler {
         System.out.println("*         [0]:返回上一个界面     *");
         System.out.println("*******************************");
 
-        int n = input.nextInt();
-        switch (n) {
+       // int n = input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不合法输入，重新输入哦！");
+            n =input.next();
+        }
+        switch (Integer.parseInt(n)) {
             case 1:
-                threecase1(ctx);
+                onecase1(ctx);
                 break;
             case 2:
-                threecase2(ctx);
+                onecase3(ctx);
                 break;
             case 3:
-                threecase3(ctx);
+                onecase4(ctx);
                 break;
             case 4:
-                threecase4(ctx);
+                onecase5(ctx);
                 break;
             case 5:
-                threecase5(ctx);
+                onecase6(ctx);
                 break;
             case 6:
-                threecase6(ctx);
+                onecase7(ctx);
                 break;
             case 7:
-                threecase7(ctx);
+                onecase8(ctx);
                 break;
             case 8:
-                threecase8(ctx);
+                new CPassAddGroupApplyView(ctx);
                 break;
             case 0:
                 //返回上一个界面
@@ -61,46 +69,5 @@ public class CGroupThreeViewHandler {
         }
     }
 
-    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void threecase1(ChannelHandlerContext ctx) {
-
-    }
-
-    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void threecase2(ChannelHandlerContext ctx) {
-
-    }
-
-    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void threecase3(ChannelHandlerContext ctx) {
-
-    }
-
-    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void threecase4(ChannelHandlerContext ctx) {
-
-    }
-
-    //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-    public void threecase5(ChannelHandlerContext ctx) {
-
-    }
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-    public void threecase6(ChannelHandlerContext ctx) {
-
-    }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-    public void threecase7(ChannelHandlerContext ctx) {
-
-    }
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-    public void threecase8(ChannelHandlerContext ctx) {
-
-    }
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 }

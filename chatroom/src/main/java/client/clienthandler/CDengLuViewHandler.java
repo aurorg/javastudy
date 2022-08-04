@@ -1,7 +1,9 @@
 package client.clienthandler;
 
+
 import io.netty.channel.ChannelHandlerContext;
 import message.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
 
@@ -32,8 +34,15 @@ public class CDengLuViewHandler {
         System.out.println("*         [6]:修改密码          *");
         System.out.println("*******************************");
 
-        int n = input.nextInt();
-        switch (n) {
+       // int n = input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不合法输入，重新输入哦！");
+            n =input.next();
+        }
+
+        //把n转成int类型
+        switch (Integer.parseInt(n)) {
             case 1:
                enroll(ctx);
                 break;

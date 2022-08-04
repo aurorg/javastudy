@@ -4,6 +4,7 @@ import client.ResponseHandler;
 import io.netty.channel.ChannelHandlerContext;
 import jdk.swing.interop.SwingInterOpUtils;
 import message.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,9 +44,14 @@ public class CFriendViewHandler {
 //            System.out.println("输入不规范，请重新输入您的选择：");
 //            n1=input.nextInt();
 //        }
-       int n = input.nextInt();
+       //int n = input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不合法输入，重新输入哦！");
+            n =input.next();
+        }
 
-        switch (n) {
+        switch (Integer.parseInt(n)) {
             case 1:
                 //添加好友
                 addfriend(ctx);

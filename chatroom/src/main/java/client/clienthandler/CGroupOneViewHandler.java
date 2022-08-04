@@ -2,6 +2,7 @@ package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import message.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.Scanner;
@@ -35,8 +36,14 @@ public class CGroupOneViewHandler {
         System.out.println("*         [0]:返回上一个界面     *");
         System.out.println("*******************************");
 
-        int n =input.nextInt();
-        switch(n){
+
+        //int n =input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不合法输入，重新输入哦！");
+            n =input.next();
+        }
+        switch(Integer.parseInt(n)){
             case 1:
                 onecase1(ctx);
                 break;
@@ -100,7 +107,7 @@ public class CGroupOneViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //创建群
-    public void onecase1(ChannelHandlerContext ctx){
+    public static void onecase1(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
@@ -131,7 +138,7 @@ public class CGroupOneViewHandler {
     }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //解散群
-    public void onecase2(ChannelHandlerContext ctx){
+    public static void onecase2(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
@@ -185,7 +192,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
     //申请加群
 
-   public void onecase3(ChannelHandlerContext ctx){
+   public static void onecase3(ChannelHandlerContext ctx){
        System.out.println("请输入您的id号：");
        int userid=input.nextInt();
 
@@ -210,7 +217,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //申请退群
-   public void onecase4(ChannelHandlerContext ctx){
+   public static void onecase4(ChannelHandlerContext ctx){
 
        System.out.println("请输入您的id号：");
        int userid=input.nextInt();
@@ -236,7 +243,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
    //查看群列表成员
 
-   public void onecase5(ChannelHandlerContext ctx){
+   public static void onecase5(ChannelHandlerContext ctx){
        System.out.println("请输入您的id号：");
        int userid= input.nextInt();
        System.out.println("请输入您需要查看群列表的该群的id号：");
@@ -265,7 +272,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //群历史消息
-    public void onecase6(ChannelHandlerContext ctx){
+    public static void onecase6(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
         int userid= input.nextInt();
         System.out.println("请输入您需要查看群历史消息的该群的id号：");
@@ -297,7 +304,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //查看群未读消息
-    public void onecase7(ChannelHandlerContext ctx){
+    public static void onecase7(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
         int userid= input.nextInt();
@@ -329,7 +336,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //群聊(发消息、发文件)
-    public void onecase8(ChannelHandlerContext ctx){
+    public static void onecase8(ChannelHandlerContext ctx){
         System.out.println("请输入您的id：");
         int userid=input.nextInt();
         System.out.println("请输入你需要发消息的群：");
@@ -468,7 +475,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //添加管理员
-    public void onecase9(ChannelHandlerContext ctx){
+    public static void onecase9(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
         System.out.println("请输入你需要添加管理员的群id号：");
@@ -495,7 +502,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //删除管理员（其实就是将管理员的身份改为普通用户）
-    public void onecase10(ChannelHandlerContext ctx){
+    public static void onecase10(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
         System.out.println("请输入你需要删除管理员的群id号：");
@@ -525,7 +532,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //将用户踢出群
-    public void onecase11(ChannelHandlerContext ctx){
+    public static void onecase11(ChannelHandlerContext ctx){
 
             System.out.println("请输入您的id号：");
             int userid=input.nextInt();
@@ -554,7 +561,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //开启禁言模式
-    public void onecase12(ChannelHandlerContext ctx){
+    public static void onecase12(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
         System.out.println("请输入你需要开启禁言模式的群id号：");
@@ -581,7 +588,7 @@ public class CGroupOneViewHandler {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
     //关闭禁言模式
-    public void onecase13(ChannelHandlerContext ctx){
+    public static void onecase13(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
         int userid=input.nextInt();
