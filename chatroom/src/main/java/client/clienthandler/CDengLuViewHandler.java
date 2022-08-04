@@ -32,6 +32,8 @@ public class CDengLuViewHandler {
         System.out.println("*         [2]:用户登录          *");
         System.out.println("*         [3]:用户注销          *");
         System.out.println("*         [4]:退出系统(下线）    *");
+        System.out.println("*         [5]:找回密码          *");
+        System.out.println("*         [6]:修改密码          *");
         System.out.println("*******************************");
 
         int n = input.nextInt();
@@ -51,7 +53,12 @@ public class CDengLuViewHandler {
                 offline(ctx);
                 System.exit(0);
                 break;
-
+            case 5:
+                findpassword(ctx);
+                break;
+            case 6:
+                updatepassword(ctx);
+                break;
             default:
                 System.out.println("请按照要求输入哦！再给你一次重新输入的机会");
                 new CDengLuViewHandler(ctx);
@@ -108,7 +115,7 @@ public class CDengLuViewHandler {
         /**
          * 将id号发给服务端，让服务端去数据库查找有没有这个账号，核对密码对不对
          */
-        
+
         //向客户端将账号和id发过去
         Loginmsg loginmsg = new Loginmsg(userid1, psw1);
         ctx.writeAndFlush(loginmsg);
@@ -236,6 +243,15 @@ public class CDengLuViewHandler {
        ctx.channel().close();
 
    }
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //找回密码
+    public void findpassword(ChannelHandlerContext ctx){
 
+    }
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+    //修改密码
+    public void updatepassword(ChannelHandlerContext ctx){
+
+    }
 
 }
