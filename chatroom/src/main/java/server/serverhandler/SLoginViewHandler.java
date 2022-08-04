@@ -63,7 +63,7 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
 
 
             String sql;
-            sql = "SELECT userid,userpassword FROM usermsg where (userid=? and userpassword=?)";
+            sql = "SELECT userid,userpassword,userstate FROM usermsg where (userid=? and userpassword=?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid1);
             ps.setString(2, password1);
@@ -79,10 +79,11 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
                 //通过字段搜索
                 int userid2=rs.getInt("userid");
                 String password2 = rs.getString("userpassword");
+                int userstate2=rs.getInt("userstate");
                 System.out.println(userid2);
                 System.out.println(password2);
 
-                if((userid1==userid2) && (password1.equals(password2))){
+                if((userid1==userid2) && (password1.equals(password2)) && userstate2==2){
                     isexit=true;
                 }
             }
@@ -130,7 +131,7 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
 
                 //ctx.writeAndFlush(message1);
             }else{
-                message1 = new ServerToClientmsg(false,"您的账号不存在或者密码错误");
+                message1 = new ServerToClientmsg(false,"您的账号不存在或者密码错误或者您已经登录");
                 System.out.println(message1);
             }
 

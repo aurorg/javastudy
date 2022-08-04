@@ -73,7 +73,12 @@ public class CDengLuViewHandler {
     //注册操作
     public void enroll(ChannelHandlerContext ctx){
         System.out.println("请输入您的手机号码进行注册（6位）：");
-        int pn1 =input.nextInt();
+        String n =input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("输入太随意，重新输入哦！");
+            n=input.next();
+        }
+        int pn1=Integer.parseInt(n);
 
         //log.info("23432424");
         System.out.println("请输入您的账号昵称：");
@@ -109,7 +114,13 @@ public class CDengLuViewHandler {
     //登录操作
     public void login(ChannelHandlerContext ctx) {
         System.out.println("请输入您的账号【id】:");
-        int userid1 = input.nextInt();
+       // int userid1 = input.nextInt();
+        String n =input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("输入太随意，重新输入哦！");
+            n=input.next();
+        }
+        int userid1 =Integer.parseInt(n);
 
         System.out.println("请输入您的密码：");
         String psw1 = input.next();
