@@ -73,12 +73,12 @@ public class CDengLuViewHandler {
     //注册操作
     public void enroll(ChannelHandlerContext ctx){
         System.out.println("请输入您的手机号码进行注册（6位）：");
-        String n =input.next();
-        while(!StringUtils.isNumeric(n)){
+        String n1 =input.next();
+        while(!StringUtils.isNumeric(n1)){
             System.out.println("输入太随意，重新输入哦！");
-            n=input.next();
+            n1=input.next();
         }
-        int pn1=Integer.parseInt(n);
+        int pn1=Integer.parseInt(n1);
 
         //log.info("23432424");
         System.out.println("请输入您的账号昵称：");
@@ -115,12 +115,12 @@ public class CDengLuViewHandler {
     public void login(ChannelHandlerContext ctx) {
         System.out.println("请输入您的账号【id】:");
        // int userid1 = input.nextInt();
-        String n =input.next();
-        while(!StringUtils.isNumeric(n)){
+        String n2 =input.next();
+        while(!StringUtils.isNumeric(n2)){
             System.out.println("输入太随意，重新输入哦！");
-            n=input.next();
+            n2=input.next();
         }
-        int userid1 =Integer.parseInt(n);
+        int userid1 =Integer.parseInt(n2);
 
         System.out.println("请输入您的密码：");
         String psw1 = input.next();
@@ -184,8 +184,16 @@ public class CDengLuViewHandler {
     //注销账号
     public void logout(ChannelHandlerContext ctx){
         System.out.println("用户注销操作如下：");
+
         System.out.println("请输入您的账号【id】:");
-        int userid1 =input.nextInt();
+        //int userid1 =input.nextInt();
+        String n3 =input.next();
+        while(!StringUtils.isNumeric(n3)){
+            System.out.println("输入太随意，重新输入哦！");
+            n3=input.next();
+        }
+        int userid1=Integer.parseInt(n3);
+
 
         System.out.println("请输入您的密码：");
         String psw1 =input.next();
@@ -200,8 +208,13 @@ public class CDengLuViewHandler {
         System.out.println("**不删除了就进行后续操作***");
         System.out.println("***********************");
 
-        int n = input.nextInt();
-        switch (n) {
+        //int n4 = input.nextInt();
+        String n4=input.next();
+        while(!StringUtils.isNumeric(n4)){
+            System.out.println("不合法输入，重新输入哦！");
+            n4 =input.next();
+        }
+        switch (Integer.parseInt(n4)) {
             case 1://向服务器发消息，让服务器从数据库中删除这个账号
 
                 //向服务器将账户的id发过去
@@ -240,7 +253,13 @@ public class CDengLuViewHandler {
     //下线处理
    public void offline(ChannelHandlerContext ctx){
        System.out.println("请输入您的账号【id】:");
-       int userid1 = input.nextInt();
+       //int userid1 = input.nextInt();
+       String n5=input.next();
+       while(!StringUtils.isNumeric(n5)){
+           System.out.println("不合法输入，重新输入哦！");
+           n5 =input.next();
+       }
+       int userid1 =Integer.parseInt(n5);
 
        OffLinemsg offLinemsg = new OffLinemsg(userid1);
        ctx.writeAndFlush(offLinemsg);
@@ -264,9 +283,23 @@ public class CDengLuViewHandler {
     public void findpassword(ChannelHandlerContext ctx){
 
         System.out.println("请输入你的id号：");
-        int userid=input.nextInt();
+       // int userid=input.nextInt();
+        String n6=input.next();
+        while(!StringUtils.isNumeric(n6)){
+            System.out.println("不合法输入，重新输入哦！");
+            n6 =input.next();
+        }
+        int userid =Integer.parseInt(n6);
+
         System.out.println("请输入您的电话号码：");
-        int phonenumber=input.nextInt();
+        //int phonenumber=input.nextInt();
+        String n7=input.next();
+        while(!StringUtils.isNumeric(n7)){
+            System.out.println("不合法输入，重新输入哦！");
+            n7 =input.next();
+        }
+        int phonenumber=Integer.parseInt(n7);
+
 
         FindPasswordmsg findPasswordmsg =new FindPasswordmsg(userid,phonenumber);
         ctx.writeAndFlush(findPasswordmsg);
@@ -288,11 +321,26 @@ public class CDengLuViewHandler {
     //修改密码
     public void updatepassword(ChannelHandlerContext ctx){
         System.out.println("请输入你的id号：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n8=input.next();
+        while(!StringUtils.isNumeric(n8)){
+            System.out.println("不合法输入，重新输入哦！");
+            n8 =input.next();
+        }
+        int userid=Integer.parseInt(n8);
+
         System.out.println("请输入您的电话号码：");
-        int phonenumber=input.nextInt();
+        //int phonenumber=input.nextInt();
+        String n9=input.next();
+        while(!StringUtils.isNumeric(n9)){
+            System.out.println("不合法输入，重新输入哦！");
+            n9 =input.next();
+        }
+        int phonenumber=Integer.parseInt(n9);
+
+        //需要更深层处理
         System.out.println("请输入你的原密码：");
-         String ps= input.next();
+        String ps= input.next();
         System.out.println("请输入您需要修改的密码：");
         String password=input.next();
 
