@@ -113,6 +113,7 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new SGroupChatHandler()); //群聊的
                             ch.pipeline().addLast(new SGroupGetFileHandler()); //接受群文件的
                             ch.pipeline().addLast(new SFindPasswordHandler()); //找回密码的
+                            ch.pipeline().addLast(new SUpdatePasswordHandler()); //修改密码的
                         }
 
                     }); //给workerGroup的EventLoop对应的管道设置处理器

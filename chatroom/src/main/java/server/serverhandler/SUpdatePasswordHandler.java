@@ -58,9 +58,11 @@ public class SUpdatePasswordHandler extends SimpleChannelInboundHandler<UpdatePa
 
             String sql2 ="update usermsg set userpassword =? where userid =?";
             ps=conn.prepareStatement(sql2);
-            ps.setInt(1,phonenumber1);
+             ps.setString(1,password1);
             ps.setInt(2,userid1);
             ps.executeUpdate();
+            message1 = new ServerToClientmsg(true,"密码已修改");
+            ctx.writeAndFlush(message1);
 
             stat.close();
             conn.close();

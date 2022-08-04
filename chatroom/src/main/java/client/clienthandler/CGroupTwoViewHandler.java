@@ -31,7 +31,7 @@ public class CGroupTwoViewHandler {
         int n = input.nextInt();
         switch (n) {
             case 1:
-                twocase1(ctx);
+                onecase1(ctx);
                 break;
             case 2:
                 twocase2(ctx);
