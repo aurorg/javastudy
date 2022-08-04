@@ -793,7 +793,7 @@ public class CGroupOneViewHandler {
             n1 =input.next();
         }
         int groupid=Integer.parseInt(n1);
-        
+
 
         GroupCloseBanSpeakMessage groupCloseBanSpeakMessage = new GroupCloseBanSpeakMessage(userid,groupid);
         ctx.writeAndFlush(groupCloseBanSpeakMessage);
