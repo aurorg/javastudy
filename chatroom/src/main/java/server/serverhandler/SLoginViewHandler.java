@@ -103,6 +103,16 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
                 System.out.println("111111111111ceshi");
                 System.out.println("已将您群聊表中的状态改为上线");
 
+                //好友表中的状态
+                String sql4="update friendlist set state =1 where friendid =?";
+                ps=conn.prepareStatement(sql4);
+                ps.setInt(1,userid1);
+                ps.executeUpdate();
+                System.out.println("111111111111ceshi");
+                System.out.println("已将您好友表中的状态改为上线");
+
+
+
                 message1 = new ServerToClientmsg(true,"数据库核对成功（该账号存在，密码输入正确）");
                 System.out.println(message1);
 

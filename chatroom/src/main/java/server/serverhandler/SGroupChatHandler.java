@@ -145,7 +145,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
                             ps.setString(6, "TEXT");
                         } else {
                             String addFile;
-                            addFile = "/home/shizhanli/" + file.getName();
+                            addFile =System.getProperty("user.dir") + file.getName();
 
                             //测试
                             System.out.println("测试" + addFile);
@@ -201,7 +201,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
                             ps.setString(6, "TEXT");
                         } else {
                             String addFile;
-                            addFile = "/home/shizhanli/" + file.getName();
+                            addFile = System.getProperty("user.dir") + file.getName();
 
                             //测试
                             System.out.println("测试" + addFile);

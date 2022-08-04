@@ -15,7 +15,7 @@ public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FriendChatmsg friendChatmsg) throws Exception {
 
-        if (is1) {
+        if (is1  && friendChatmsg.getUserid()==chatting) {
 
             System.out.println(friendChatmsg.getA() + friendChatmsg.getMessage());
 

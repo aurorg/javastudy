@@ -68,8 +68,8 @@ public class CPassFriendApplyView {
             e.printStackTrace();
         }
         System.out.println("申请已经通过，你们已经成为好友啦！");
-//        System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
-//        new CFriendViewHandler(ctx);
+        System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
+        new CFriendViewHandler(ctx);
 
 
     }

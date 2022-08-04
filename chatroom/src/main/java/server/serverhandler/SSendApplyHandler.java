@@ -109,7 +109,7 @@ public class SSendApplyHandler extends SimpleChannelInboundHandler<SendApplyMess
                     message1=new ServerToClientmsg(true,"可以添加!");
 
                     Channel channel = ChatHandlerMap.getChannel(friendid2);
-                    if(channel==null){
+                    if(channel!=null){
                         channel.writeAndFlush(new FriendChatmsg());
                     }
 

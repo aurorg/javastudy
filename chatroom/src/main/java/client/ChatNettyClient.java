@@ -49,6 +49,9 @@ public class ChatNettyClient {
     public static volatile List<String> grouphistorymsg; //查询群历史消息
     public static volatile List<String> groupunreadmsg;//查询群未读消息的
 
+    public static volatile int chatting=0;
+
+
     public static void main(String[] args) throws Exception{
 
         //客户端需要一个事件循环组

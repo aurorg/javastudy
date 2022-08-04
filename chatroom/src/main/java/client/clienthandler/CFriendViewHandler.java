@@ -207,52 +207,15 @@ public class CFriendViewHandler {
 
     public void friendchat(ChannelHandlerContext ctx){
 
-
-//        Informationfriendhistorymsg message1 =new Informationfriendhistorymsg(userid1,friendid1);
-//        ctx.writeAndFlush(message1);
-//
-//        try{
-//            synchronized(waitMessage){
-//                waitMessage.wait();
-//            }
-//        }catch (InterruptedException e){
-//            e.printStackTrace();
-//        }
-//
-//        if(waitSuccess==1){
-//            talker=friendid1;
-//            int count=0;
-//
-//            for(String s:friendlist){
-//                System.out.println(s);
-//            }
-//
-//            if(havefile.charAt(count)=='1'){
-//                CFriendViewHandler.receiverFile(s,input,ctx,friendid1);
-//            }
-//            count++;
-//        }
-//
-//        Informationmsg message1 = new Informationmsg(userid1,friendid1);
-//        ctx.writeAndFlush(message1);
-//
-
-//        FriendChatmsg message1 = new FriendChatmsg(userid1,friendid1,null,null);
-//        ctx.writeAndFlush(message1);
-//
-//        try{
-//            synchronized(waitMessage){
-//                waitMessage.wait();
-//            }
-//        }catch (InterruptedException e){
-//            e.printStackTrace();
-//        }
+        //要判断好友是否正在聊天
 
         System.out.println("请输入您的id：");
         int userid1=input.nextInt();
 
         System.out.println("请输入你需要发消息的好友id:");
         int friendid1 = input.nextInt();
+
+        chatting=friendid1;
 
         /**
          * 让服务端建立一个channel，用map将（用户和对应的channel绑起来），然后开始发消息
