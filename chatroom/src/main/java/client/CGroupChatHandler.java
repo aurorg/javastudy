@@ -14,7 +14,8 @@ public class CGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
 
         if (is2) {
 
-//            System.out.println(friendChatmsg.getA() + friendChatmsg.getMessage());
+            //将消息打印出来
+            System.out.println(groupChatMessage.getA() + groupChatMessage.getMessage());
 
             synchronized (waitMessage) {
                 waitMessage.notifyAll();

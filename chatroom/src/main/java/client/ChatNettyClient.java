@@ -37,8 +37,6 @@ public class ChatNettyClient {
     public static volatile String havefile="";
 
 
-
-
     public static volatile Map<String, List<String>> informationMap;//
 
     public static volatile List<String> friendmsglist;//查询好友历史消息列表
@@ -75,6 +73,7 @@ public class ChatNettyClient {
                             ch.pipeline().addLast(new MessageCodec()); //解码编码的
                             ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
                             ch.pipeline().addLast(new CFriendChatHandler());//好友聊天的
+                            ch.pipeline().addLast(new CGroupChatHandler()); //群聊的
                             //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 

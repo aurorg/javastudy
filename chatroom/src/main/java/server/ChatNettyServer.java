@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import message.SGroupChatHandler;
+import server.serverhandler.SGroupChatHandler;
 import server.serverhandler.*;
 
 import java.io.IOException;

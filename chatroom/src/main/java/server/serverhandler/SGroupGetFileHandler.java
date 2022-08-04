@@ -75,7 +75,7 @@ public class SGroupGetFileHandler extends SimpleChannelInboundHandler<GroupGetFi
                 }else if(issuccess1==13 && messagetype.equals("FILE") && msg.equals(filename)){
 
                     message1=new ServerToClientmsg(true,"收到你要保存群文件的信息啦！");
-
+                    ctx.writeAndFlush(message1);
 
 
                     File file=new File(filename);
@@ -92,7 +92,7 @@ public class SGroupGetFileHandler extends SimpleChannelInboundHandler<GroupGetFi
                     ps.setString(2,"FILE");
                     ps.executeUpdate();
 
-                    System.out.println("测试收文件111111111111111111");
+                    System.out.println("测试收文件555555555");
 
         }
     }

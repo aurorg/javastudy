@@ -96,7 +96,7 @@ public class SLoginViewHandler extends SimpleChannelInboundHandler<Loginmsg> {
                 System.out.println("已将您的状态改为上线");
 
                 //群聊表的状态
-                String sql3="update groupList set memberstate =1 where userid =?";
+                String sql3="update grouplist set memberstate =1 where groupmemberid =?";
                 ps=conn.prepareStatement(sql3);
                 ps.setInt(1,userid1);
                 ps.executeUpdate();

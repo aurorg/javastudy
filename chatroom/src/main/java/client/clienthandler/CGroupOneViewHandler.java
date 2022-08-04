@@ -383,6 +383,7 @@ public class CGroupOneViewHandler {
             //接收文件的情况
             else if(chatmessage.equalsIgnoreCase("Y")){
                 receiveFile(ctx,groupid,userid);
+                break;
             }
 
             //发送文本消息
@@ -435,6 +436,7 @@ public class CGroupOneViewHandler {
 
             GroupGetFilemsg groupGetFilemsg= new GroupGetFilemsg(userid,groupid,filename);
             ctx.writeAndFlush(groupGetFilemsg);
+
             System.out.println("1111111111111111111");
             try {
                 synchronized (waitMessage) {
@@ -443,6 +445,7 @@ public class CGroupOneViewHandler {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             System.out.println("222222222222222");
             //new ResponseHandler().saveFile(FriendGetFilemsg);
             System.out.println("333333333333333");

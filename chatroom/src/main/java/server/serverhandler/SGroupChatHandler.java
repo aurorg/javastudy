@@ -1,9 +1,11 @@
-package message;
+package server.serverhandler;
 
 import common.ChatHandlerMap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import message.GroupChatMessage;
+import message.ServerToClientmsg;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,6 +41,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
     protected void channelRead0(ChannelHandlerContext ctx, GroupChatMessage groupChatMessage) throws Exception {
 
         try{
+
             System.out.println("打印消息" + groupChatMessage);
 
             //接收消息的部分
@@ -68,8 +71,8 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
 
             String sql1;
             sql1 ="SELECT groupstate FROM groupmsg WHERE groupid=?";
-            ps.setInt(1,groupid1);
             ps = conn.prepareStatement(sql1);
+            ps.setInt(1,groupid1);
             rs = ps.executeQuery();
 
             int isexit =2;
@@ -115,7 +118,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
                     int groupmemberid1 = rs.getInt("groupmemberid");
                     int memberstate1 = rs.getInt("memberstate");
 
-                    if (memberstate1 == 1) {
+                    if (memberstate1 == 1  && groupmemberid1!=userid1) {
                         //建管道发消息
                         Channel channel;
                         channel = ChatHandlerMap.getChannel(groupmemberid1);
@@ -179,7 +182,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
                         ps.executeUpdate();
 
                     }
-                    if (isexit == 2) { //将消息存下来上线了看
+                    if (isexit == 2 && groupmemberid1!=userid1) { //将消息存下来上线了看
 
                         message2 = new ServerToClientmsg(true, ""); //唤醒线程
                         ctx.writeAndFlush(message2);

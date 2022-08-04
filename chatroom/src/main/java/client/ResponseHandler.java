@@ -1,5 +1,6 @@
 package client;
 
+import client.clienthandler.CGroupOneViewHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.Message;
@@ -55,9 +56,10 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if(message.getMessageType()==Message.GroupGetFilemsg){
                 System.out.println("接下来输入您的本地路径保存下来：");
                 saveFile(message.getFile());
-
                 System.out.println("message.file的路径【测试路径2】"+message.getFile());
                 System.out.println("已经保存啦");
+                System.out.println("接下来为你返回群的主界面");
+                new CGroupOneViewHandler(ctx);
 
             }
             else if (message.getMessageType() == Message.Informationfriendunreadmsg) {
@@ -129,8 +131,10 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 //        }
             System.out.println("请输入路径：");
             String addFile = input.next();
+
             File tempFile1 = new File(addFile);
             tempFile1.createNewFile();
+
             System.out.println("查看路径【测试路径2】"+file.getAbsolutePath());
             FileChannel readChannel = new FileInputStream(file).getChannel();
             FileChannel writeChannel = new FileOutputStream(tempFile1).getChannel();
