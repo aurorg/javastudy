@@ -271,6 +271,25 @@ public class CDengLuViewHandler {
         int userid=input.nextInt();
         System.out.println("请输入您的电话号码：");
         int phonenumber=input.nextInt();
+        System.out.println("请输入你的原密码：");
+         String ps= input.next();
+        System.out.println("请输入您需要修改的密码：");
+        String password=input.next();
+
+        UpdatePasswordmsg updatePasswordmsg = new UpdatePasswordmsg(userid,phonenumber,password);
+        ctx.writeAndFlush(updatePasswordmsg);
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\n");
+        System.out.println("修改成功");
+        System.out.println("接下来为你返回主界面");
+        new CDengLuViewHandler(ctx);
     }
 
 }
