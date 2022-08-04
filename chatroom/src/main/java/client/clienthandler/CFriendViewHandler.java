@@ -47,7 +47,7 @@ public class CFriendViewHandler {
        //int n = input.nextInt();
         String n=input.next();
         while(!StringUtils.isNumeric(n)){
-            System.out.println("不合法输入，重新输入哦！");
+            System.out.println("不要随意输入，重新输入哦！");
             n =input.next();
         }
 
@@ -96,9 +96,23 @@ public class CFriendViewHandler {
 
     public void addfriend(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
-        int userid1 = input.nextInt();
+        //int userid1 = input.nextInt();
+        String a=input.next();
+        while(!StringUtils.isNumeric(a)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a =input.next();
+        }
+        int userid1=Integer.parseInt(a);
+
         System.out.println("请输入您需要添加好友的账号【id】");
-        int friendid1=input.nextInt();
+        //int friendid1=input.nextInt();
+        String a1=input.next();
+        while(!StringUtils.isNumeric(a1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a1 =input.next();
+        }
+        int friendid1=Integer.parseInt(a1);
+
         SendApplyMessage sendapplymessage = new SendApplyMessage(userid1,friendid1,"对方想加你好友");
         ctx.writeAndFlush(sendapplymessage);
         try{
@@ -121,9 +135,25 @@ public class CFriendViewHandler {
      */
     public void deletefriend(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
-        int userid1 = input.nextInt();
+       // int userid1 = input.nextInt();
+        String a2=input.next();
+        while(!StringUtils.isNumeric(a2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a2 =input.next();
+        }
+        int userid1=Integer.parseInt(a2);
+
+
         System.out.println("请输入您需要删除好友的账号【id】");
-        int friendid1=input.nextInt();
+        //int friendid1=input.nextInt();
+        String a3=input.next();
+        while(!StringUtils.isNumeric(a3)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a3 =input.next();
+        }
+        int friendid1=Integer.parseInt(a3);
+
+
         DeleteFriendmsg deletefriendmsg = new DeleteFriendmsg(userid1,friendid1);
         ctx.writeAndFlush(deletefriendmsg);
         try{
@@ -148,7 +178,13 @@ public class CFriendViewHandler {
     //3  好友列表
     public void friendlist(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
-        int userid1 = input.nextInt();
+        //int userid1 = input.nextInt();
+        String a4=input.next();
+        while(!StringUtils.isNumeric(a4)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a4 =input.next();
+        }
+        int userid1=Integer.parseInt(a4);
         FriendListmsg friendListmsg = new FriendListmsg(userid1);
         ctx.writeAndFlush(friendListmsg);
 
@@ -164,7 +200,7 @@ public class CFriendViewHandler {
             System.out.println(s1);
         }
 
-        System.out.println("您的好友列表入上文所显示。");
+        System.out.println("您的好友列表如上文所显示。");
         System.out.println("接下来返回好友界面，您可以根据您的需要选择功能");
         new CFriendViewHandler(ctx);
 
@@ -174,9 +210,24 @@ public class CFriendViewHandler {
     //4  屏蔽好友
     public void shieldfriend(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号【id】：");
-        int userid1 = input.nextInt();
+        //int userid1 = input.nextInt();
+        String a5=input.next();
+        while(!StringUtils.isNumeric(a5)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a5 =input.next();
+        }
+        int  userid1=Integer.parseInt(a5);
+
         System.out.println("请输入您需要屏蔽好友的账号【id】");
-        int friendid1=input.nextInt();
+        //int friendid1=input.nextInt();
+        String a6=input.next();
+        while(!StringUtils.isNumeric(a6)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a6 =input.next();
+        }
+        int friendid1=Integer.parseInt(a6);
+
+
         ShieldFriendmsg shieldFriendmsg=new ShieldFriendmsg(userid1,friendid1);
         ctx.writeAndFlush(shieldFriendmsg);
 
@@ -210,10 +261,22 @@ public class CFriendViewHandler {
         //要判断好友是否正在聊天
 
         System.out.println("请输入您的id：");
-        int userid1=input.nextInt();
+        //int userid1=input.nextInt();
+        String a7=input.next();
+        while(!StringUtils.isNumeric(a7)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a7 =input.next();
+        }
+        int  userid1=Integer.parseInt(a7);
 
         System.out.println("请输入你需要发消息的好友id:");
-        int friendid1 = input.nextInt();
+        //int friendid1 = input.nextInt();
+        String a8=input.next();
+        while(!StringUtils.isNumeric(a8)){
+            System.out.println("不要随意输入，重新输入哦！");
+            a8 =input.next();
+        }
+        int friendid1=Integer.parseInt(a8);
 
         chatting=friendid1;
 

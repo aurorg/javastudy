@@ -338,7 +338,7 @@ public class CDengLuViewHandler {
         }
         int phonenumber=Integer.parseInt(n9);
 
-        //需要更深层处理
+        //需要更深层处理(数据库判断)
         System.out.println("请输入你的原密码：");
         String ps= input.next();
         System.out.println("请输入您需要修改的密码：");

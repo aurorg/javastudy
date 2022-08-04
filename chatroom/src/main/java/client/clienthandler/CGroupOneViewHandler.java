@@ -40,7 +40,7 @@ public class CGroupOneViewHandler {
         //int n =input.nextInt();
         String n=input.next();
         while(!StringUtils.isNumeric(n)){
-            System.out.println("不合法输入，重新输入哦！");
+            System.out.println("不要随意输入，重新输入哦！");
             n =input.next();
         }
         switch(Integer.parseInt(n)){
@@ -110,9 +110,15 @@ public class CGroupOneViewHandler {
     public static void onecase1(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
 
-        System.out.println("请输入您需要建群的群名称(和您之间建过的群的名称不能重复)：");
+        System.out.println("请输入您需要建群的群名称：");
         String groupname=input.next();
 
         GroupSetupMessage groupSetupMessage = new GroupSetupMessage(userid,groupname);
@@ -141,10 +147,22 @@ public class CGroupOneViewHandler {
     public static void onecase2(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
 
         System.out.println("请输入您需要解散群的群账号id：");
-        int groupid=input.nextInt();
+        //int groupid=input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
 
         System.out.println("***请问您确定解散群了吗***");
         System.out.println("**********************");
@@ -152,9 +170,14 @@ public class CGroupOneViewHandler {
         System.out.println("******[2]不解散了*******");
         System.out.println("**不解散了就进行后续操作***");
         System.out.println("***********************");
-        int n = input.nextInt();
+        //int n = input.nextInt();
+        String n2=input.next();
+        while(!StringUtils.isNumeric(n2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n2 =input.next();
+        }
 
-        switch(n){
+        switch(Integer.parseInt(n2)){
             case 1:
                  GroupDeleteMessage groupDeleteMessage=new GroupDeleteMessage(userid,groupid);
                  ctx.writeAndFlush(groupDeleteMessage);
@@ -194,10 +217,23 @@ public class CGroupOneViewHandler {
 
    public static void onecase3(ChannelHandlerContext ctx){
        System.out.println("请输入您的id号：");
-       int userid=input.nextInt();
+       //int userid=input.nextInt();
+       String n=input.next();
+       while(!StringUtils.isNumeric(n)){
+           System.out.println("不要随意输入，重新输入哦！");
+           n =input.next();
+       }
+       int userid=Integer.parseInt(n);
 
        System.out.println("请输入您需要加群的id号(确保该群存在)：");
-       int groupid=input.nextInt();
+      // int groupid=input.nextInt();
+       String n1=input.next();
+       while(!StringUtils.isNumeric(n1)){
+           System.out.println("不要随意输入，重新输入哦！");
+           n1 =input.next();
+       }
+       int groupid=Integer.parseInt(n1);
+
 
        GroupSendApplyMessage groupSendApplyMessage=new GroupSendApplyMessage(userid,groupid,"请求加群");
        ctx.writeAndFlush(groupSendApplyMessage);
@@ -220,10 +256,24 @@ public class CGroupOneViewHandler {
    public static void onecase4(ChannelHandlerContext ctx){
 
        System.out.println("请输入您的id号：");
-       int userid=input.nextInt();
+       //int userid=input.nextInt();
+       String n=input.next();
+       while(!StringUtils.isNumeric(n)){
+           System.out.println("不要随意输入，重新输入哦！");
+           n =input.next();
+       }
+       int userid=Integer.parseInt(n);
+
 
        System.out.println("请输入您需要退出群的群账号id(确保该群存在)：");
-       int groupid=input.nextInt();
+       //int groupid=input.nextInt();
+       String n1=input.next();
+       while(!StringUtils.isNumeric(n1)){
+           System.out.println("不要随意输入，重新输入哦！");
+           n1 =input.next();
+       }
+       int groupid=Integer.parseInt(n1);
+
 
        GroupQuitMessage groupQuitMessage= new GroupQuitMessage(userid,groupid,"退群的消息");
        ctx.writeAndFlush(groupQuitMessage);
@@ -245,9 +295,22 @@ public class CGroupOneViewHandler {
 
    public static void onecase5(ChannelHandlerContext ctx){
        System.out.println("请输入您的id号：");
-       int userid= input.nextInt();
+       //int userid= input.nextInt();
+       String n=input.next();
+       while(!StringUtils.isNumeric(n)){
+           System.out.println("不要随意输入，重新输入哦！");
+           n =input.next();
+       }
+       int userid=Integer.parseInt(n);
+
        System.out.println("请输入您需要查看群列表的该群的id号：");
-       int groupid= input.nextInt();
+       //int groupid= input.nextInt();
+       String n1=input.next();
+       while(!StringUtils.isNumeric(n1)){
+           System.out.println("不要随意输入，重新输入哦！");
+           n1 =input.next();
+       }
+       int groupid=Integer.parseInt(n1);
 
        GroupListMemberMessage groupListMemberMessage = new GroupListMemberMessage(userid,groupid);
        ctx.writeAndFlush(groupListMemberMessage);
@@ -274,9 +337,23 @@ public class CGroupOneViewHandler {
     //群历史消息
     public static void onecase6(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
-        int userid= input.nextInt();
+        //int userid= input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
+
         System.out.println("请输入您需要查看群历史消息的该群的id号：");
-        int groupid= input.nextInt();
+        //int groupid= input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
 
         GroupHistoryMessage groupHistoryMessage = new GroupHistoryMessage(userid,groupid);
         ctx.writeAndFlush(groupHistoryMessage);
@@ -307,9 +384,23 @@ public class CGroupOneViewHandler {
     public static void onecase7(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
-        int userid= input.nextInt();
+        //int userid= input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
+
         System.out.println("请输入您需要查看群未读消息的该群的id号：");
-        int groupid= input.nextInt();
+        //int groupid= input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
 
         GroupUnreadMessage groupUnreadMessage = new GroupUnreadMessage(userid,groupid);
         ctx.writeAndFlush(groupUnreadMessage);
@@ -338,9 +429,23 @@ public class CGroupOneViewHandler {
     //群聊(发消息、发文件)
     public static void onecase8(ChannelHandlerContext ctx){
         System.out.println("请输入您的id：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
         System.out.println("请输入你需要发消息的群：");
-        int groupid=input.nextInt();
+        //int groupid=input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
+
 
         System.out.println("[输入Q，返回主界面(F发文件Y收文件）]：");
 
@@ -477,11 +582,34 @@ public class CGroupOneViewHandler {
     //添加管理员
     public static void onecase9(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
-        int userid=input.nextInt();
+       // int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
         System.out.println("请输入你需要添加管理员的群id号：");
-        int groupid=input.nextInt();
+        //int groupid=input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
+
+
+
         System.out.println("请输入你将哪位用户添加为管理员的id号：");
-        int peopleid=input.nextInt();
+        //int peopleid=input.nextInt();
+        String n2=input.next();
+        while(!StringUtils.isNumeric(n2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n2 =input.next();
+        }
+        int  peopleid=Integer.parseInt(n2);
+
 
         GroupAddAdministratorMessage groupAddAdministratorMessage=new GroupAddAdministratorMessage(userid,groupid,peopleid);
         ctx.writeAndFlush(groupAddAdministratorMessage);
@@ -504,11 +632,32 @@ public class CGroupOneViewHandler {
     //删除管理员（其实就是将管理员的身份改为普通用户）
     public static void onecase10(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
         System.out.println("请输入你需要删除管理员的群id号：");
-        int groupid=input.nextInt();
+        //int groupid=input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
+
         System.out.println("请输入你将哪位用户删除管理员身份的id号：");
-        int peopleid=input.nextInt();
+        //int peopleid=input.nextInt();
+        String n2=input.next();
+        while(!StringUtils.isNumeric(n2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n2 =input.next();
+        }
+        int  peopleid=Integer.parseInt(n2);
+
 
         GroupDeleteAdministratorMessage groupDeleteAdministratorMessage = new GroupDeleteAdministratorMessage(userid,groupid,peopleid);
         ctx.writeAndFlush(groupDeleteAdministratorMessage);
@@ -535,11 +684,33 @@ public class CGroupOneViewHandler {
     public static void onecase11(ChannelHandlerContext ctx){
 
             System.out.println("请输入您的id号：");
-            int userid=input.nextInt();
+            //int userid=input.nextInt();
+            String n=input.next();
+            while(!StringUtils.isNumeric(n)){
+                System.out.println("不要随意输入，重新输入哦！");
+                n =input.next();
+            }
+            int userid=Integer.parseInt(n);
+
             System.out.println("请输入你需要删除用户的群id号：");
-            int groupid=input.nextInt();
+            //int groupid=input.nextInt();
+            String n1=input.next();
+            while(!StringUtils.isNumeric(n1)){
+             System.out.println("不要随意输入，重新输入哦！");
+                n1 =input.next();
+            }
+            int groupid=Integer.parseInt(n1);
+
+
             System.out.println("请输入你删除用户的id号：");
-            int peopleid=input.nextInt();
+            //int peopleid=input.nextInt();
+            String n2=input.next();
+            while(!StringUtils.isNumeric(n2)){
+              System.out.println("不要随意输入，重新输入哦！");
+              n2 =input.next();
+            }
+            int  peopleid=Integer.parseInt(n2);
+
 
             GroupDeleteMemberMessage groupDeleteMemberMessage = new GroupDeleteMemberMessage(userid,groupid,peopleid);
             ctx.writeAndFlush(groupDeleteMemberMessage);
@@ -563,9 +734,24 @@ public class CGroupOneViewHandler {
     //开启禁言模式
     public static void onecase12(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
         System.out.println("请输入你需要开启禁言模式的群id号：");
-        int groupid=input.nextInt();
+        //int groupid=input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
+
+
 
         GroupOpenBanSpeakMessage groupOpenBanSpeakMessage = new GroupOpenBanSpeakMessage(userid,groupid);
         ctx.writeAndFlush(groupOpenBanSpeakMessage);
@@ -591,9 +777,23 @@ public class CGroupOneViewHandler {
     public static void onecase13(ChannelHandlerContext ctx){
 
         System.out.println("请输入您的id号：");
-        int userid=input.nextInt();
+        //int userid=input.nextInt();
+        String n=input.next();
+        while(!StringUtils.isNumeric(n)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n =input.next();
+        }
+        int userid=Integer.parseInt(n);
+
         System.out.println("请输入你需要解除禁言模式的群id号：");
-        int groupid=input.nextInt();
+        //int groupid=input.nextInt();
+        String n1=input.next();
+        while(!StringUtils.isNumeric(n1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            n1 =input.next();
+        }
+        int groupid=Integer.parseInt(n1);
+        
 
         GroupCloseBanSpeakMessage groupCloseBanSpeakMessage = new GroupCloseBanSpeakMessage(userid,groupid);
         ctx.writeAndFlush(groupCloseBanSpeakMessage);
