@@ -2,6 +2,7 @@ package client.clienthandler;
 
 
 import io.netty.channel.ChannelHandlerContext;
+import lombok.extern.slf4j.Slf4j;
 import message.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -18,6 +19,7 @@ import static client.ChatNettyClient.waitSuccess;
  * 完成上面这三个操作之后进行后续操作，就会调用MainView里面的界面
  */
 //@Slf4j
+
 public class CDengLuViewHandler {
     //用户输入
     static Scanner input = new Scanner(System.in);

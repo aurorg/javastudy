@@ -74,7 +74,7 @@ public class ChatNettyClient {
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new ProtocolFrameDecoder());
                             ch.pipeline().addLast(new MessageCodec()); //解码编码的
-                            
+
                             //心跳机制
                             //用来判断是不是读空闲时间过长，或者写空闲时间过长
                             //8s内如果没有收到channel的数据，就会触发IdleStateREADER_IDLE事件
@@ -107,8 +107,8 @@ public class ChatNettyClient {
                         }
                     });
 
-            System.out.println("客户端 ok.....");
-
+            System.out.println("*******************************客户端ok*********************************");
+            System.out.println("*******************************客户端ok*********************************");
 
             //启动客户端取连接服务端
             //关于ChannelFuture需要分析：涉及netty的异步模型

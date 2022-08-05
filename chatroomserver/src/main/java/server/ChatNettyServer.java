@@ -13,6 +13,7 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
+import lombok.extern.slf4j.Slf4j;
 import message.OffLinemsg;
 import server.serverhandler.*;
 
@@ -22,6 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+
+@Slf4j
 public class ChatNettyServer {
 
     public static void jdbcmysql(){
@@ -89,7 +92,7 @@ public class ChatNettyServer {
                                 public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
                                     IdleStateEvent event = (IdleStateEvent) evt;
                                     if (event.state() == IdleState.READER_IDLE) {
-
+                                        //log.debug("已经16s没有读到数据");
                                     }
                                     super.userEventTriggered(ctx, evt);
                                 }
@@ -151,7 +154,8 @@ public class ChatNettyServer {
 
                     }); //给workerGroup的EventLoop对应的管道设置处理器
 
-            System.out.println("服务器启动好了......");
+            System.out.println("*****************************服务器启动好了************************************");
+            System.out.println("*****************************服务器启动好了************************************");
 
             //绑定一个端口并且同步，生成一个ChannelFuture对象
             //启动服务器（并且绑定端口）
