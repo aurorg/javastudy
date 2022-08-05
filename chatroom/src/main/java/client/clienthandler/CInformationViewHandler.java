@@ -63,9 +63,25 @@ public class CInformationViewHandler {
     //查看好友历史消息函数
     public void historyfriendmsg(ChannelHandlerContext ctx) {
         System.out.println("请输入您的账号【id号】：");
-        int userid1 = input.nextInt();
+        //int userid1 = input.nextInt();
+        String c1=input.next();
+        while(!StringUtils.isNumeric(c1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            c1 =input.next();
+        }
+        int  userid1=Integer.parseInt(c1);
+
+
+
         System.out.println("请输入您的好友的账号【id号】：");
-        int friendid1 = input.nextInt();
+        //int friendid1 = input.nextInt();
+        String c2=input.next();
+        while(!StringUtils.isNumeric(c2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            c2 =input.next();
+        }
+        int  friendid1=Integer.parseInt(c2);
+
 
         Informationfriendhistorymsg informationmsg = new Informationfriendhistorymsg(userid1, friendid1);
         ctx.writeAndFlush(informationmsg);
@@ -92,9 +108,23 @@ public class CInformationViewHandler {
     //查看好友未读消息记录
     public void unreadfriendmsg(ChannelHandlerContext ctx) {
         System.out.println("请输入您的账号【id号】：");
-        int userid1 = input.nextInt();
+        //int userid1 = input.nextInt();
+        String c3=input.next();
+        while(!StringUtils.isNumeric(c3)){
+            System.out.println("不要随意输入，重新输入哦！");
+            c3 =input.next();
+        }
+        int  userid1=Integer.parseInt(c3);
+
+
         System.out.println("请输入您的好友的账号【id号】：");
-        int friendid1 = input.nextInt();
+        //int friendid1 = input.nextInt();
+        String c4=input.next();
+        while(!StringUtils.isNumeric(c4)){
+            System.out.println("不要随意输入，重新输入哦！");
+            c4 =input.next();
+        }
+        int  friendid1=Integer.parseInt(c4);
 
         Informationfriendunreadmsg informationfriendunreadmsg = new Informationfriendunreadmsg(userid1,friendid1);
         ctx.writeAndFlush(informationfriendunreadmsg);

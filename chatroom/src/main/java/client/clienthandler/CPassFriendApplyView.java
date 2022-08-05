@@ -54,9 +54,23 @@ public class CPassFriendApplyView {
 
     public void  passfriend(ChannelHandlerContext ctx){
         System.out.println("请输入您的账号id:");
-        int userid1 =input.nextInt();
+        //int userid1 =input.nextInt();
+        String e2=input.next();
+        while(!StringUtils.isNumeric(e2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            e2 =input.next();
+        }
+        int  userid1=Integer.parseInt(e2);
+
         System.out.println("请输入你需要查看好友申请的好友账号id：");
-        int friendid1 = input.nextInt();
+        //int friendid1 = input.nextInt();
+        String e1=input.next();
+        while(!StringUtils.isNumeric(e1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            e1 =input.next();
+        }
+        int  friendid1=Integer.parseInt(e1);
+
 
         Addfriendmsg addfriendmsg =new Addfriendmsg(userid1,friendid1);
         ctx.writeAndFlush(addfriendmsg);

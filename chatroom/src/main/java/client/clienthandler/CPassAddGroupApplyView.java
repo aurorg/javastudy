@@ -53,11 +53,32 @@ public class CPassAddGroupApplyView {
 
     public void passgroupapply(ChannelHandlerContext ctx){
         System.out.println("请输入您的id号：");
-        int userid1=input.nextInt();
+        //int userid1=input.nextInt();
+        String d=input.next();
+        while(!StringUtils.isNumeric(d)){
+            System.out.println("不要随意输入，重新输入哦！");
+            d =input.next();
+        }
+        int  userid1=Integer.parseInt(d);
+
         System.out.println("请输入你需要处理群通知的该群的id号：");
-        int groupid1=input.nextInt();
+        //int groupid1=input.nextInt();
+        String d1=input.next();
+        while(!StringUtils.isNumeric(d1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            d1 =input.next();
+        }
+        int groupid1=Integer.parseInt(d1);
+
+
         System.out.println("请输入需要加您的群的用户的id号：");
-        int peopleid1=input.nextInt();
+        //int peopleid1=input.nextInt();
+        String d2=input.next();
+        while(!StringUtils.isNumeric(d2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            d2 =input.next();
+        }
+        int  peopleid1=Integer.parseInt(d2);
 
         GroupJoinMessage groupJoinMessage=new GroupJoinMessage(userid1,groupid1,peopleid1);
         ctx.writeAndFlush(groupJoinMessage);

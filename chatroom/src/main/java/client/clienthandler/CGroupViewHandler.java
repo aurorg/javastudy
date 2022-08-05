@@ -62,13 +62,33 @@ public class CGroupViewHandler {
     //身份验证的函数
     public void authentication(ChannelHandlerContext ctx){
         System.out.println("请输入你的账号：");
-        int userid = input.nextInt();
+        //int userid = input.nextInt();
+        String b=input.next();
+        while(!StringUtils.isNumeric(b)){
+            System.out.println("不要随意输入，重新输入哦！");
+            b =input.next();
+        }
+        int userid=Integer.parseInt(b);
 
         System.out.println("请输入你需要访问的群id:");
-        int groupid = input.nextInt();
+        //int groupid = input.nextInt();
+
+        String b1=input.next();
+        while(!StringUtils.isNumeric(b1)){
+            System.out.println("不要随意输入，重新输入哦！");
+            b1 =input.next();
+        }
+        int groupid=Integer.parseInt(b1);
 
         System.out.println("请输入你在这个群里的身份:");
-        int identity = input.nextInt();
+        //int identity = input.nextInt();
+        String b2=input.next();
+        while(!StringUtils.isNumeric(b2)){
+            System.out.println("不要随意输入，重新输入哦！");
+            b2 =input.next();
+        }
+        int  identity=Integer.parseInt(b2);
+
 
         //给服务器发消息，服务器从数据库查看数据，确认你的身份是否正确
 
