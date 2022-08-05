@@ -453,7 +453,7 @@ public class CGroupOneViewHandler {
 
         String chatmessage=input.nextLine(); //输入聊天消息的
 
-        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了
+        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了(已经解决)
 
         while(!chatmessage.equals("Q")) {
 
@@ -532,7 +532,7 @@ public class CGroupOneViewHandler {
         System.out.println("*******[Y]:接受*******");
         System.out.println("*******[N]:拒绝*******");
         System.out.println("*******[S]:不处理******");
-        System.out.println("*********************");
+        System.out.println("**********************");
 
         String choice=input.nextLine();
         while(!choice.equalsIgnoreCase("Y")&&!choice.equalsIgnoreCase("N")&&!choice.equalsIgnoreCase("S")){
