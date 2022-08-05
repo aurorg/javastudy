@@ -1,15 +1,19 @@
 package server;
 
+import common.ChatHandlerMap;
 import common.MessageCodec;
 import common.ProtocolFrameDecoder;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
+import message.OffLinemsg;
 import server.serverhandler.*;
 
 import java.io.IOException;
@@ -77,6 +81,36 @@ public class ChatNettyServer {
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new ProtocolFrameDecoder());
                             ch.pipeline().addLast(new MessageCodec());
+
+                            //心跳机制
+                            ch.pipeline().addLast(new IdleStateHandler(16, 0, 0));
+                            ch.pipeline().addLast(new ChannelDuplexHandler() {
+                                @Override
+                                public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                                    IdleStateEvent event = (IdleStateEvent) evt;
+                                    if (event.state() == IdleState.READER_IDLE) {
+
+                                    }
+                                    super.userEventTriggered(ctx, evt);
+                                }
+                            });
+
+                            ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+                                @Override
+                                public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+
+
+                                }
+                                @Override
+                                public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+
+                                    if (ChatHandlerMap.getUser(ctx.channel()) != 0) {
+                                        OffLinemsg msg = new OffLinemsg();
+                                        super.channelRead(ctx, msg);
+                                    }
+                                }
+                            });
+
 
                             //需要用什么处理器直接加就行了
                             ch.pipeline().addLast(new SEnrollViewHandle()); //注册

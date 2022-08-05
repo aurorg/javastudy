@@ -60,6 +60,14 @@ public class SOffLineHandler extends SimpleChannelInboundHandler<OffLinemsg> {
             ps.setInt(1,userid2);
             ps.executeUpdate();
 
+            //好友表
+            String sql4="update friendlist set state =2 where friendid =?";
+            ps=conn.prepareStatement(sql4);
+            ps.setInt(1,userid2);
+            ps.executeUpdate();
+            System.out.println("111111111111");
+            System.out.println("已将您好友表中的状态改为下线");
+
             //群聊
             String sql3 ="update grouplist set memberstate =2 where groupmemberid =?";
             ps=conn.prepareStatement(sql3);
