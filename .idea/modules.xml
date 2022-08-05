@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/chatroom/chatroom.iml" filepath="$PROJECT_DIR$/chatroom/chatroom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chatroomclient/chatroomclient.iml" filepath="$PROJECT_DIR$/chatroomclient/chatroomclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chatroomserver/chatroomserver.iml" filepath="$PROJECT_DIR$/chatroomserver/chatroomserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/javabasics/javabasics.iml" filepath="$PROJECT_DIR$/javabasics/javabasics.iml" />
       <module fileurl="file://$PROJECT_DIR$/javanet/javanet.iml" filepath="$PROJECT_DIR$/javanet/javanet.iml" />
       <module fileurl="file://$PROJECT_DIR$/javastudy.iml" filepath="$PROJECT_DIR$/javastudy.iml" />

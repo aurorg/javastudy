@@ -9,12 +9,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="chatroom" />
         <module name="javabasics" />
+        <module name="chatroomserver" />
         <module name="javathread" />
+        <module name="chatroomclient" />
         <module name="javanet" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="chatroom" target="11" />
+      <module name="chatroomclient" target="11" />
+      <module name="chatroomserver" target="11" />
       <module name="javabasics" target="11" />
       <module name="javanet" target="11" />
       <module name="javastudy" target="11" />
