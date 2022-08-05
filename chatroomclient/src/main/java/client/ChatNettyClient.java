@@ -75,9 +75,14 @@ public class ChatNettyClient {
                             ch.pipeline().addLast(new ProtocolFrameDecoder());
                             ch.pipeline().addLast(new MessageCodec()); //解码编码的
 
-                            //心跳机制
+
                             //用来判断是不是读空闲时间过长，或者写空闲时间过长
                             //8s内如果没有收到channel的数据，就会触发IdleStateREADER_IDLE事件
+                            //IdleStateHandler是netty提供的处理空闲状态的处理器，有三个参数
+                            //int readerIdleTimeSeconds :表示多长时间没有读，就会发送一个心跳检测包检测是否还处于连接状态
+                            // int writerIdleTimeSeconds ：表示多长时间没有写，就会发送一个心跳检测包检测是否还处于连接状态
+                            // int allIdleTimeSeconds：表示多长时间既没有读又没有写，就会发送一个心跳检测包检测是否还处于连接状态
+
                             ch.pipeline().addLast(new IdleStateHandler(0, 8, 0));
                             ch.pipeline() .addLast(new ChannelDuplexHandler() {
                                 @Override

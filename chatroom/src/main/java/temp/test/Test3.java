@@ -1,7 +1,8 @@
 package temp.test;
 
 import java.io.*;
-//端点传文件
+
+//端点传文件测试
 
 public class Test3 {
     private static int position = -1;
@@ -54,11 +55,15 @@ public class Test3 {
 
         }catch(IOException e) {//TODO: handle exception
 
-        } finally{try{//关闭输入输出流
+        } finally{
+
+            try{
+                //关闭输入输出流
 
             if (fis != null)
 
-                fis.close();if (fos != null)
+                fis.close();
+            if (fos != null)
 
                 fos.close();
 
@@ -76,7 +81,7 @@ public class Test3 {
 
         Thread.sleep(10000);
 
-    }catch(InterruptedException e) {//TODO Auto-generated catch block
+    }catch(InterruptedException e) {
 
         e.printStackTrace();
 
@@ -98,11 +103,11 @@ public class Test3 {
 
         }
 
-    }catch(FileNotFoundException e) {//TODO Auto-generated catch block
+    }catch(FileNotFoundException e) {
 
         e.printStackTrace();
 
-    }catch(IOException e) {//TODO Auto-generated catch block
+    }catch(IOException e) {
 
         e.printStackTrace();
 
