@@ -104,6 +104,7 @@ public class ChatNettyServer {
 
 
                                 }
+                                //退出下线处理
                                 @Override
                                 public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 

@@ -82,7 +82,7 @@ public class CDengLuViewHandler {
         }
         int pn1=Integer.parseInt(n1);
 
-        //log.info("23432424");
+        //log.info("11111111");
         System.out.println("请输入您的账号昵称：");
         String name1 =input.next();
 
