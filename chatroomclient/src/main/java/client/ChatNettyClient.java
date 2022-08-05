@@ -60,7 +60,7 @@ public class ChatNettyClient {
         LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
       //  MessageCodec clientCodec=new MessageCodec();
 
-
+        
 
         try {
             //创建客户端启动对象
