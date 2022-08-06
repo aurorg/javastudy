@@ -543,8 +543,23 @@ public class CGroupOneViewHandler {
         //接收文件的情况
         if(choice.equalsIgnoreCase("Y")) {
 
+            GroupHistoryMessage groupHistoryMessage1 = new GroupHistoryMessage(userid,groupid);
+            ctx.writeAndFlush(groupHistoryMessage1);
+            try {
+                synchronized (waitMessage) {
+                    waitMessage.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            for(String s1 :grouphistorymsg){
+                System.out.println(s1);
+            }
+
             System.out.println("你需要接受哪个文件(输入文件路径)：");
-            String filename = input.next();
+            String filename = input.nextLine();
+
 
             GroupGetFilemsg groupGetFilemsg= new GroupGetFilemsg(userid,groupid,filename);
             ctx.writeAndFlush(groupGetFilemsg);

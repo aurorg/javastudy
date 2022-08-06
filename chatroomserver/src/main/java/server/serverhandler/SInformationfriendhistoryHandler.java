@@ -8,6 +8,7 @@ import message.ServerToClientmsg;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandler<Informationfriendhistorymsg> {
@@ -112,6 +113,7 @@ public class SInformationfriendhistoryHandler extends SimpleChannelInboundHandle
             }
             //判断之后进行后续选择
            // System.out.println("11111111");
+            Collections.reverse(messagelist);
             ServerToClientmsg message1 = new ServerToClientmsg(true,"");
            // System.out.println("111111112222");
             message1.setFriendmsglist(messagelist);
