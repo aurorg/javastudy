@@ -1,17 +1,9 @@
 package client.clienthandler;
 
-import client.ResponseHandler;
 import io.netty.channel.ChannelHandlerContext;
-import jdk.swing.interop.SwingInterOpUtils;
-import message.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
 import static client.ChatNettyClient.*;
@@ -390,8 +382,23 @@ public class CFriendViewHandler {
         //接收文件的情况
         if(choice.equalsIgnoreCase("Y")) {
 
+            Informationfriendhistorymsg informationfriendhistorymsg=new Informationfriendhistorymsg(userid,friendid);
+            ctx.writeAndFlush(informationfriendhistorymsg);
+            try {
+                synchronized (waitMessage) {
+                    waitMessage.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            for(String s1 :friendmsglist){
+                System.out.println(s1);
+            }
+
+
             System.out.println("你需要接受哪个文件(输入文件路径)：");
-            String filename = input.next();
+            String filename = input.nextLine();
 
             FriendGetFilemsg friendGetFilemsg = new FriendGetFilemsg(userid, friendid, filename);
             ctx.writeAndFlush(friendGetFilemsg);

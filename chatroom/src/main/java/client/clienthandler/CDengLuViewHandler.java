@@ -2,7 +2,6 @@ package client.clienthandler;
 
 
 import io.netty.channel.ChannelHandlerContext;
-import message.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
@@ -18,6 +17,7 @@ import static client.ChatNettyClient.waitSuccess;
  * 完成上面这三个操作之后进行后续操作，就会调用MainView里面的界面
  */
 //@Slf4j
+
 public class CDengLuViewHandler {
     //用户输入
     static Scanner input = new Scanner(System.in);
@@ -80,7 +80,7 @@ public class CDengLuViewHandler {
         }
         int pn1=Integer.parseInt(n1);
 
-        //log.info("23432424");
+        //log.info("11111111");
         System.out.println("请输入您的账号昵称：");
         String name1 =input.next();
 

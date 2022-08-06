@@ -1,5 +1,6 @@
 package server.serverhandler;
 
+import cn.hutool.core.date.DateTime;
 import common.ChatHandlerMap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -145,7 +146,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
                             ps.setString(6, "TEXT");
                         } else {
                             String addFile;
-                            addFile =System.getProperty("user.dir") + file.getName();
+                            addFile =System.getProperty("user.dir") + file.getName()+new DateTime(System.currentTimeMillis());
 
                             //测试
                             System.out.println("测试" + addFile);
@@ -201,7 +202,7 @@ public class SGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
                             ps.setString(6, "TEXT");
                         } else {
                             String addFile;
-                            addFile = System.getProperty("user.dir") + file.getName();
+                            addFile = System.getProperty("user.dir") + file.getName()+new DateTime(System.currentTimeMillis());
 
                             //测试
                             System.out.println("测试" + addFile);

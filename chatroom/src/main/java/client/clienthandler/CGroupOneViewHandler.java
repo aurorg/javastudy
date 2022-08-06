@@ -1,7 +1,6 @@
 package client.clienthandler;
 
 import io.netty.channel.ChannelHandlerContext;
-import message.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -453,7 +452,7 @@ public class CGroupOneViewHandler {
 
         String chatmessage=input.nextLine(); //输入聊天消息的
 
-        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了
+        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了(已经解决)
 
         while(!chatmessage.equals("Q")) {
 
@@ -532,7 +531,7 @@ public class CGroupOneViewHandler {
         System.out.println("*******[Y]:接受*******");
         System.out.println("*******[N]:拒绝*******");
         System.out.println("*******[S]:不处理******");
-        System.out.println("*********************");
+        System.out.println("**********************");
 
         String choice=input.nextLine();
         while(!choice.equalsIgnoreCase("Y")&&!choice.equalsIgnoreCase("N")&&!choice.equalsIgnoreCase("S")){
@@ -543,8 +542,23 @@ public class CGroupOneViewHandler {
         //接收文件的情况
         if(choice.equalsIgnoreCase("Y")) {
 
+            GroupHistoryMessage groupHistoryMessage1 = new GroupHistoryMessage(userid,groupid);
+            ctx.writeAndFlush(groupHistoryMessage1);
+            try {
+                synchronized (waitMessage) {
+                    waitMessage.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            for(String s1 :grouphistorymsg){
+                System.out.println(s1);
+            }
+
             System.out.println("你需要接受哪个文件(输入文件路径)：");
-            String filename = input.next();
+            String filename = input.nextLine();
+
 
             GroupGetFilemsg groupGetFilemsg= new GroupGetFilemsg(userid,groupid,filename);
             ctx.writeAndFlush(groupGetFilemsg);

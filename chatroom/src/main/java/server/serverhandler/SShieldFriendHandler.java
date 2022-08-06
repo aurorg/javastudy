@@ -9,6 +9,7 @@ import java.sql.*;
 
 public class SShieldFriendHandler extends SimpleChannelInboundHandler<ShieldFriendmsg> {
 
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ShieldFriendmsg shieldFriendmsg) throws Exception {
 
@@ -99,4 +100,6 @@ public class SShieldFriendHandler extends SimpleChannelInboundHandler<ShieldFrie
         }
 
     }
+
+
 }

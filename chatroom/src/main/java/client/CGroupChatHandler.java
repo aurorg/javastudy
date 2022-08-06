@@ -5,7 +5,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import message.GroupChatMessage;
 
 import static client.ChatNettyClient.*;
-import static client.ChatNettyClient.waitMessage;
 
 public class CGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMessage> {
 

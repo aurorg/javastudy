@@ -1,14 +1,10 @@
 package client;
 
-import client.clienthandler.CFriendViewHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.FriendChatmsg;
 
-import java.util.Scanner;
-
 import static client.ChatNettyClient.*;
-import static client.ChatNettyClient.waitMessage;
 
 public class CFriendChatHandler extends SimpleChannelInboundHandler<FriendChatmsg> {
 

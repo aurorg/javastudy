@@ -8,6 +8,7 @@ import message.ServerToClientmsg;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SInformationfriendunreadHandler extends SimpleChannelInboundHandler<Informationfriendunreadmsg> {
@@ -114,6 +115,7 @@ public class SInformationfriendunreadHandler extends SimpleChannelInboundHandler
 
             }
             //判断之后进行后续选择
+            Collections.reverse(messagelist1);
             // System.out.println("11111111");
             ServerToClientmsg message1 = new ServerToClientmsg(true,"");
             // System.out.println("111111112222");

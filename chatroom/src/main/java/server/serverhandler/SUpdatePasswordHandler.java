@@ -2,7 +2,6 @@ package server.serverhandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import message.Message;
 import message.ServerToClientmsg;
 import message.UpdatePasswordmsg;
 
@@ -30,6 +29,8 @@ public class SUpdatePasswordHandler extends SimpleChannelInboundHandler<UpdatePa
 
     //记录语句的输入
     static PreparedStatement ps =null;
+
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, UpdatePasswordmsg updatePasswordmsg) throws Exception {
 

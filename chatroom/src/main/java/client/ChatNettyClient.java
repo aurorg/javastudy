@@ -1,18 +1,18 @@
 package client;
 
 import client.clienthandler.CDengLuViewHandler;
-import client.clienthandler.CGroupViewHandler;
 import common.MessageCodec;
 import common.ProtocolFrameDecoder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
+import message.HeartbeatMessage;
 
 import java.io.File;
 import java.util.List;
@@ -74,6 +74,27 @@ public class ChatNettyClient {
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new ProtocolFrameDecoder());
                             ch.pipeline().addLast(new MessageCodec()); //解码编码的
+
+
+                            //用来判断是不是读空闲时间过长，或者写空闲时间过长
+                            //8s内如果没有收到channel的数据，就会触发IdleStateREADER_IDLE事件
+                            //IdleStateHandler是netty提供的处理空闲状态的处理器，有三个参数
+                            //int readerIdleTimeSeconds :表示多长时间没有读，就会发送一个心跳检测包检测是否还处于连接状态
+                            // int writerIdleTimeSeconds ：表示多长时间没有写，就会发送一个心跳检测包检测是否还处于连接状态
+                            // int allIdleTimeSeconds：表示多长时间既没有读又没有写，就会发送一个心跳检测包检测是否还处于连接状态
+
+                            ch.pipeline().addLast(new IdleStateHandler(0, 8, 0));
+                            ch.pipeline() .addLast(new ChannelDuplexHandler() {
+                                @Override
+                                public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                                    IdleStateEvent event = (IdleStateEvent) evt;
+                                    if (event.state() == IdleState.WRITER_IDLE) {
+                                        ctx.writeAndFlush(new HeartbeatMessage());
+                                    }
+                                    super.userEventTriggered(ctx, evt);
+                                }
+                            });
+
                             ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
                             ch.pipeline().addLast(new CFriendChatHandler());//好友聊天的
                             ch.pipeline().addLast(new CGroupChatHandler()); //群聊的
@@ -91,8 +112,8 @@ public class ChatNettyClient {
                         }
                     });
 
-            System.out.println("客户端 ok.....");
-
+            System.out.println("*******************************客户端ok*********************************");
+            System.out.println("*******************************客户端ok*********************************");
 
             //启动客户端取连接服务端
             //关于ChannelFuture需要分析：涉及netty的异步模型

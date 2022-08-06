@@ -1,7 +1,5 @@
 package message;
 
-import message.Message;
-
 public class Logoutmsg extends Message {
     private int userid; //用户的id
 //    private String name; //用户姓名

@@ -397,6 +397,7 @@ public class CFriendViewHandler {
                 System.out.println(s1);
             }
 
+
             System.out.println("你需要接受哪个文件(输入文件路径)：");
             String filename = input.nextLine();
 

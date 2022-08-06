@@ -1,7 +1,5 @@
 package message;
 
-import message.Message;
-
 import java.io.File;
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package message;
 
-import message.Message;
-
 //注册时客户端向服务端发的消息
 public class Enrollmsg extends Message {
 

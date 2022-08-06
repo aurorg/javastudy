@@ -1,16 +1,20 @@
 package server;
 
+import common.ChatHandlerMap;
 import common.MessageCodec;
 import common.ProtocolFrameDecoder;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import server.serverhandler.SGroupChatHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
+import lombok.extern.slf4j.Slf4j;
+import message.OffLinemsg;
 import server.serverhandler.*;
 
 import java.io.IOException;
@@ -19,6 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+
+@Slf4j
 public class ChatNettyServer {
 
     public static void jdbcmysql(){
@@ -79,6 +85,37 @@ public class ChatNettyServer {
                             ch.pipeline().addLast(new ProtocolFrameDecoder());
                             ch.pipeline().addLast(new MessageCodec());
 
+                            //心跳机制
+                            ch.pipeline().addLast(new IdleStateHandler(16, 0, 0));
+                            ch.pipeline().addLast(new ChannelDuplexHandler() {
+                                @Override
+                                public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                                    IdleStateEvent event = (IdleStateEvent) evt;
+                                    if (event.state() == IdleState.READER_IDLE) {
+                                        //log.debug("已经16s没有读到数据");
+                                    }
+                                    super.userEventTriggered(ctx, evt);
+                                }
+                            });
+
+                            ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+                                @Override
+                                public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+
+
+                                }
+                                //退出下线处理
+                                @Override
+                                public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+
+                                    if (ChatHandlerMap.getUser(ctx.channel()) != 0) {
+                                        OffLinemsg msg = new OffLinemsg();
+                                        super.channelRead(ctx, msg);
+                                    }
+                                }
+                            });
+
+
                             //需要用什么处理器直接加就行了
                             ch.pipeline().addLast(new SEnrollViewHandle()); //注册
                             ch.pipeline().addLast(new SLoginViewHandler());//登录
@@ -118,7 +155,8 @@ public class ChatNettyServer {
 
                     }); //给workerGroup的EventLoop对应的管道设置处理器
 
-            System.out.println("服务器启动好了......");
+            System.out.println("*****************************服务器启动好了************************************");
+            System.out.println("*****************************服务器启动好了************************************");
 
             //绑定一个端口并且同步，生成一个ChannelFuture对象
             //启动服务器（并且绑定端口）

@@ -1,11 +1,8 @@
 package server.serverhandler;
 
-import common.ChatHandlerMap;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.Addfriendmsg;
-import message.FriendChatmsg;
 import message.ServerToClientmsg;
 
 import java.sql.*;
