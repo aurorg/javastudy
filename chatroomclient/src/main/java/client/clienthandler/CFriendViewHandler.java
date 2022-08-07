@@ -310,6 +310,7 @@ public class CFriendViewHandler {
                 file=new File(input.nextLine());
 
         }
+            //这里需要写发文件的过程，之前的有问题，现在需要分块发
             friendChatmsg2 = new FriendChatmsg(userid1, friendid1, file, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
 
@@ -373,6 +374,7 @@ public class CFriendViewHandler {
         System.out.println("*******[N]:拒绝*******");
         System.out.println("*******[S]:不处理******");
         System.out.println("*********************");
+
 
         String choice=input.nextLine();
         while(!choice.equalsIgnoreCase("Y")&&!choice.equalsIgnoreCase("N")&&!choice.equalsIgnoreCase("S")){

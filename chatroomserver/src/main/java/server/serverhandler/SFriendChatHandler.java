@@ -196,7 +196,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
                 ps.setString(5,"TEXT");
             }else {
                 String addFile;
-                addFile=System.getProperty("user.dir")+ file.getName()+new DateTime(System.currentTimeMillis());
+                addFile=System.getProperty("user.dir")+ file.getName()+new DateTime(System.currentTimeMillis());//后面加上时间为了区分两个不同的文件
 
                 //测试
                 System.out.println("测试"+addFile);
@@ -223,7 +223,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
                 ps.setInt(4, 5);
                 ps.setString(5,"FILE");
 
-                message2 = new ServerToClientmsg(true, ""); //唤醒线程
+                message2 = new ServerToClientmsg(true, ""); //唤醒线程（消息是null的时候就已经被提醒有文件消息，这里返回的内容可加可不加）
                 ctx.writeAndFlush(message2);
 
 
