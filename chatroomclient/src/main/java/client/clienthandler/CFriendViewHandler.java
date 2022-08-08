@@ -302,6 +302,7 @@ public class CFriendViewHandler {
             file=new File(input.next());
 
             while(!file.exists()||!file.isFile()){
+
                 if(!file.exists()){
                     System.out.println("文件不存在，请重新输入需要发送的文件的绝对路径");
                 }else{

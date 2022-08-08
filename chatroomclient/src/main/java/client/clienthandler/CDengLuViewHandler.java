@@ -21,8 +21,10 @@ import static client.ChatNettyClient.waitSuccess;
 //@Slf4j
 
 public class CDengLuViewHandler {
+
     //用户输入
     static Scanner input = new Scanner(System.in);
+
     //实现界面层和客户交流的代码
     public CDengLuViewHandler(ChannelHandlerContext ctx){
         System.out.println("*******************************");

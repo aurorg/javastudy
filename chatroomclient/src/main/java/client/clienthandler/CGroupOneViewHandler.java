@@ -10,6 +10,8 @@ import java.util.Scanner;
 import static client.ChatNettyClient.*;
 
 public class CGroupOneViewHandler {
+
+
     //用户输入
     static Scanner input = new Scanner(System.in);
 
