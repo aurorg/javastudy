@@ -8,7 +8,7 @@ import java.util.Scanner;
 import static client.clienthandler.CGroupOneViewHandler.*;
 
 public class CGroupThreeViewHandler {
-    
+
     //用户输入
     static Scanner input = new Scanner(System.in);
 
