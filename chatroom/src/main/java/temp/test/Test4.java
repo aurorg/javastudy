@@ -67,16 +67,20 @@ class ClientFile extends Thread {
             String s = new String(b, 0, len);
 
 // 如果服务器传输过来的是ok那么就开始传输字节
+            
 
             if (s.equalsIgnoreCase("ok")) {
 
                 long size = 0;
 
+
                 jprogressbar.setMaximum((int) (file.length() / 10000));// 设置进度条最大值
 
                 FileInputStream fin = new FileInputStream(file);
 
+
                 byte[] b1 = new byte[1024 * 1024 * 2];
+
 
                 while (fin.available() != 0) {
 
@@ -91,6 +95,7 @@ class ClientFile extends Thread {
                     jprogressbar.setValue((int) (size / 10000));
 
                 }
+
 
                 if (fin.available() == 0) {
 
@@ -110,6 +115,7 @@ class ClientFile extends Thread {
 
                 }
 
+
                 output.close();
 
                 fin.close();
@@ -117,6 +123,7 @@ class ClientFile extends Thread {
                 socket.close();
 
             } else {
+
 
 // 传输的不是ok那么就弹出个信息框对方拒绝
 
