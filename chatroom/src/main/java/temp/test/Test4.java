@@ -67,7 +67,7 @@ class ClientFile extends Thread {
             String s = new String(b, 0, len);
 
 // 如果服务器传输过来的是ok那么就开始传输字节
-            
+
 
             if (s.equalsIgnoreCase("ok")) {
 

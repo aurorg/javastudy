@@ -1,6 +1,7 @@
 package message;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class FriendChatmsg  extends Message{
 
@@ -17,19 +18,27 @@ public class FriendChatmsg  extends Message{
     //Group好友消息,Friend群消息;chattype一般情况下为好友消息
     private String chattype;
 
-    private File file;
+    //private File file;
+    private byte[] file;
 
-    private int count =1;//未读消息的条数
+    private int fileSize;//文件大小
 
+    private int start;//开始的部分
+
+    private int onceSize; //传一次的大小
+
+    private String path; //路径
+
+    private String fileName;//文件名称
 
     private String a; //加信息的
+
 
     private int Group=0;
     private int cishu;//记录发消息是第几次
 
-    public  FriendChatmsg(){}
 
-    public FriendChatmsg(int userid,int friendid,File file,String messagetype){
+    public FriendChatmsg(int userid,int friendid,byte[] file,String messagetype){
         this.userid=userid;
         this.friendid=friendid;
         this.file=file;
@@ -44,79 +53,120 @@ public class FriendChatmsg  extends Message{
 
     }
 
-    public void setCount(int count){
-        this.count=count;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
-    public void setMessage(String message){
-        this.message=message;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setFile(File file){
-        this.file=file;
+    public void setFriendid(int friendid) {
+        this.friendid = friendid;
     }
 
-    public void setChattype(String chattype) {
-        this.chattype = chattype;
+    public int getFriendid() {
+        return friendid;
     }
 
-    public void setGroup(int group) {
-        Group = group;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-//    public void setCishu(int cishu){
-//        cishu=cishu;
-//    }
-
-    public String getChattype() {
-        return chattype;
+    public String getMessage() {
+        return message;
     }
 
-    public int getGroup() {
-        return Group;
+    public void setMessagetype(String messagetype) {
+        this.messagetype = messagetype;
     }
 
     public String getMessagetype() {
         return messagetype;
     }
 
-    public String getMessage(){
-        return this.message;
-    }
-    public int getFriendid(){
-        return this.friendid;
-    }
-    public int getUserid(){
-        return this.userid;
+    public void setChattype(String chattype) {
+        this.chattype = chattype;
     }
 
-    public File getFile(){
+    public String getChattype() {
+        return chattype;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public byte[] getFile() {
         return file;
     }
 
-    public int getCount(){
-        return count;
+
+    public void setFileSize(int fileSize) {
+        this.fileSize = fileSize;
     }
 
-    public String getA() {
-        return a;
+    public int getFileSize() {
+        return fileSize;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setOnceSize(int onceSize) {
+        this.onceSize = onceSize;
+    }
+
+    public int getOnceSize() {
+        return onceSize;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 
     public void setA(String a) {
         this.a = a;
     }
 
-    //    public int getCishu(){
-//        return this.cishu;
-//    }
-
-    /*    @Override
-        public int getMessageType() {
-            return FriendChatRequestMessage;
-        }*/
-    public String toString(){
-        return "userid = "+userid+", friendid = "+friendid+" message = "+message;
+    public String getA() {
+        return a;
     }
 
-
+    @Override
+    public String toString() {
+        return "好友消息FriendChatmsg{" +
+                "userid=" + userid +
+                ", friendid=" + friendid +
+                ", messagetype='" + messagetype + '\'' +
+                ", message='" + message + '\'' +
+                ", chattype='" + chattype + '\'' +
+                ", file=" + Arrays.toString(file) +
+                ", fileSize=" + fileSize +
+                ", start=" + start +
+                ", onceSize=" + onceSize +
+                ", path='" + path + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", a='" + a + '\'' +
+                ", Group=" + Group +
+                ", cishu=" + cishu +
+                '}';
+    }
 }

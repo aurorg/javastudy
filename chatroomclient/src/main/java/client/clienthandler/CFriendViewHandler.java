@@ -1,5 +1,6 @@
 package client.clienthandler;
 
+import client.CSendFileHandler;
 import io.netty.channel.ChannelHandlerContext;
 import message.*;
 import org.apache.commons.lang3.StringUtils;
@@ -284,7 +285,7 @@ public class CFriendViewHandler {
 
         String chatmessage=input.nextLine(); //输入聊天消息的
 
-        // 暂时有个问题，有一个退出聊天界面了，另外一个就退出不了了
+
 
     while(!chatmessage.equals("Q")) {
 
@@ -312,8 +313,12 @@ public class CFriendViewHandler {
 
         }
             //这里需要写发文件的过程，之前的有问题，现在需要分块发
-            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, file, "FILE");
+            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, (byte[]) null, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
+
+            //重写的发文件
+            new CSendFileHandler(ctx,file,friendChatmsg2);
+
 
         try {
             synchronized (waitMessage) {

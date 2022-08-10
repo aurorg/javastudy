@@ -51,6 +51,9 @@ public class ChatNettyClient {
 
     public static volatile int chatting=0;
 
+    public static volatile int fileLength; //发送文件的总的大小
+
+
 
     public static void main(String[] args) throws Exception{
 
