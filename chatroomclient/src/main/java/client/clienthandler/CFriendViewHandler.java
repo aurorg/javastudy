@@ -316,8 +316,10 @@ public class CFriendViewHandler {
             friendChatmsg2 = new FriendChatmsg(userid1, friendid1, (byte[]) null, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
 
+            
             //重写的发文件
             new CSendFileHandler(ctx,file,friendChatmsg2);
+
 
 
         try {
