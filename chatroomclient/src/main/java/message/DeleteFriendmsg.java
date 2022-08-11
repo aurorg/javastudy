@@ -3,7 +3,8 @@ package message;
 public class DeleteFriendmsg extends Message{
     private int userid;
     private int friendid;
-    public DeleteFriendmsg(){}
+
+
     public DeleteFriendmsg(int userid,int friendid){
         this.userid=userid;
         this.friendid=friendid;

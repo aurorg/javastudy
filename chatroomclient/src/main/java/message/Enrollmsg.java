@@ -9,10 +9,6 @@ public class Enrollmsg extends Message {
     private int phonenumber; //用户的电话号码
 
 
-    public Enrollmsg(){
-
-    }
-
     public Enrollmsg( int phonenumber,String name,String password ){
        // this.userid=userid;
         this.phonenumber=phonenumber;
