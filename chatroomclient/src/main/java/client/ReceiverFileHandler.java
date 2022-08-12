@@ -33,8 +33,8 @@ public class ReceiverFileHandler extends SimpleChannelInboundHandler<SendFileMes
             System.out.printf("|%3d%%",percent);
             rate=percent;
         }
-        breakPointReceive.writeInt(start);
-        breakPointReceive.seek(breakPointReceive.getFilePointer()-4);
+//        breakPointReceive.writeInt(start);
+//        breakPointReceive.seek(breakPointReceive.getFilePointer()-4);
         /*
          * 纠结一件事，把close方法每次调用都执行，害怕开销太大;
          * 把close在最后执行，怕发生断掉续传时没有即使写入部分数据

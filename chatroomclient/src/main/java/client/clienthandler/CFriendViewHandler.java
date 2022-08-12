@@ -1,6 +1,6 @@
 package client.clienthandler;
 
-import client.CSendFileHandler;
+import client.SendFile;
 import io.netty.channel.ChannelHandlerContext;
 import message.*;
 import org.apache.commons.lang3.StringUtils;
@@ -319,21 +319,21 @@ public class CFriendViewHandler {
 
 
             //重写的发文件
-            new CSendFileHandler(ctx,file,friendChatmsg2);
+            new SendFile(ctx,file,friendChatmsg2);
 
 
 
-//        try {
-//            synchronized (waitMessage) {
-//                waitMessage.wait();
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//            if(waitSuccess==0){
-//                new CFriendViewHandler(ctx);
-//            }
-//
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+            if(waitSuccess==0){
+                new CFriendViewHandler(ctx);
+            }
+
 
 //        System.out.println("[输入Q,返回主界面]：");
 //

@@ -59,10 +59,10 @@ public class ChatNettyClient {
     public static Properties properties=new Properties();
     public static volatile BlockingQueue<Object> blockingQueue=new ArrayBlockingQueue<>(5);
     public static String path;
-    public static volatile RandomAccessFile breakPointSend;//处理发送断点续传配置文件
-    public static String breakPointSendPath=ChatNettyClient.class.getClassLoader().getResource("breakPointSend").getPath();
-    public static volatile RandomAccessFile breakPointReceive;//处理接收断点续传配置文件
-    public static String breakPointReceivePath=ChatNettyClient.class.getClassLoader().getResource("breakPointReceive").getPath();
+//    public static volatile RandomAccessFile breakPointSend;//处理发送断点续传配置文件
+//    public static String breakPointSendPath=ChatNettyClient.class.getClassLoader().getResource("breakPointSend").getPath();
+//    public static volatile RandomAccessFile breakPointReceive;//处理接收断点续传配置文件
+//    public static String breakPointReceivePath=ChatNettyClient.class.getClassLoader().getResource("breakPointReceive").getPath();
 
 
     public static void main(String[] args) throws Exception{
@@ -70,9 +70,9 @@ public class ChatNettyClient {
         //客户端需要一个事件循环组
         NioEventLoopGroup group = new NioEventLoopGroup();
 
-        LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
+       // LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
       //  MessageCodec clientCodec=new MessageCodec();
-        properties.load(new java.io.FileInputStream(ChatNettyClient.class.getClassLoader().getResource("application.properties").getPath()));
+//        properties.load(new java.io.FileInputStream(ChatNettyClient.class.getClassLoader().getResource("application.properties").getPath()));
 
 
         try {
@@ -111,6 +111,9 @@ public class ChatNettyClient {
                             ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
                             ch.pipeline().addLast(new CFriendChatHandler());//好友聊天的
                             ch.pipeline().addLast(new CGroupChatHandler()); //群聊的
+                            ch.pipeline().addLast(new ReceiverFileHandler());
+                            ch.pipeline().addLast(new FileResponseseHandler());
+
                             //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
 

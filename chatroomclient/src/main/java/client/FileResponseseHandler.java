@@ -12,8 +12,8 @@ public class FileResponseseHandler extends SimpleChannelInboundHandler<FileRespo
     @Override
     protected void channelRead0(ChannelHandlerContext  ctx, FileResponseMessage  msg) throws Exception {
         if(!receive){
-            breakPointSend.writeUTF(msg.getServerPath());
-            breakPointSend.writeInt(0);
+//            breakPointSend.writeUTF(msg.getServerPath());
+//            breakPointSend.writeInt(0);
             receive=true;
             blockingQueue.put(msg.getServerPath());
             synchronized (waitMessage){
@@ -29,11 +29,11 @@ public class FileResponseseHandler extends SimpleChannelInboundHandler<FileRespo
             System.out.print("-");
         }
         System.out.printf("|%3d%%",percent);
-        breakPointSend.seek(breakPointSend.getFilePointer()-4);
-        breakPointSend.writeInt(msg.getLength());
+//        breakPointSend.seek(breakPointSend.getFilePointer()-4);
+//        breakPointSend.writeInt(msg.getLength());
         if(percent==100){
             receive=false;
-            breakPointSend.close();
+//            breakPointSend.close();
         }
 
 

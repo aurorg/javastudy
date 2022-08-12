@@ -55,6 +55,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 //                System.out.println("打印消息2" + friendChatmsg);
 //            }
 
+            System.out.println("12121212");
         System.out.println("打印消息" + friendChatmsg);
 
         //接受消息的部分
@@ -63,7 +64,7 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
         String msg1 = friendChatmsg.getMessage();
         String  messagetype=friendChatmsg.getMessagetype(); //消息的类型FILE 和TEXT
 
-        File file=friendChatmsg.getFile();
+        File file= new File(friendChatmsg.getFileName());
 
 
         ServerToClientmsg message1 = null;
@@ -204,21 +205,22 @@ public class SFriendChatHandler extends SimpleChannelInboundHandler<FriendChatms
 
                 ps.setString(3,addFile); //获取文件的绝对路径
 
-                //将文件读到程序，然后写入本地存着
-
-                File tempFile=new File(addFile);
-                tempFile.createNewFile();
-                FileChannel readChannel= new FileInputStream(file).getChannel();
-                FileChannel writeChannel= new FileOutputStream(tempFile).getChannel();
-                ByteBuffer buf=ByteBuffer.allocate(1024);
-                while(readChannel.read(buf)!=-1){
-                    buf.flip();
-                    writeChannel.write(buf);
-                    buf.clear();
-                }
-
-                readChannel.close();
-                writeChannel.close();
+                //直接接收文件
+//                //将文件读到程序，然后写入本地存着
+//
+//                File tempFile=new File(addFile);
+//                tempFile.createNewFile();
+//                FileChannel readChannel= new FileInputStream(file).getChannel();
+//                FileChannel writeChannel= new FileOutputStream(tempFile).getChannel();
+//                ByteBuffer buf=ByteBuffer.allocate(1024);
+//                while(readChannel.read(buf)!=-1){
+//                    buf.flip();
+//                    writeChannel.write(buf);
+//                    buf.clear();
+//                }
+//
+//                readChannel.close();
+//                writeChannel.close();
 
                 ps.setInt(4, 5);
                 ps.setString(5,"FILE");
