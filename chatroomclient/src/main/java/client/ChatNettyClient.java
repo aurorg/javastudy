@@ -15,8 +15,12 @@ import io.netty.handler.timeout.IdleStateHandler;
 import message.HeartbeatMessage;
 
 import java.io.File;
+import java.io.RandomAccessFile;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class ChatNettyClient {
 
@@ -52,7 +56,13 @@ public class ChatNettyClient {
     public static volatile int chatting=0;
 
     public static volatile int fileLength; //发送文件的总的大小
-
+    public static Properties properties=new Properties();
+    public static volatile BlockingQueue<Object> blockingQueue=new ArrayBlockingQueue<>(5);
+    public static String path;
+    public static volatile RandomAccessFile breakPointSend;//处理发送断点续传配置文件
+    public static String breakPointSendPath=ChatNettyClient.class.getClassLoader().getResource("breakPointSend").getPath();
+    public static volatile RandomAccessFile breakPointReceive;//处理接收断点续传配置文件
+    public static String breakPointReceivePath=ChatNettyClient.class.getClassLoader().getResource("breakPointReceive").getPath();
 
 
     public static void main(String[] args) throws Exception{
@@ -62,7 +72,7 @@ public class ChatNettyClient {
 
         LoggingHandler Log=new LoggingHandler(LogLevel.DEBUG);
       //  MessageCodec clientCodec=new MessageCodec();
-
+        properties.load(new java.io.FileInputStream(ChatNettyClient.class.getClassLoader().getResource("application.properties").getPath()));
 
 
         try {
@@ -126,6 +136,15 @@ public class ChatNettyClient {
             channelFuture.channel().closeFuture().sync();
         }finally{
             group.shutdownGracefully();
+        }
+    }
+    public static void wait1(){
+        try {
+            synchronized (waitMessage) {
+                waitMessage.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

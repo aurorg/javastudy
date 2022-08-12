@@ -24,6 +24,13 @@ public class ServerToClientmsg extends Message {
     public File file; //用来接受file
     private int readcount=0; //读消息的条数
 
+    private int fileLength;
+   // int MessageType = ResponseMessage;
+    private int gradeInGroup;
+    private String haveFile = "";
+
+
+
 
     private int ServerToClientmsg;
     int MessageType=ServerToClientmsg;
@@ -141,6 +148,23 @@ public class ServerToClientmsg extends Message {
         return groupunreadmsg;
     }
     //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    public void setHaveFile(String haveFile) {
+        this.haveFile = haveFile;
+    }
+
+    public void setFileLength(int fileLength) {
+        this.fileLength = fileLength;
+    }
+
+    public int getFileLength() {
+        return fileLength;
+    }
+
+    public String getHaveFile() {
+        return haveFile;
+    }
+
 
 
 
