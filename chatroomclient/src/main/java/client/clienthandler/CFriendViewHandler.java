@@ -252,7 +252,7 @@ public class CFriendViewHandler {
 
     public void friendchat(ChannelHandlerContext ctx){
 
-        //要判断好友是否正在聊天
+        //要判断好友是否正在聊天(yijingpanduan)
 
         System.out.println("请输入您的id：");
         //int userid1=input.nextInt();
@@ -302,6 +302,7 @@ public class CFriendViewHandler {
             System.out.println("请输入需要发送的文件的绝对路径：");
             file=new File(input.next());
 
+
             while(!file.exists()||!file.isFile()){
 
                 if(!file.exists()){
@@ -322,17 +323,18 @@ public class CFriendViewHandler {
 
 
 
-        try {
-            synchronized (waitMessage) {
-                waitMessage.wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-            if(waitSuccess==0){
-                new CFriendViewHandler(ctx);
-            }
+//        try {
+//            synchronized (waitMessage) {
+//                waitMessage.wait();
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//            if(waitSuccess==0){
+//                new CFriendViewHandler(ctx);
+//            }
 //
+
 //        System.out.println("[输入Q,返回主界面]：");
 //
 //        chatmessage = input.nextLine();
