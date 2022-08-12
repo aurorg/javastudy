@@ -1,6 +1,7 @@
 package message;
 
-public class HeartbeatMessage {
+public class HeartbeatMessage extends Message{
+
     public HeartbeatMessage(){
 
     }
