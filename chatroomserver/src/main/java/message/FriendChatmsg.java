@@ -36,6 +36,10 @@ public class FriendChatmsg  extends Message{
     private int Group=0;
     private int cishu;//记录发消息是第几次
 
+    public FriendChatmsg(){
+
+    }
+
 
     public FriendChatmsg(int userid,int friendid,byte[] file,String messagetype){
         this.userid=userid;
