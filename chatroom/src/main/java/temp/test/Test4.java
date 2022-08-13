@@ -78,8 +78,10 @@ class ClientFile extends Thread {
 
                 FileInputStream fin = new FileInputStream(file);
 
+                //一次读取的大小
 
                 byte[] b1 = new byte[1024 * 1024 * 2];
+
 
 
                 while (fin.available() != 0) {
