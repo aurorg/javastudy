@@ -14,8 +14,10 @@
         <module>javathread</module>
         <module>javanet</module>
         <module>chatroom</module>
-        <module>chatroomclient</module>
-        <module>chatroomserver</module>
+        <module>chatroomclient2</module>
+        <module>chatroomserver2</module>
+        <module>client</module>
+        <module>server</module>
     </modules>
 
     <properties>

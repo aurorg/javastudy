@@ -57,7 +57,7 @@ class ClientFile extends Thread {
             String str1 = file.getName() + "\t" + file.length();
 
             output.write(str1.getBytes());
-            
+
 
             output.flush();
 
