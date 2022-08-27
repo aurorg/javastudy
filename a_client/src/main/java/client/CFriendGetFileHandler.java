@@ -2,6 +2,7 @@ package client;
 
 //暂时没有用
 
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.FriendGetFilemsg;

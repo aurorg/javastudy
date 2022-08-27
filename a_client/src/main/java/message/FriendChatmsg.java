@@ -19,7 +19,7 @@ public class FriendChatmsg  extends Message{
     private String chattype;
 
     //private File file;
-    private byte[] file;
+    //private byte[] file;
 
     private int fileSize;//文件大小
 
@@ -32,13 +32,20 @@ public class FriendChatmsg  extends Message{
     private String fileName;//文件名称
 
     private String a; //加信息的
+    private File file;
 
 
     private int Group=0;
     private int cishu;//记录发消息是第几次
 
 
-    public FriendChatmsg(int userid,int friendid,byte[] file,String messagetype){
+//    public FriendChatmsg(int userid,int friendid,byte[] file,String messagetype){
+//        this.userid=userid;
+//        this.friendid=friendid;
+//        this.file=file;
+//        this.messagetype=messagetype;
+//    }
+    public FriendChatmsg(int userid,int friendid,File file,String messagetype){
         this.userid=userid;
         this.friendid=friendid;
         this.file=file;
@@ -93,14 +100,21 @@ public class FriendChatmsg  extends Message{
         return chattype;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
+//    public void setFile(byte[] file) {
+//        this.file = file;
+//    }
+//
+//    public byte[] getFile() {
+//        return file;
+//    }
+
+    public void setFile(File file){
+        this.file=file;
     }
 
-    public byte[] getFile() {
+    public File getFile(){
         return file;
     }
-
 
     public void setFileSize(int fileSize) {
         this.fileSize = fileSize;
@@ -158,7 +172,7 @@ public class FriendChatmsg  extends Message{
                 ", messagetype='" + messagetype + '\'' +
                 ", message='" + message + '\'' +
                 ", chattype='" + chattype + '\'' +
-                ", file=" + Arrays.toString(file) +
+
                 ", fileSize=" + fileSize +
                 ", start=" + start +
                 ", onceSize=" + onceSize +

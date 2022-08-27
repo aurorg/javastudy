@@ -111,8 +111,8 @@ public class ChatNettyClient {
                             ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
                             ch.pipeline().addLast(new CFriendChatHandler());//好友聊天的
                             ch.pipeline().addLast(new CGroupChatHandler()); //群聊的
-                            ch.pipeline().addLast(new ReceiverFileHandler());
-                            ch.pipeline().addLast(new FileResponseseHandler());
+//                            ch.pipeline().addLast(new ReceiverFileHandler());
+//                            ch.pipeline().addLast(new FileResponseseHandler());
 
                             //ch.pipeline().addLast(new ServerToClientmsg());
                             ch.pipeline().addLast("CLoginViewHandler",new ChannelInboundHandlerAdapter(){  //加入自己的处理器,需要什么处理器加什么处理器（这个后面都可以加）
@@ -133,7 +133,7 @@ public class ChatNettyClient {
             System.out.println("*******************************客户端ok*********************************");
 
             //启动客户端取连接服务端
-            
+
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 6686).sync();
 
             //给关闭通道增加一个连接进行监听

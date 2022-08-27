@@ -16,8 +16,8 @@
         <module>chatroom</module>
         <module>chatroomclient2</module>
         <module>chatroomserver2</module>
-        <module>client</module>
-        <module>server</module>
+        <module>a_client</module>
+        <module>a_server</module>
     </modules>
 
     <properties>

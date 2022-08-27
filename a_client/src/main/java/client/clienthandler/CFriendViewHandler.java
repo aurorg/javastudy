@@ -1,6 +1,5 @@
 package client.clienthandler;
 
-import client.SendFile;
 import io.netty.channel.ChannelHandlerContext;
 import message.*;
 import org.apache.commons.lang3.StringUtils;
@@ -313,13 +312,8 @@ public class CFriendViewHandler {
                 file=new File(input.nextLine());
 
         }
-            //这里需要写发文件的过程，之前的有问题，现在需要分块发
-            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, (byte[]) null, "FILE");
+            friendChatmsg2 = new FriendChatmsg(userid1, friendid1, file, "FILE");
             ctx.writeAndFlush(friendChatmsg2);
-
-
-            //重写的发文件
-            new SendFile(ctx,file,friendChatmsg2);
 
 
 

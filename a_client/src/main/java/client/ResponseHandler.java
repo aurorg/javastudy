@@ -20,6 +20,8 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 
     static Scanner input = new Scanner(System.in);
 
+
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ServerToClientmsg message) throws Exception {
 
