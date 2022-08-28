@@ -6,10 +6,12 @@ import message.GroupChatMessage;
 
 import static client.ChatNettyClient.*;
 
+
 public class CGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMessage> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GroupChatMessage groupChatMessage) throws Exception {
+
 
         if (is2) {
 
@@ -21,6 +23,7 @@ public class CGroupChatHandler extends SimpleChannelInboundHandler<GroupChatMess
             }
             return;
         }
+        
 
         if (!unRead2) {
             System.out.println("您有未读群消息");

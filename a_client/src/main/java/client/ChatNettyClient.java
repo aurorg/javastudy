@@ -108,6 +108,7 @@ public class ChatNettyClient {
                                 }
                             });
 
+
                             ch.pipeline().addLast(new ResponseHandler()); //服务端给客户端回消息的处理器
                             ch.pipeline().addLast(new CFriendChatHandler());//好友聊天的
                             ch.pipeline().addLast(new CGroupChatHandler()); //群聊的

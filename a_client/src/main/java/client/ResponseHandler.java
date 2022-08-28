@@ -22,6 +22,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
 
 
 
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ServerToClientmsg message) throws Exception {
 
@@ -34,6 +35,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             waitSuccess = 0;
         }
         //成功里面分好多种情况
+
 
         else {
             waitSuccess = 1;
@@ -79,6 +81,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<ServerToClientm
             else if(message.getMessageType()==Message.GroupUnreadmsg){
                 groupunreadmsg=message.groupunreadmsg;
             }
+
 
             else {
                 System.out.print("操作成功 " + reason);
